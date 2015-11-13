@@ -1,0 +1,72 @@
+/* 
+  Localizable.strings
+  CrossChat
+
+  Created by chaobai on 15/9/21.
+  Copyright (c) 2015年 chaobai. All rights reserved.
+*/
+
+"Chats" = "Chats";
+
+"Settings" = "Settings";
+
+/* subtitle for the certificate pinned setting */
+"Manage saved SSL certificates" = "Manage saved SSL certificates";
+
+"Security" = "Security";
+
+"Accounts" = "Accounts";
+
+"New Accounts" = "New Accounts";
+
+"Cancel" = "Cancel";
+
+"Create New Account" = "Create New Account";
+
+"Connect to Existing Account" = "Connect to Existing Account";
+
+"Basic" = "Basic";
+
+"Password" = "Password";
+
+"XMPP Server Address" = "XMPP Server Address";
+
+"Server" = "Server";
+
+"Create" = "Create";
+
+"Login" = "Login";
+
+"Auto Login" = "Auto Login";
+
+"xmpp.jp" = "xmpp.jp";
+
+"error" = "error";
+
+"You must enter a username and a password." = "You must enter a username and a password.";
+
+"OK" = "OK";
+
+"Creating Account..." = "Creating Account...";
+
+"Login..." = "Login...";
+
+"Success" = "Success";
+
+"Disconnect" = "Disconnect";
+
+"Connected" = "Connected";
+
+"Connecting" = "Connecting";
+
+"LogOut" = "LogOut";
+
+"LogOut..." = "LogOut...";
+
+"Buddy" = "Buddy";
+
+"Type in" = "type in...";
+
+"Hold to Speak" = "Hold to Speak";
+
+"UnHold to Stop" = "Unhold to Stop";

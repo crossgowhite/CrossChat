@@ -1,0 +1,71 @@
+/* 
+  Localizable.strings
+  CrossChat
+
+  Created by chaobai on 15/9/21.
+  Copyright (c) 2015年 chaobai. All rights reserved.
+*/
+
+"Chats" = "会话";
+
+"Settings" = "设置";
+
+"Manage saved SSL certificates" = "管理SSL证书";
+
+"Security" = "安全";
+
+"Accounts" = "帐号";
+
+"New Accounts" = "创建帐号";
+
+"Cancel" = "取消";
+
+"Create New Account" = "创建新帐号";
+
+"Connect to Existing Account" = "登陆已有帐号";
+
+"Basic" = "基础信息";
+
+"Password" = "密码";
+
+"XMPP Server Address" = "XMPP服务器地址";
+
+"Server" = "服务器";
+
+"Create" = "创建";
+
+"Login" = "登陆";
+
+"Auto Login" = "自动登录";
+
+"xmpp.jp" = "xmpp.jp";
+
+"error" = "错误";
+
+"You must enter a username and a password." = "您必须输入用户名和密码.";
+
+"OK" = "确定";
+
+"Creating Account..." = "创建帐号...";
+
+"Login..." = "登录中...";
+
+"Success" = "成功";
+
+"Disconnect" = "未连接";
+
+"Connected" = "已连接";
+
+"Connecting" = "连接中";
+
+"LogOut" = "注销";
+
+"LogOut..." = "注销中...";
+
+"Buddy" = "联系人";
+
+"Type in" = "请输入...";
+
+"Hold to Speak" = "按住 说话";
+
+"UnHold to Stop" = "松开 结束";

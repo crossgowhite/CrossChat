@@ -1,0 +1,5 @@
+XMPPFRAMEWORK_CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES
+XMPPFRAMEWORK_ENABLE_BITCODE = NO
+XMPPFRAMEWORK_HEADER_SEARCH_PATHS = $(inherited) $(SDKROOT)/usr/include/libxml2 $(PODS_ROOT)/XMPPFramework/module $(SDKROOT)/usr/include/libresolv $(inherited) $(SDKROOT)/usr/include/libxml2 $(PODS_ROOT)/XMPPFramework/module $(SDKROOT)/usr/include/libresolv
+XMPPFRAMEWORK_LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/XMPPFramework/Vendor/libidn" "$(PODS_ROOT)/XMPPFramework/Vendor/libidn"
+XMPPFRAMEWORK_OTHER_LDFLAGS = -l"idn" -l"resolv" -l"xml2" -framework "CoreData" -framework "CoreLocation" -framework "Foundation" -framework "SystemConfiguration" -framework "UIKit"

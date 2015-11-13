@@ -1,0 +1,1045 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B1C857E504FD11D142654C11 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29DE9DA3ECADB50DE3034A07 /* libPods.a */; };
+		F734D64E1BEB363E00CA81AF /* CrossXMPPMessageStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = F734D64D1BEB363E00CA81AF /* CrossXMPPMessageStatus.m */; };
+		F735D3B21BE89F9A00656182 /* CrossMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F735D3B01BE89F9A00656182 /* CrossMessageViewController.m */; };
+		F735D3B31BE89F9A00656182 /* CrossMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F735D3B11BE89F9A00656182 /* CrossMessageViewController.xib */; };
+		F73FE1051BDE2BC200F2651F /* CrossBuddyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F73FE1041BDE2BC200F2651F /* CrossBuddyTableViewController.m */; };
+		F73FE1081BDF0CE100F2651F /* CrossBuddy.m in Sources */ = {isa = PBXBuildFile; fileRef = F73FE1071BDF0CE100F2651F /* CrossBuddy.m */; };
+		F73FE10B1BDF642100F2651F /* CrossBuddyDataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F73FE10A1BDF642100F2651F /* CrossBuddyDataBaseManager.m */; };
+		F73FE10E1BDF7AE100F2651F /* CrossBuddyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F73FE10D1BDF7AE100F2651F /* CrossBuddyManager.m */; };
+		F76998AF1BAF9F8400BFE1E6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F76998AE1BAF9F8400BFE1E6 /* main.m */; };
+		F76998B81BAF9F8400BFE1E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F76998B61BAF9F8400BFE1E6 /* Main.storyboard */; };
+		F76998BA1BAF9F8400BFE1E6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F76998B91BAF9F8400BFE1E6 /* Images.xcassets */; };
+		F76998BD1BAF9F8400BFE1E6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F76998BB1BAF9F8400BFE1E6 /* LaunchScreen.xib */; };
+		F76998C91BAF9F8400BFE1E6 /* CrossChatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F76998C81BAF9F8400BFE1E6 /* CrossChatTests.m */; };
+		F76998D51BAFA07900BFE1E6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F76998D41BAFA07900BFE1E6 /* AppDelegate.m */; };
+		F76998DD1BAFA42100BFE1E6 /* CrossConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F76998DC1BAFA42100BFE1E6 /* CrossConversationViewController.m */; };
+		F76998E81BAFB97800BFE1E6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F76998EA1BAFB97800BFE1E6 /* Localizable.strings */; };
+		F76998EF1BAFCEF100BFE1E6 /* CrossLanguageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F76998EE1BAFCEF100BFE1E6 /* CrossLanguageManager.m */; };
+		F76998FF1BAFE6FC00BFE1E6 /* CrossSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F76998FD1BAFE6FC00BFE1E6 /* CrossSettingViewController.m */; };
+		F76999001BAFE6FC00BFE1E6 /* CrossSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F76998FE1BAFE6FC00BFE1E6 /* CrossSettingViewController.xib */; };
+		F76999031BAFEEE600BFE1E6 /* CrossSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = F76999021BAFEEE600BFE1E6 /* CrossSetting.m */; };
+		F76999071BAFF12A00BFE1E6 /* CrossViewSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = F76999061BAFF12A00BFE1E6 /* CrossViewSetting.m */; };
+		F769990A1BAFF40500BFE1E6 /* CrossCertificateSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = F76999091BAFF40500BFE1E6 /* CrossCertificateSetting.m */; };
+		F769990E1BAFF52100BFE1E6 /* CrossCertificateDomainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F769990C1BAFF52100BFE1E6 /* CrossCertificateDomainViewController.m */; };
+		F76999131BAFF66500BFE1E6 /* CrossSettingViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F76999121BAFF66500BFE1E6 /* CrossSettingViewManager.m */; };
+		F76999161BAFFAEE00BFE1E6 /* CrossSettingGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = F76999151BAFFAEE00BFE1E6 /* CrossSettingGroup.m */; };
+		F769991C1BB0ED3800BFE1E6 /* CrossNewAccountSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = F769991B1BB0ED3800BFE1E6 /* CrossNewAccountSetting.m */; };
+		F76999241BB1238500BFE1E6 /* CrossNewAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F76999221BB1238500BFE1E6 /* CrossNewAccountViewController.m */; };
+		F76999281BB1310200BFE1E6 /* CrossNewAccountViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F76999271BB1310200BFE1E6 /* CrossNewAccountViewManager.m */; };
+		F769992B1BB13A8A00BFE1E6 /* CrossSettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F769992A1BB13A8A00BFE1E6 /* CrossSettingTableViewCell.m */; };
+		F76999311BB13B4100BFE1E6 /* CrossAccountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F769992F1BB13B4100BFE1E6 /* CrossAccountTableViewCell.m */; };
+		F76999321BB13B4100BFE1E6 /* CrossAccountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F76999301BB13B4100BFE1E6 /* CrossAccountTableViewCell.xib */; };
+		F76BECF11BE8AEF300EDB832 /* CrossMessageFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = F76BECF01BE8AEF300EDB832 /* CrossMessageFrame.m */; };
+		F76BECF41BE8B4D600EDB832 /* CrossMessageTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = F76BECF31BE8B4D600EDB832 /* CrossMessageTextView.m */; };
+		F76BECF71BE8B64800EDB832 /* CrossMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F76BECF61BE8B64800EDB832 /* CrossMessageTableViewCell.m */; };
+		F76BECFA1BE9964100EDB832 /* CrossMessageViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F76BECF91BE9964100EDB832 /* CrossMessageViewManager.m */; };
+		F76E34DC1BD612B900331E1F /* CrossAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F76E34DB1BD612B900331E1F /* CrossAccountManager.m */; };
+		F77204AB1BEC3C5F005DC22D /* CrossConversationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F77204AA1BEC3C5F005DC22D /* CrossConversationTableViewCell.m */; };
+		F77204AE1BEC3CEF005DC22D /* CrossConversationSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = F77204AD1BEC3CEF005DC22D /* CrossConversationSetting.m */; };
+		F77204B11BEC405F005DC22D /* CrossConversationViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F77204B01BEC405F005DC22D /* CrossConversationViewManager.m */; };
+		F778ED501BE734E300ECF7CE /* CrossMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F778ED4F1BE734E300ECF7CE /* CrossMessageManager.m */; };
+		F778ED531BE7363100ECF7CE /* CrossMessageDataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F778ED521BE7363100ECF7CE /* CrossMessageDataBaseManager.m */; };
+		F78DC96E1BB937A000D78B38 /* CrossYapDatabaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F78DC96D1BB937A000D78B38 /* CrossYapDatabaseObject.m */; };
+		F78DC9721BBA32B600D78B38 /* CrossDataBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = F78DC9711BBA32B600D78B38 /* CrossDataBaseView.m */; };
+		F78DC9751BBA60DD00D78B38 /* CrossAccountSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = F78DC9741BBA60DD00D78B38 /* CrossAccountSetting.m */; };
+		F7947A5E1BB910BC00E1B446 /* CrossConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = F7947A5D1BB910BC00E1B446 /* CrossConstants.m */; };
+		F7947A601BB913E400E1B446 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F7947A5F1BB913E400E1B446 /* libsqlite3.dylib */; };
+		F79D46381BEC87AB006CAC03 /* CrossXMPPMessageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = F79D46371BEC87AB006CAC03 /* CrossXMPPMessageDecoder.m */; };
+		F79D463B1BEC9DA5006CAC03 /* CrossTimerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F79D463A1BEC9DA5006CAC03 /* CrossTimerHelper.m */; };
+		F79D463F1BF06F04006CAC03 /* CrossKeyBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = F79D463E1BF06F04006CAC03 /* CrossKeyBoardView.m */; };
+		F7AF62251BBB820B0036DC67 /* CrossCertificateDomainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7AF62241BBB820B0036DC67 /* CrossCertificateDomainViewController.xib */; };
+		F7AF62271BBB82920036DC67 /* CrossNewAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7AF62261BBB82920036DC67 /* CrossNewAccountViewController.xib */; };
+		F7D28D391BB2757A00ED3FD6 /* CrossAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D28D381BB2757A00ED3FD6 /* CrossAccount.m */; };
+		F7D28D401BB28CBF00ED3FD6 /* CrossAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D28D3F1BB28CBF00ED3FD6 /* CrossAlertViewController.m */; };
+		F7D28D441BB28F5200ED3FD6 /* CrossAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D28D431BB28F5200ED3FD6 /* CrossAlertAction.m */; };
+		F7D28DCA1BB39F6300ED3FD6 /* CrossProtocolManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D28DC91BB39F6300ED3FD6 /* CrossProtocolManager.m */; };
+		F7D28DCD1BB3A41500ED3FD6 /* CrossXMPPAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D28DCC1BB3A41500ED3FD6 /* CrossXMPPAccount.m */; };
+		F7D28E621BB51EC500ED3FD6 /* CrossXMPPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D28E611BB51EC500ED3FD6 /* CrossXMPPManager.m */; };
+		F7D28E641BB51F7000ED3FD6 /* CrossError.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D28E631BB51F7000ED3FD6 /* CrossError.m */; };
+		F7D28E671BB51F8700ED3FD6 /* CrossErrorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D28E661BB51F8700ED3FD6 /* CrossErrorManager.m */; };
+		F7D28E6B1BB5249300ED3FD6 /* CrossXMPPError.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D28E6A1BB5249300ED3FD6 /* CrossXMPPError.m */; };
+		F7D28E6E1BB539A900ED3FD6 /* CrossProtocolStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D28E6D1BB539A900ED3FD6 /* CrossProtocolStatus.m */; };
+		F7E31D0B1BE1FDE100AE1413 /* CrossBuddyViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E31D0A1BE1FDE100AE1413 /* CrossBuddyViewManager.m */; };
+		F7E31D0E1BE2054D00AE1413 /* CrossBuddySetting.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E31D0D1BE2054D00AE1413 /* CrossBuddySetting.m */; };
+		F7E31D151BE20B6C00AE1413 /* CrossBuddyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E31D131BE20B6C00AE1413 /* CrossBuddyTableViewCell.m */; };
+		F7E501031BB92BDC00DA5CF2 /* CrossAccountDataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E501021BB92BDC00DA5CF2 /* CrossAccountDataBaseManager.m */; };
+		F7E54B251BE35C3600872487 /* CrossMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E54B241BE35C3600872487 /* CrossMessage.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F76998C31BAF9F8400BFE1E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F76998A11BAF9F8400BFE1E6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F76998A81BAF9F8400BFE1E6;
+			remoteInfo = CrossChat;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		29DE9DA3ECADB50DE3034A07 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		95C9829AE0FB8227D6DE7B62 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		B2832C3653D537F61A55CAE4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		F734D64C1BEB363E00CA81AF /* CrossXMPPMessageStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossXMPPMessageStatus.h; path = Classes/Utilities/CrossXMPPMessageStatus.h; sourceTree = "<group>"; };
+		F734D64D1BEB363E00CA81AF /* CrossXMPPMessageStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossXMPPMessageStatus.m; path = Classes/Utilities/CrossXMPPMessageStatus.m; sourceTree = "<group>"; };
+		F735D3AF1BE89F9A00656182 /* CrossMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossMessageViewController.h; path = "Classes/View Controllers/CrossMessageViewController.h"; sourceTree = "<group>"; };
+		F735D3B01BE89F9A00656182 /* CrossMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossMessageViewController.m; path = "Classes/View Controllers/CrossMessageViewController.m"; sourceTree = "<group>"; };
+		F735D3B11BE89F9A00656182 /* CrossMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CrossMessageViewController.xib; path = "Classes/View Controllers/CrossMessageViewController.xib"; sourceTree = "<group>"; };
+		F73FE1031BDE2BC200F2651F /* CrossBuddyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossBuddyTableViewController.h; path = "Classes/View Controllers/CrossBuddyTableViewController.h"; sourceTree = "<group>"; };
+		F73FE1041BDE2BC200F2651F /* CrossBuddyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossBuddyTableViewController.m; path = "Classes/View Controllers/CrossBuddyTableViewController.m"; sourceTree = "<group>"; };
+		F73FE1061BDF0CE100F2651F /* CrossBuddy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossBuddy.h; path = Classes/Model/Buddy/CrossBuddy.h; sourceTree = "<group>"; };
+		F73FE1071BDF0CE100F2651F /* CrossBuddy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossBuddy.m; path = Classes/Model/Buddy/CrossBuddy.m; sourceTree = "<group>"; };
+		F73FE1091BDF642100F2651F /* CrossBuddyDataBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossBuddyDataBaseManager.h; path = Classes/Controllers/CrossBuddyDataBaseManager.h; sourceTree = "<group>"; };
+		F73FE10A1BDF642100F2651F /* CrossBuddyDataBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossBuddyDataBaseManager.m; path = Classes/Controllers/CrossBuddyDataBaseManager.m; sourceTree = "<group>"; };
+		F73FE10C1BDF7AE100F2651F /* CrossBuddyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossBuddyManager.h; path = Classes/Controllers/CrossBuddyManager.h; sourceTree = "<group>"; };
+		F73FE10D1BDF7AE100F2651F /* CrossBuddyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossBuddyManager.m; path = Classes/Controllers/CrossBuddyManager.m; sourceTree = "<group>"; };
+		F76998A91BAF9F8400BFE1E6 /* CrossChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrossChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F76998AD1BAF9F8400BFE1E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F76998AE1BAF9F8400BFE1E6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F76998B71BAF9F8400BFE1E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F76998B91BAF9F8400BFE1E6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F76998BC1BAF9F8400BFE1E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		F76998C21BAF9F8400BFE1E6 /* CrossChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrossChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F76998C71BAF9F8400BFE1E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F76998C81BAF9F8400BFE1E6 /* CrossChatTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CrossChatTests.m; sourceTree = "<group>"; };
+		F76998D31BAFA07900BFE1E6 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = "<group>"; };
+		F76998D41BAFA07900BFE1E6 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = "<group>"; };
+		F76998DB1BAFA42100BFE1E6 /* CrossConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossConversationViewController.h; path = "Classes/View Controllers/CrossConversationViewController.h"; sourceTree = "<group>"; };
+		F76998DC1BAFA42100BFE1E6 /* CrossConversationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossConversationViewController.m; path = "Classes/View Controllers/CrossConversationViewController.m"; sourceTree = "<group>"; };
+		F76998E91BAFB97800BFE1E6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F76998EB1BAFB97E00BFE1E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F76998EC1BAFB9C100BFE1E6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		F76998ED1BAFCEF100BFE1E6 /* CrossLanguageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossLanguageManager.h; path = Classes/Controllers/CrossLanguageManager.h; sourceTree = "<group>"; };
+		F76998EE1BAFCEF100BFE1E6 /* CrossLanguageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossLanguageManager.m; path = Classes/Controllers/CrossLanguageManager.m; sourceTree = "<group>"; };
+		F76998F21BAFD0C700BFE1E6 /* String.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = String.h; path = Classes/String.h; sourceTree = "<group>"; };
+		F76998FC1BAFE6FC00BFE1E6 /* CrossSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossSettingViewController.h; path = "Classes/View Controllers/CrossSettingViewController.h"; sourceTree = "<group>"; };
+		F76998FD1BAFE6FC00BFE1E6 /* CrossSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossSettingViewController.m; path = "Classes/View Controllers/CrossSettingViewController.m"; sourceTree = "<group>"; };
+		F76998FE1BAFE6FC00BFE1E6 /* CrossSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CrossSettingViewController.xib; path = "Classes/View Controllers/CrossSettingViewController.xib"; sourceTree = "<group>"; };
+		F76999011BAFEEE600BFE1E6 /* CrossSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossSetting.h; path = Classes/Model/Settings/CrossSetting.h; sourceTree = "<group>"; };
+		F76999021BAFEEE600BFE1E6 /* CrossSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossSetting.m; path = Classes/Model/Settings/CrossSetting.m; sourceTree = "<group>"; };
+		F76999051BAFF12A00BFE1E6 /* CrossViewSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossViewSetting.h; path = Classes/Model/Settings/CrossViewSetting.h; sourceTree = "<group>"; };
+		F76999061BAFF12A00BFE1E6 /* CrossViewSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossViewSetting.m; path = Classes/Model/Settings/CrossViewSetting.m; sourceTree = "<group>"; };
+		F76999081BAFF40500BFE1E6 /* CrossCertificateSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossCertificateSetting.h; path = Classes/Model/Settings/CrossCertificateSetting.h; sourceTree = "<group>"; };
+		F76999091BAFF40500BFE1E6 /* CrossCertificateSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossCertificateSetting.m; path = Classes/Model/Settings/CrossCertificateSetting.m; sourceTree = "<group>"; };
+		F769990B1BAFF52100BFE1E6 /* CrossCertificateDomainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossCertificateDomainViewController.h; path = "Classes/View Controllers/CrossCertificateDomainViewController.h"; sourceTree = "<group>"; };
+		F769990C1BAFF52100BFE1E6 /* CrossCertificateDomainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossCertificateDomainViewController.m; path = "Classes/View Controllers/CrossCertificateDomainViewController.m"; sourceTree = "<group>"; };
+		F76999111BAFF66500BFE1E6 /* CrossSettingViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossSettingViewManager.h; path = Classes/Controllers/CrossSettingViewManager.h; sourceTree = "<group>"; };
+		F76999121BAFF66500BFE1E6 /* CrossSettingViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossSettingViewManager.m; path = Classes/Controllers/CrossSettingViewManager.m; sourceTree = "<group>"; };
+		F76999141BAFFAEE00BFE1E6 /* CrossSettingGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossSettingGroup.h; path = Classes/Model/Settings/CrossSettingGroup.h; sourceTree = "<group>"; };
+		F76999151BAFFAEE00BFE1E6 /* CrossSettingGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossSettingGroup.m; path = Classes/Model/Settings/CrossSettingGroup.m; sourceTree = "<group>"; };
+		F769991A1BB0ED3800BFE1E6 /* CrossNewAccountSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossNewAccountSetting.h; path = Classes/Model/Settings/CrossNewAccountSetting.h; sourceTree = "<group>"; };
+		F769991B1BB0ED3800BFE1E6 /* CrossNewAccountSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossNewAccountSetting.m; path = Classes/Model/Settings/CrossNewAccountSetting.m; sourceTree = "<group>"; };
+		F76999211BB1238500BFE1E6 /* CrossNewAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossNewAccountViewController.h; path = "Classes/View Controllers/CrossNewAccountViewController.h"; sourceTree = "<group>"; };
+		F76999221BB1238500BFE1E6 /* CrossNewAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossNewAccountViewController.m; path = "Classes/View Controllers/CrossNewAccountViewController.m"; sourceTree = "<group>"; };
+		F76999261BB1310200BFE1E6 /* CrossNewAccountViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossNewAccountViewManager.h; path = Classes/Controllers/CrossNewAccountViewManager.h; sourceTree = "<group>"; };
+		F76999271BB1310200BFE1E6 /* CrossNewAccountViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossNewAccountViewManager.m; path = Classes/Controllers/CrossNewAccountViewManager.m; sourceTree = "<group>"; };
+		F76999291BB13A8A00BFE1E6 /* CrossSettingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossSettingTableViewCell.h; path = Classes/Views/CrossSettingTableViewCell.h; sourceTree = "<group>"; };
+		F769992A1BB13A8A00BFE1E6 /* CrossSettingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossSettingTableViewCell.m; path = Classes/Views/CrossSettingTableViewCell.m; sourceTree = "<group>"; };
+		F769992E1BB13B4100BFE1E6 /* CrossAccountTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossAccountTableViewCell.h; path = Classes/Views/CrossAccountTableViewCell.h; sourceTree = "<group>"; };
+		F769992F1BB13B4100BFE1E6 /* CrossAccountTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossAccountTableViewCell.m; path = Classes/Views/CrossAccountTableViewCell.m; sourceTree = "<group>"; };
+		F76999301BB13B4100BFE1E6 /* CrossAccountTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CrossAccountTableViewCell.xib; path = Classes/Views/CrossAccountTableViewCell.xib; sourceTree = "<group>"; };
+		F76BECEF1BE8AEF300EDB832 /* CrossMessageFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossMessageFrame.h; path = Classes/Views/CrossMessageFrame.h; sourceTree = "<group>"; };
+		F76BECF01BE8AEF300EDB832 /* CrossMessageFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossMessageFrame.m; path = Classes/Views/CrossMessageFrame.m; sourceTree = "<group>"; };
+		F76BECF21BE8B4D600EDB832 /* CrossMessageTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossMessageTextView.h; path = Classes/Views/CrossMessageTextView.h; sourceTree = "<group>"; };
+		F76BECF31BE8B4D600EDB832 /* CrossMessageTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossMessageTextView.m; path = Classes/Views/CrossMessageTextView.m; sourceTree = "<group>"; };
+		F76BECF51BE8B64800EDB832 /* CrossMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossMessageTableViewCell.h; path = Classes/Views/CrossMessageTableViewCell.h; sourceTree = "<group>"; };
+		F76BECF61BE8B64800EDB832 /* CrossMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossMessageTableViewCell.m; path = Classes/Views/CrossMessageTableViewCell.m; sourceTree = "<group>"; };
+		F76BECF81BE9964100EDB832 /* CrossMessageViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossMessageViewManager.h; path = Classes/Controllers/CrossMessageViewManager.h; sourceTree = "<group>"; };
+		F76BECF91BE9964100EDB832 /* CrossMessageViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossMessageViewManager.m; path = Classes/Controllers/CrossMessageViewManager.m; sourceTree = "<group>"; };
+		F76E34DA1BD612B900331E1F /* CrossAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossAccountManager.h; path = Classes/Controllers/CrossAccountManager.h; sourceTree = "<group>"; };
+		F76E34DB1BD612B900331E1F /* CrossAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossAccountManager.m; path = Classes/Controllers/CrossAccountManager.m; sourceTree = "<group>"; };
+		F77204A91BEC3C5F005DC22D /* CrossConversationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossConversationTableViewCell.h; path = Classes/Views/CrossConversationTableViewCell.h; sourceTree = "<group>"; };
+		F77204AA1BEC3C5F005DC22D /* CrossConversationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossConversationTableViewCell.m; path = Classes/Views/CrossConversationTableViewCell.m; sourceTree = "<group>"; };
+		F77204AC1BEC3CEF005DC22D /* CrossConversationSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossConversationSetting.h; path = Classes/Model/Settings/CrossConversationSetting.h; sourceTree = "<group>"; };
+		F77204AD1BEC3CEF005DC22D /* CrossConversationSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossConversationSetting.m; path = Classes/Model/Settings/CrossConversationSetting.m; sourceTree = "<group>"; };
+		F77204AF1BEC405F005DC22D /* CrossConversationViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossConversationViewManager.h; path = "Classes/View Controllers/CrossConversationViewManager.h"; sourceTree = "<group>"; };
+		F77204B01BEC405F005DC22D /* CrossConversationViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossConversationViewManager.m; path = "Classes/View Controllers/CrossConversationViewManager.m"; sourceTree = "<group>"; };
+		F778ED4E1BE734E300ECF7CE /* CrossMessageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossMessageManager.h; path = Classes/Controllers/CrossMessageManager.h; sourceTree = "<group>"; };
+		F778ED4F1BE734E300ECF7CE /* CrossMessageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossMessageManager.m; path = Classes/Controllers/CrossMessageManager.m; sourceTree = "<group>"; };
+		F778ED511BE7363100ECF7CE /* CrossMessageDataBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossMessageDataBaseManager.h; path = Classes/Controllers/CrossMessageDataBaseManager.h; sourceTree = "<group>"; };
+		F778ED521BE7363100ECF7CE /* CrossMessageDataBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossMessageDataBaseManager.m; path = Classes/Controllers/CrossMessageDataBaseManager.m; sourceTree = "<group>"; };
+		F78DC96C1BB937A000D78B38 /* CrossYapDatabaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossYapDatabaseObject.h; path = "Classes/Model/Yap Storage/CrossYapDatabaseObject.h"; sourceTree = "<group>"; };
+		F78DC96D1BB937A000D78B38 /* CrossYapDatabaseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossYapDatabaseObject.m; path = "Classes/Model/Yap Storage/CrossYapDatabaseObject.m"; sourceTree = "<group>"; };
+		F78DC9701BBA32B600D78B38 /* CrossDataBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossDataBaseView.h; path = Classes/Controllers/CrossDataBaseView.h; sourceTree = "<group>"; };
+		F78DC9711BBA32B600D78B38 /* CrossDataBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossDataBaseView.m; path = Classes/Controllers/CrossDataBaseView.m; sourceTree = "<group>"; };
+		F78DC9731BBA60DD00D78B38 /* CrossAccountSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossAccountSetting.h; path = Classes/Model/Settings/CrossAccountSetting.h; sourceTree = "<group>"; };
+		F78DC9741BBA60DD00D78B38 /* CrossAccountSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossAccountSetting.m; path = Classes/Model/Settings/CrossAccountSetting.m; sourceTree = "<group>"; };
+		F7947A5D1BB910BC00E1B446 /* CrossConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossConstants.m; path = Classes/Utilities/CrossConstants.m; sourceTree = "<group>"; };
+		F7947A5F1BB913E400E1B446 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		F79D46361BEC87AB006CAC03 /* CrossXMPPMessageDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossXMPPMessageDecoder.h; path = Classes/Utilities/CrossXMPPMessageDecoder.h; sourceTree = "<group>"; };
+		F79D46371BEC87AB006CAC03 /* CrossXMPPMessageDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossXMPPMessageDecoder.m; path = Classes/Utilities/CrossXMPPMessageDecoder.m; sourceTree = "<group>"; };
+		F79D46391BEC9DA5006CAC03 /* CrossTimerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossTimerHelper.h; path = Classes/Utilities/CrossTimerHelper.h; sourceTree = "<group>"; };
+		F79D463A1BEC9DA5006CAC03 /* CrossTimerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossTimerHelper.m; path = Classes/Utilities/CrossTimerHelper.m; sourceTree = "<group>"; };
+		F79D463D1BF06F04006CAC03 /* CrossKeyBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossKeyBoardView.h; path = Classes/Views/CrossKeyBoardView.h; sourceTree = "<group>"; };
+		F79D463E1BF06F04006CAC03 /* CrossKeyBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossKeyBoardView.m; path = Classes/Views/CrossKeyBoardView.m; sourceTree = "<group>"; };
+		F7AF62241BBB820B0036DC67 /* CrossCertificateDomainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CrossCertificateDomainViewController.xib; path = "Classes/View Controllers/CrossCertificateDomainViewController.xib"; sourceTree = "<group>"; };
+		F7AF62261BBB82920036DC67 /* CrossNewAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CrossNewAccountViewController.xib; path = "Classes/View Controllers/CrossNewAccountViewController.xib"; sourceTree = "<group>"; };
+		F7D28D371BB2757A00ED3FD6 /* CrossAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossAccount.h; path = Classes/Model/Accounts/CrossAccount.h; sourceTree = "<group>"; };
+		F7D28D381BB2757A00ED3FD6 /* CrossAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossAccount.m; path = Classes/Model/Accounts/CrossAccount.m; sourceTree = "<group>"; };
+		F7D28D3E1BB28CBF00ED3FD6 /* CrossAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossAlertViewController.h; path = "Classes/View Controllers/CrossAlertViewController.h"; sourceTree = "<group>"; };
+		F7D28D3F1BB28CBF00ED3FD6 /* CrossAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossAlertViewController.m; path = "Classes/View Controllers/CrossAlertViewController.m"; sourceTree = "<group>"; };
+		F7D28D421BB28F5200ED3FD6 /* CrossAlertAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossAlertAction.h; path = Classes/Model/Alert/CrossAlertAction.h; sourceTree = "<group>"; };
+		F7D28D431BB28F5200ED3FD6 /* CrossAlertAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossAlertAction.m; path = Classes/Model/Alert/CrossAlertAction.m; sourceTree = "<group>"; };
+		F7D28DC81BB39F6300ED3FD6 /* CrossProtocolManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossProtocolManager.h; path = Classes/Controllers/CrossProtocolManager.h; sourceTree = "<group>"; };
+		F7D28DC91BB39F6300ED3FD6 /* CrossProtocolManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossProtocolManager.m; path = Classes/Controllers/CrossProtocolManager.m; sourceTree = "<group>"; };
+		F7D28DCB1BB3A41500ED3FD6 /* CrossXMPPAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossXMPPAccount.h; path = Classes/Model/Accounts/CrossXMPPAccount.h; sourceTree = "<group>"; };
+		F7D28DCC1BB3A41500ED3FD6 /* CrossXMPPAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossXMPPAccount.m; path = Classes/Model/Accounts/CrossXMPPAccount.m; sourceTree = "<group>"; };
+		F7D28DCE1BB3A58A00ED3FD6 /* CrossProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossProtocol.h; path = Classes/Controllers/CrossProtocol.h; sourceTree = "<group>"; };
+		F7D28DD11BB3A78900ED3FD6 /* CrossConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CrossConstants.h; path = Classes/Utilities/CrossConstants.h; sourceTree = "<group>"; };
+		F7D28E5F1BB51D9300ED3FD6 /* CrossError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CrossError.h; path = Classes/Utilities/CrossError.h; sourceTree = "<group>"; };
+		F7D28E601BB51EC500ED3FD6 /* CrossXMPPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossXMPPManager.h; path = Classes/Controllers/CrossXMPPManager.h; sourceTree = "<group>"; };
+		F7D28E611BB51EC500ED3FD6 /* CrossXMPPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossXMPPManager.m; path = Classes/Controllers/CrossXMPPManager.m; sourceTree = "<group>"; };
+		F7D28E631BB51F7000ED3FD6 /* CrossError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossError.m; path = Classes/Utilities/CrossError.m; sourceTree = "<group>"; };
+		F7D28E651BB51F8700ED3FD6 /* CrossErrorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossErrorManager.h; path = Classes/Controllers/CrossErrorManager.h; sourceTree = "<group>"; };
+		F7D28E661BB51F8700ED3FD6 /* CrossErrorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossErrorManager.m; path = Classes/Controllers/CrossErrorManager.m; sourceTree = "<group>"; };
+		F7D28E691BB5249300ED3FD6 /* CrossXMPPError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossXMPPError.h; path = Classes/Utilities/CrossXMPPError.h; sourceTree = "<group>"; };
+		F7D28E6A1BB5249300ED3FD6 /* CrossXMPPError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossXMPPError.m; path = Classes/Utilities/CrossXMPPError.m; sourceTree = "<group>"; };
+		F7D28E6C1BB5314F00ED3FD6 /* CrossProtocolStatus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CrossProtocolStatus.h; path = Classes/Utilities/CrossProtocolStatus.h; sourceTree = "<group>"; };
+		F7D28E6D1BB539A900ED3FD6 /* CrossProtocolStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossProtocolStatus.m; path = Classes/Utilities/CrossProtocolStatus.m; sourceTree = "<group>"; };
+		F7E31D091BE1FDE100AE1413 /* CrossBuddyViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossBuddyViewManager.h; path = Classes/Controllers/CrossBuddyViewManager.h; sourceTree = "<group>"; };
+		F7E31D0A1BE1FDE100AE1413 /* CrossBuddyViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossBuddyViewManager.m; path = Classes/Controllers/CrossBuddyViewManager.m; sourceTree = "<group>"; };
+		F7E31D0C1BE2054D00AE1413 /* CrossBuddySetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossBuddySetting.h; path = Classes/Model/Settings/CrossBuddySetting.h; sourceTree = "<group>"; };
+		F7E31D0D1BE2054D00AE1413 /* CrossBuddySetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossBuddySetting.m; path = Classes/Model/Settings/CrossBuddySetting.m; sourceTree = "<group>"; };
+		F7E31D121BE20B6C00AE1413 /* CrossBuddyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossBuddyTableViewCell.h; path = Classes/Views/CrossBuddyTableViewCell.h; sourceTree = "<group>"; };
+		F7E31D131BE20B6C00AE1413 /* CrossBuddyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossBuddyTableViewCell.m; path = Classes/Views/CrossBuddyTableViewCell.m; sourceTree = "<group>"; };
+		F7E501011BB92BDC00DA5CF2 /* CrossAccountDataBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossAccountDataBaseManager.h; path = Classes/Controllers/CrossAccountDataBaseManager.h; sourceTree = "<group>"; };
+		F7E501021BB92BDC00DA5CF2 /* CrossAccountDataBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossAccountDataBaseManager.m; path = Classes/Controllers/CrossAccountDataBaseManager.m; sourceTree = "<group>"; };
+		F7E54B231BE35C3600872487 /* CrossMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossMessage.h; path = Classes/Model/Message/CrossMessage.h; sourceTree = "<group>"; };
+		F7E54B241BE35C3600872487 /* CrossMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossMessage.m; path = Classes/Model/Message/CrossMessage.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F76998A61BAF9F8400BFE1E6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7947A601BB913E400E1B446 /* libsqlite3.dylib in Frameworks */,
+				B1C857E504FD11D142654C11 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F76998BF1BAF9F8400BFE1E6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1EC3F28D90E2AE8D24DB55FD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B2832C3653D537F61A55CAE4 /* Pods.debug.xcconfig */,
+				95C9829AE0FB8227D6DE7B62 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		3A710076720B45EA126120C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F7947A5F1BB913E400E1B446 /* libsqlite3.dylib */,
+				29DE9DA3ECADB50DE3034A07 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F717AEB11BDF0C7700084CB1 /* Buddy */ = {
+			isa = PBXGroup;
+			children = (
+				F73FE1061BDF0CE100F2651F /* CrossBuddy.h */,
+				F73FE1071BDF0CE100F2651F /* CrossBuddy.m */,
+			);
+			name = Buddy;
+			sourceTree = "<group>";
+		};
+		F735D3AE1BE89F6D00656182 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				F735D3AF1BE89F9A00656182 /* CrossMessageViewController.h */,
+				F735D3B01BE89F9A00656182 /* CrossMessageViewController.m */,
+				F735D3B11BE89F9A00656182 /* CrossMessageViewController.xib */,
+			);
+			name = Message;
+			sourceTree = "<group>";
+		};
+		F73FE1021BDE2B3A00F2651F /* Buddy */ = {
+			isa = PBXGroup;
+			children = (
+				F73FE1031BDE2BC200F2651F /* CrossBuddyTableViewController.h */,
+				F73FE1041BDE2BC200F2651F /* CrossBuddyTableViewController.m */,
+			);
+			name = Buddy;
+			sourceTree = "<group>";
+		};
+		F76998A01BAF9F8400BFE1E6 = {
+			isa = PBXGroup;
+			children = (
+				F76998AB1BAF9F8400BFE1E6 /* CrossChat */,
+				F76998C51BAF9F8400BFE1E6 /* CrossChatTests */,
+				F76998AA1BAF9F8400BFE1E6 /* Products */,
+				1EC3F28D90E2AE8D24DB55FD /* Pods */,
+				3A710076720B45EA126120C4 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F76998AA1BAF9F8400BFE1E6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F76998A91BAF9F8400BFE1E6 /* CrossChat.app */,
+				F76998C21BAF9F8400BFE1E6 /* CrossChatTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F76998AB1BAF9F8400BFE1E6 /* CrossChat */ = {
+			isa = PBXGroup;
+			children = (
+				F76998F01BAFD05400BFE1E6 /* Resources */,
+				F76998D21BAFA05E00BFE1E6 /* Classes */,
+				F76998AC1BAF9F8400BFE1E6 /* Supporting Files */,
+			);
+			path = CrossChat;
+			sourceTree = "<group>";
+		};
+		F76998AC1BAF9F8400BFE1E6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F76998AD1BAF9F8400BFE1E6 /* Info.plist */,
+				F76998AE1BAF9F8400BFE1E6 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F76998C51BAF9F8400BFE1E6 /* CrossChatTests */ = {
+			isa = PBXGroup;
+			children = (
+				F76998C81BAF9F8400BFE1E6 /* CrossChatTests.m */,
+				F76998C61BAF9F8400BFE1E6 /* Supporting Files */,
+			);
+			path = CrossChatTests;
+			sourceTree = "<group>";
+		};
+		F76998C61BAF9F8400BFE1E6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F76998C71BAF9F8400BFE1E6 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F76998D21BAFA05E00BFE1E6 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F76998DA1BAFA11D00BFE1E6 /* Model */,
+				F76998D91BAFA11100BFE1E6 /* Utilities */,
+				F76998D81BAFA10500BFE1E6 /* Views */,
+				F76998D71BAFA0C500BFE1E6 /* Controllers */,
+				F76998D61BAFA09500BFE1E6 /* View Controllers */,
+				F76998D31BAFA07900BFE1E6 /* AppDelegate.h */,
+				F76998D41BAFA07900BFE1E6 /* AppDelegate.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		F76998D61BAFA09500BFE1E6 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F735D3AE1BE89F6D00656182 /* Message */,
+				F73FE1021BDE2B3A00F2651F /* Buddy */,
+				F7D28D3A1BB28C6700ED3FD6 /* Alert */,
+				F769992C1BB13AC500BFE1E6 /* Conversation */,
+				F76999101BAFF60500BFE1E6 /* Settings */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		F76998D71BAFA0C500BFE1E6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F78DC96F1BBA327000D78B38 /* Yap DataBase View */,
+				F7D28D451BB3885100ED3FD6 /* View Controller Manager */,
+				F76998ED1BAFCEF100BFE1E6 /* CrossLanguageManager.h */,
+				F76998EE1BAFCEF100BFE1E6 /* CrossLanguageManager.m */,
+				F7D28DCE1BB3A58A00ED3FD6 /* CrossProtocol.h */,
+				F7D28DC81BB39F6300ED3FD6 /* CrossProtocolManager.h */,
+				F7D28DC91BB39F6300ED3FD6 /* CrossProtocolManager.m */,
+				F7D28E601BB51EC500ED3FD6 /* CrossXMPPManager.h */,
+				F7D28E611BB51EC500ED3FD6 /* CrossXMPPManager.m */,
+				F7D28E651BB51F8700ED3FD6 /* CrossErrorManager.h */,
+				F7D28E661BB51F8700ED3FD6 /* CrossErrorManager.m */,
+				F7E501011BB92BDC00DA5CF2 /* CrossAccountDataBaseManager.h */,
+				F7E501021BB92BDC00DA5CF2 /* CrossAccountDataBaseManager.m */,
+				F73FE1091BDF642100F2651F /* CrossBuddyDataBaseManager.h */,
+				F73FE10A1BDF642100F2651F /* CrossBuddyDataBaseManager.m */,
+				F76E34DA1BD612B900331E1F /* CrossAccountManager.h */,
+				F76E34DB1BD612B900331E1F /* CrossAccountManager.m */,
+				F73FE10C1BDF7AE100F2651F /* CrossBuddyManager.h */,
+				F73FE10D1BDF7AE100F2651F /* CrossBuddyManager.m */,
+				F778ED4E1BE734E300ECF7CE /* CrossMessageManager.h */,
+				F778ED4F1BE734E300ECF7CE /* CrossMessageManager.m */,
+				F778ED511BE7363100ECF7CE /* CrossMessageDataBaseManager.h */,
+				F778ED521BE7363100ECF7CE /* CrossMessageDataBaseManager.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		F76998D81BAFA10500BFE1E6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F79D463C1BF06EDC006CAC03 /* KeyBoard */,
+				F77204A81BEC3C4C005DC22D /* Conversation */,
+				F76BECEE1BE8AECB00EDB832 /* Message */,
+				F769992D1BB13ADA00BFE1E6 /* Settings */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		F76998D91BAFA11100BFE1E6 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				F7D28DD11BB3A78900ED3FD6 /* CrossConstants.h */,
+				F7947A5D1BB910BC00E1B446 /* CrossConstants.m */,
+				F7D28E5F1BB51D9300ED3FD6 /* CrossError.h */,
+				F7D28E631BB51F7000ED3FD6 /* CrossError.m */,
+				F7D28E691BB5249300ED3FD6 /* CrossXMPPError.h */,
+				F7D28E6A1BB5249300ED3FD6 /* CrossXMPPError.m */,
+				F7D28E6C1BB5314F00ED3FD6 /* CrossProtocolStatus.h */,
+				F7D28E6D1BB539A900ED3FD6 /* CrossProtocolStatus.m */,
+				F734D64C1BEB363E00CA81AF /* CrossXMPPMessageStatus.h */,
+				F734D64D1BEB363E00CA81AF /* CrossXMPPMessageStatus.m */,
+				F79D46361BEC87AB006CAC03 /* CrossXMPPMessageDecoder.h */,
+				F79D46371BEC87AB006CAC03 /* CrossXMPPMessageDecoder.m */,
+				F79D46391BEC9DA5006CAC03 /* CrossTimerHelper.h */,
+				F79D463A1BEC9DA5006CAC03 /* CrossTimerHelper.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		F76998DA1BAFA11D00BFE1E6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F7E54B221BE35C1700872487 /* Message */,
+				F717AEB11BDF0C7700084CB1 /* Buddy */,
+				F78DC96B1BB9373E00D78B38 /* Yap Storage */,
+				F7D28D411BB28D2E00ED3FD6 /* Alert */,
+				F7D28D361BB256C500ED3FD6 /* Accounts */,
+				F76999041BAFEEEA00BFE1E6 /* Settings */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		F76998F01BAFD05400BFE1E6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F76998B61BAF9F8400BFE1E6 /* Main.storyboard */,
+				F76998BB1BAF9F8400BFE1E6 /* LaunchScreen.xib */,
+				F76998B91BAF9F8400BFE1E6 /* Images.xcassets */,
+				F76998EA1BAFB97800BFE1E6 /* Localizable.strings */,
+				F76998F21BAFD0C700BFE1E6 /* String.h */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		F76999041BAFEEEA00BFE1E6 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				F76999141BAFFAEE00BFE1E6 /* CrossSettingGroup.h */,
+				F76999151BAFFAEE00BFE1E6 /* CrossSettingGroup.m */,
+				F76999011BAFEEE600BFE1E6 /* CrossSetting.h */,
+				F76999021BAFEEE600BFE1E6 /* CrossSetting.m */,
+				F76999051BAFF12A00BFE1E6 /* CrossViewSetting.h */,
+				F76999061BAFF12A00BFE1E6 /* CrossViewSetting.m */,
+				F76999081BAFF40500BFE1E6 /* CrossCertificateSetting.h */,
+				F76999091BAFF40500BFE1E6 /* CrossCertificateSetting.m */,
+				F769991A1BB0ED3800BFE1E6 /* CrossNewAccountSetting.h */,
+				F769991B1BB0ED3800BFE1E6 /* CrossNewAccountSetting.m */,
+				F78DC9731BBA60DD00D78B38 /* CrossAccountSetting.h */,
+				F78DC9741BBA60DD00D78B38 /* CrossAccountSetting.m */,
+				F7E31D0C1BE2054D00AE1413 /* CrossBuddySetting.h */,
+				F7E31D0D1BE2054D00AE1413 /* CrossBuddySetting.m */,
+				F77204AC1BEC3CEF005DC22D /* CrossConversationSetting.h */,
+				F77204AD1BEC3CEF005DC22D /* CrossConversationSetting.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		F76999101BAFF60500BFE1E6 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				F769991D1BB0EE4000BFE1E6 /* Detail Settings */,
+				F76998FC1BAFE6FC00BFE1E6 /* CrossSettingViewController.h */,
+				F76998FD1BAFE6FC00BFE1E6 /* CrossSettingViewController.m */,
+				F76998FE1BAFE6FC00BFE1E6 /* CrossSettingViewController.xib */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		F769991D1BB0EE4000BFE1E6 /* Detail Settings */ = {
+			isa = PBXGroup;
+			children = (
+				F769990B1BAFF52100BFE1E6 /* CrossCertificateDomainViewController.h */,
+				F769990C1BAFF52100BFE1E6 /* CrossCertificateDomainViewController.m */,
+				F7AF62241BBB820B0036DC67 /* CrossCertificateDomainViewController.xib */,
+				F76999211BB1238500BFE1E6 /* CrossNewAccountViewController.h */,
+				F76999221BB1238500BFE1E6 /* CrossNewAccountViewController.m */,
+				F7AF62261BBB82920036DC67 /* CrossNewAccountViewController.xib */,
+			);
+			name = "Detail Settings";
+			sourceTree = "<group>";
+		};
+		F769992C1BB13AC500BFE1E6 /* Conversation */ = {
+			isa = PBXGroup;
+			children = (
+				F76998DB1BAFA42100BFE1E6 /* CrossConversationViewController.h */,
+				F76998DC1BAFA42100BFE1E6 /* CrossConversationViewController.m */,
+			);
+			name = Conversation;
+			sourceTree = "<group>";
+		};
+		F769992D1BB13ADA00BFE1E6 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				F76999291BB13A8A00BFE1E6 /* CrossSettingTableViewCell.h */,
+				F769992A1BB13A8A00BFE1E6 /* CrossSettingTableViewCell.m */,
+				F769992E1BB13B4100BFE1E6 /* CrossAccountTableViewCell.h */,
+				F769992F1BB13B4100BFE1E6 /* CrossAccountTableViewCell.m */,
+				F76999301BB13B4100BFE1E6 /* CrossAccountTableViewCell.xib */,
+				F7E31D121BE20B6C00AE1413 /* CrossBuddyTableViewCell.h */,
+				F7E31D131BE20B6C00AE1413 /* CrossBuddyTableViewCell.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		F76BECEE1BE8AECB00EDB832 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				F76BECEF1BE8AEF300EDB832 /* CrossMessageFrame.h */,
+				F76BECF01BE8AEF300EDB832 /* CrossMessageFrame.m */,
+				F76BECF21BE8B4D600EDB832 /* CrossMessageTextView.h */,
+				F76BECF31BE8B4D600EDB832 /* CrossMessageTextView.m */,
+				F76BECF51BE8B64800EDB832 /* CrossMessageTableViewCell.h */,
+				F76BECF61BE8B64800EDB832 /* CrossMessageTableViewCell.m */,
+			);
+			name = Message;
+			sourceTree = "<group>";
+		};
+		F77204A81BEC3C4C005DC22D /* Conversation */ = {
+			isa = PBXGroup;
+			children = (
+				F77204A91BEC3C5F005DC22D /* CrossConversationTableViewCell.h */,
+				F77204AA1BEC3C5F005DC22D /* CrossConversationTableViewCell.m */,
+			);
+			name = Conversation;
+			sourceTree = "<group>";
+		};
+		F78DC96B1BB9373E00D78B38 /* Yap Storage */ = {
+			isa = PBXGroup;
+			children = (
+				F78DC96C1BB937A000D78B38 /* CrossYapDatabaseObject.h */,
+				F78DC96D1BB937A000D78B38 /* CrossYapDatabaseObject.m */,
+			);
+			name = "Yap Storage";
+			sourceTree = "<group>";
+		};
+		F78DC96F1BBA327000D78B38 /* Yap DataBase View */ = {
+			isa = PBXGroup;
+			children = (
+				F78DC9701BBA32B600D78B38 /* CrossDataBaseView.h */,
+				F78DC9711BBA32B600D78B38 /* CrossDataBaseView.m */,
+			);
+			name = "Yap DataBase View";
+			sourceTree = "<group>";
+		};
+		F79D463C1BF06EDC006CAC03 /* KeyBoard */ = {
+			isa = PBXGroup;
+			children = (
+				F79D463D1BF06F04006CAC03 /* CrossKeyBoardView.h */,
+				F79D463E1BF06F04006CAC03 /* CrossKeyBoardView.m */,
+			);
+			name = KeyBoard;
+			sourceTree = "<group>";
+		};
+		F7D28D361BB256C500ED3FD6 /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				F7D28D371BB2757A00ED3FD6 /* CrossAccount.h */,
+				F7D28D381BB2757A00ED3FD6 /* CrossAccount.m */,
+				F7D28DCB1BB3A41500ED3FD6 /* CrossXMPPAccount.h */,
+				F7D28DCC1BB3A41500ED3FD6 /* CrossXMPPAccount.m */,
+			);
+			name = Accounts;
+			sourceTree = "<group>";
+		};
+		F7D28D3A1BB28C6700ED3FD6 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				F7D28D3E1BB28CBF00ED3FD6 /* CrossAlertViewController.h */,
+				F7D28D3F1BB28CBF00ED3FD6 /* CrossAlertViewController.m */,
+			);
+			name = Alert;
+			sourceTree = "<group>";
+		};
+		F7D28D411BB28D2E00ED3FD6 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				F7D28D421BB28F5200ED3FD6 /* CrossAlertAction.h */,
+				F7D28D431BB28F5200ED3FD6 /* CrossAlertAction.m */,
+			);
+			name = Alert;
+			sourceTree = "<group>";
+		};
+		F7D28D451BB3885100ED3FD6 /* View Controller Manager */ = {
+			isa = PBXGroup;
+			children = (
+				F76999111BAFF66500BFE1E6 /* CrossSettingViewManager.h */,
+				F76999121BAFF66500BFE1E6 /* CrossSettingViewManager.m */,
+				F76999261BB1310200BFE1E6 /* CrossNewAccountViewManager.h */,
+				F76999271BB1310200BFE1E6 /* CrossNewAccountViewManager.m */,
+				F7E31D091BE1FDE100AE1413 /* CrossBuddyViewManager.h */,
+				F7E31D0A1BE1FDE100AE1413 /* CrossBuddyViewManager.m */,
+				F76BECF81BE9964100EDB832 /* CrossMessageViewManager.h */,
+				F76BECF91BE9964100EDB832 /* CrossMessageViewManager.m */,
+				F77204AF1BEC405F005DC22D /* CrossConversationViewManager.h */,
+				F77204B01BEC405F005DC22D /* CrossConversationViewManager.m */,
+			);
+			name = "View Controller Manager";
+			sourceTree = "<group>";
+		};
+		F7E54B221BE35C1700872487 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				F7E54B231BE35C3600872487 /* CrossMessage.h */,
+				F7E54B241BE35C3600872487 /* CrossMessage.m */,
+			);
+			name = Message;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F76998A81BAF9F8400BFE1E6 /* CrossChat */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F76998CC1BAF9F8400BFE1E6 /* Build configuration list for PBXNativeTarget "CrossChat" */;
+			buildPhases = (
+				C88DD7160144F7F52DD58F5A /* Check Pods Manifest.lock */,
+				F76998A51BAF9F8400BFE1E6 /* Sources */,
+				F76998A61BAF9F8400BFE1E6 /* Frameworks */,
+				F76998A71BAF9F8400BFE1E6 /* Resources */,
+				0DED5447E0B73A674D98C250 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CrossChat;
+			productName = CrossChat;
+			productReference = F76998A91BAF9F8400BFE1E6 /* CrossChat.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F76998C11BAF9F8400BFE1E6 /* CrossChatTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F76998CF1BAF9F8400BFE1E6 /* Build configuration list for PBXNativeTarget "CrossChatTests" */;
+			buildPhases = (
+				F76998BE1BAF9F8400BFE1E6 /* Sources */,
+				F76998BF1BAF9F8400BFE1E6 /* Frameworks */,
+				F76998C01BAF9F8400BFE1E6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F76998C41BAF9F8400BFE1E6 /* PBXTargetDependency */,
+			);
+			name = CrossChatTests;
+			productName = CrossChatTests;
+			productReference = F76998C21BAF9F8400BFE1E6 /* CrossChatTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F76998A11BAF9F8400BFE1E6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = Cross;
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = chaobai;
+				TargetAttributes = {
+					F76998A81BAF9F8400BFE1E6 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					F76998C11BAF9F8400BFE1E6 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = F76998A81BAF9F8400BFE1E6;
+					};
+				};
+			};
+			buildConfigurationList = F76998A41BAF9F8400BFE1E6 /* Build configuration list for PBXProject "CrossChat" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = F76998A01BAF9F8400BFE1E6;
+			productRefGroup = F76998AA1BAF9F8400BFE1E6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F76998A81BAF9F8400BFE1E6 /* CrossChat */,
+				F76998C11BAF9F8400BFE1E6 /* CrossChatTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F76998A71BAF9F8400BFE1E6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F76999321BB13B4100BFE1E6 /* CrossAccountTableViewCell.xib in Resources */,
+				F76998B81BAF9F8400BFE1E6 /* Main.storyboard in Resources */,
+				F735D3B31BE89F9A00656182 /* CrossMessageViewController.xib in Resources */,
+				F76998E81BAFB97800BFE1E6 /* Localizable.strings in Resources */,
+				F76999001BAFE6FC00BFE1E6 /* CrossSettingViewController.xib in Resources */,
+				F76998BD1BAF9F8400BFE1E6 /* LaunchScreen.xib in Resources */,
+				F7AF62251BBB820B0036DC67 /* CrossCertificateDomainViewController.xib in Resources */,
+				F7AF62271BBB82920036DC67 /* CrossNewAccountViewController.xib in Resources */,
+				F76998BA1BAF9F8400BFE1E6 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F76998C01BAF9F8400BFE1E6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0DED5447E0B73A674D98C250 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C88DD7160144F7F52DD58F5A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F76998A51BAF9F8400BFE1E6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F76999161BAFFAEE00BFE1E6 /* CrossSettingGroup.m in Sources */,
+				F73FE1081BDF0CE100F2651F /* CrossBuddy.m in Sources */,
+				F7D28E6B1BB5249300ED3FD6 /* CrossXMPPError.m in Sources */,
+				F76E34DC1BD612B900331E1F /* CrossAccountManager.m in Sources */,
+				F76BECFA1BE9964100EDB832 /* CrossMessageViewManager.m in Sources */,
+				F7D28E6E1BB539A900ED3FD6 /* CrossProtocolStatus.m in Sources */,
+				F77204B11BEC405F005DC22D /* CrossConversationViewManager.m in Sources */,
+				F7D28E621BB51EC500ED3FD6 /* CrossXMPPManager.m in Sources */,
+				F7D28D441BB28F5200ED3FD6 /* CrossAlertAction.m in Sources */,
+				F7D28E641BB51F7000ED3FD6 /* CrossError.m in Sources */,
+				F769992B1BB13A8A00BFE1E6 /* CrossSettingTableViewCell.m in Sources */,
+				F7D28D391BB2757A00ED3FD6 /* CrossAccount.m in Sources */,
+				F79D463B1BEC9DA5006CAC03 /* CrossTimerHelper.m in Sources */,
+				F734D64E1BEB363E00CA81AF /* CrossXMPPMessageStatus.m in Sources */,
+				F76998AF1BAF9F8400BFE1E6 /* main.m in Sources */,
+				F79D46381BEC87AB006CAC03 /* CrossXMPPMessageDecoder.m in Sources */,
+				F76998D51BAFA07900BFE1E6 /* AppDelegate.m in Sources */,
+				F77204AE1BEC3CEF005DC22D /* CrossConversationSetting.m in Sources */,
+				F77204AB1BEC3C5F005DC22D /* CrossConversationTableViewCell.m in Sources */,
+				F76BECF11BE8AEF300EDB832 /* CrossMessageFrame.m in Sources */,
+				F76998EF1BAFCEF100BFE1E6 /* CrossLanguageManager.m in Sources */,
+				F76999131BAFF66500BFE1E6 /* CrossSettingViewManager.m in Sources */,
+				F76998DD1BAFA42100BFE1E6 /* CrossConversationViewController.m in Sources */,
+				F769990E1BAFF52100BFE1E6 /* CrossCertificateDomainViewController.m in Sources */,
+				F76998FF1BAFE6FC00BFE1E6 /* CrossSettingViewController.m in Sources */,
+				F7D28E671BB51F8700ED3FD6 /* CrossErrorManager.m in Sources */,
+				F7E31D0E1BE2054D00AE1413 /* CrossBuddySetting.m in Sources */,
+				F769991C1BB0ED3800BFE1E6 /* CrossNewAccountSetting.m in Sources */,
+				F73FE10E1BDF7AE100F2651F /* CrossBuddyManager.m in Sources */,
+				F7947A5E1BB910BC00E1B446 /* CrossConstants.m in Sources */,
+				F7D28DCA1BB39F6300ED3FD6 /* CrossProtocolManager.m in Sources */,
+				F78DC96E1BB937A000D78B38 /* CrossYapDatabaseObject.m in Sources */,
+				F78DC9721BBA32B600D78B38 /* CrossDataBaseView.m in Sources */,
+				F7E31D151BE20B6C00AE1413 /* CrossBuddyTableViewCell.m in Sources */,
+				F778ED501BE734E300ECF7CE /* CrossMessageManager.m in Sources */,
+				F76BECF71BE8B64800EDB832 /* CrossMessageTableViewCell.m in Sources */,
+				F76999071BAFF12A00BFE1E6 /* CrossViewSetting.m in Sources */,
+				F7D28D401BB28CBF00ED3FD6 /* CrossAlertViewController.m in Sources */,
+				F79D463F1BF06F04006CAC03 /* CrossKeyBoardView.m in Sources */,
+				F735D3B21BE89F9A00656182 /* CrossMessageViewController.m in Sources */,
+				F778ED531BE7363100ECF7CE /* CrossMessageDataBaseManager.m in Sources */,
+				F76999311BB13B4100BFE1E6 /* CrossAccountTableViewCell.m in Sources */,
+				F76999241BB1238500BFE1E6 /* CrossNewAccountViewController.m in Sources */,
+				F73FE1051BDE2BC200F2651F /* CrossBuddyTableViewController.m in Sources */,
+				F7E501031BB92BDC00DA5CF2 /* CrossAccountDataBaseManager.m in Sources */,
+				F7E54B251BE35C3600872487 /* CrossMessage.m in Sources */,
+				F7D28DCD1BB3A41500ED3FD6 /* CrossXMPPAccount.m in Sources */,
+				F76999031BAFEEE600BFE1E6 /* CrossSetting.m in Sources */,
+				F76BECF41BE8B4D600EDB832 /* CrossMessageTextView.m in Sources */,
+				F769990A1BAFF40500BFE1E6 /* CrossCertificateSetting.m in Sources */,
+				F78DC9751BBA60DD00D78B38 /* CrossAccountSetting.m in Sources */,
+				F73FE10B1BDF642100F2651F /* CrossBuddyDataBaseManager.m in Sources */,
+				F76999281BB1310200BFE1E6 /* CrossNewAccountViewManager.m in Sources */,
+				F7E31D0B1BE1FDE100AE1413 /* CrossBuddyViewManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F76998BE1BAF9F8400BFE1E6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F76998C91BAF9F8400BFE1E6 /* CrossChatTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F76998C41BAF9F8400BFE1E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F76998A81BAF9F8400BFE1E6 /* CrossChat */;
+			targetProxy = F76998C31BAF9F8400BFE1E6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F76998B61BAF9F8400BFE1E6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F76998B71BAF9F8400BFE1E6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F76998BB1BAF9F8400BFE1E6 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F76998BC1BAF9F8400BFE1E6 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		F76998EA1BAFB97800BFE1E6 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F76998E91BAFB97800BFE1E6 /* en */,
+				F76998EB1BAFB97E00BFE1E6 /* Base */,
+				F76998EC1BAFB9C100BFE1E6 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			path = ..;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F76998CA1BAF9F8400BFE1E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F76998CB1BAF9F8400BFE1E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F76998CD1BAF9F8400BFE1E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2832C3653D537F61A55CAE4 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = CrossChat/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F76998CE1BAF9F8400BFE1E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 95C9829AE0FB8227D6DE7B62 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = CrossChat/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F76998D01BAF9F8400BFE1E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CrossChatTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CrossChat.app/CrossChat";
+			};
+			name = Debug;
+		};
+		F76998D11BAF9F8400BFE1E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CrossChatTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CrossChat.app/CrossChat";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F76998A41BAF9F8400BFE1E6 /* Build configuration list for PBXProject "CrossChat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F76998CA1BAF9F8400BFE1E6 /* Debug */,
+				F76998CB1BAF9F8400BFE1E6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F76998CC1BAF9F8400BFE1E6 /* Build configuration list for PBXNativeTarget "CrossChat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F76998CD1BAF9F8400BFE1E6 /* Debug */,
+				F76998CE1BAF9F8400BFE1E6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F76998CF1BAF9F8400BFE1E6 /* Build configuration list for PBXNativeTarget "CrossChatTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F76998D01BAF9F8400BFE1E6 /* Debug */,
+				F76998D11BAF9F8400BFE1E6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F76998A11BAF9F8400BFE1E6 /* Project object */;
+}
