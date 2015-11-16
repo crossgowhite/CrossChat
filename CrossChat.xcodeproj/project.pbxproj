@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B1C857E504FD11D142654C11 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29DE9DA3ECADB50DE3034A07 /* libPods.a */; };
+		F7078FDF1BF98121004971AC /* CrossArrayDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = F7078FDE1BF98121004971AC /* CrossArrayDataSource.m */; };
+		F7078FE51BF987F7004971AC /* CrossViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F7078FE41BF987F7004971AC /* CrossViewManager.m */; };
+		F7078FED1BF9C9FE004971AC /* CrossTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F7078FEC1BF9C9FE004971AC /* CrossTableViewDelegate.m */; };
 		F734D64E1BEB363E00CA81AF /* CrossXMPPMessageStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = F734D64D1BEB363E00CA81AF /* CrossXMPPMessageStatus.m */; };
 		F735D3B21BE89F9A00656182 /* CrossMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F735D3B01BE89F9A00656182 /* CrossMessageViewController.m */; };
 		F735D3B31BE89F9A00656182 /* CrossMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F735D3B11BE89F9A00656182 /* CrossMessageViewController.xib */; };
@@ -89,6 +92,12 @@
 		29DE9DA3ECADB50DE3034A07 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		95C9829AE0FB8227D6DE7B62 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B2832C3653D537F61A55CAE4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		F7078FDD1BF98121004971AC /* CrossArrayDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossArrayDataSource.h; path = Classes/Views/CrossArrayDataSource.h; sourceTree = "<group>"; };
+		F7078FDE1BF98121004971AC /* CrossArrayDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossArrayDataSource.m; path = Classes/Views/CrossArrayDataSource.m; sourceTree = "<group>"; };
+		F7078FE31BF987F7004971AC /* CrossViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossViewManager.h; path = Classes/Controllers/CrossViewManager.h; sourceTree = "<group>"; };
+		F7078FE41BF987F7004971AC /* CrossViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossViewManager.m; path = Classes/Controllers/CrossViewManager.m; sourceTree = "<group>"; };
+		F7078FEB1BF9C9FE004971AC /* CrossTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossTableViewDelegate.h; path = Classes/Views/CrossTableViewDelegate.h; sourceTree = "<group>"; };
+		F7078FEC1BF9C9FE004971AC /* CrossTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossTableViewDelegate.m; path = Classes/Views/CrossTableViewDelegate.m; sourceTree = "<group>"; };
 		F734D64C1BEB363E00CA81AF /* CrossXMPPMessageStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossXMPPMessageStatus.h; path = Classes/Utilities/CrossXMPPMessageStatus.h; sourceTree = "<group>"; };
 		F734D64D1BEB363E00CA81AF /* CrossXMPPMessageStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossXMPPMessageStatus.m; path = Classes/Utilities/CrossXMPPMessageStatus.m; sourceTree = "<group>"; };
 		F735D3AF1BE89F9A00656182 /* CrossMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossMessageViewController.h; path = "Classes/View Controllers/CrossMessageViewController.h"; sourceTree = "<group>"; };
@@ -255,6 +264,33 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F7078FDC1BF980CE004971AC /* ArrayTableViewDataSource */ = {
+			isa = PBXGroup;
+			children = (
+				F7078FDD1BF98121004971AC /* CrossArrayDataSource.h */,
+				F7078FDE1BF98121004971AC /* CrossArrayDataSource.m */,
+			);
+			name = ArrayTableViewDataSource;
+			sourceTree = "<group>";
+		};
+		F7078FE61BF9BEDF004971AC /* Buddy */ = {
+			isa = PBXGroup;
+			children = (
+				F7E31D121BE20B6C00AE1413 /* CrossBuddyTableViewCell.h */,
+				F7E31D131BE20B6C00AE1413 /* CrossBuddyTableViewCell.m */,
+			);
+			name = Buddy;
+			sourceTree = "<group>";
+		};
+		F7078FE71BF9C85C004971AC /* TableDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				F7078FEB1BF9C9FE004971AC /* CrossTableViewDelegate.h */,
+				F7078FEC1BF9C9FE004971AC /* CrossTableViewDelegate.m */,
+			);
+			name = TableDelegate;
+			sourceTree = "<group>";
+		};
 		F717AEB11BDF0C7700084CB1 /* Buddy */ = {
 			isa = PBXGroup;
 			children = (
@@ -398,8 +434,11 @@
 		F76998D81BAFA10500BFE1E6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F79D463C1BF06EDC006CAC03 /* KeyBoard */,
+				F7078FE71BF9C85C004971AC /* TableDelegate */,
+				F7078FDC1BF980CE004971AC /* ArrayTableViewDataSource */,
+				F7078FE61BF9BEDF004971AC /* Buddy */,
 				F77204A81BEC3C4C005DC22D /* Conversation */,
+				F79D463C1BF06EDC006CAC03 /* KeyBoard */,
 				F76BECEE1BE8AECB00EDB832 /* Message */,
 				F769992D1BB13ADA00BFE1E6 /* Settings */,
 			);
@@ -516,8 +555,6 @@
 				F769992E1BB13B4100BFE1E6 /* CrossAccountTableViewCell.h */,
 				F769992F1BB13B4100BFE1E6 /* CrossAccountTableViewCell.m */,
 				F76999301BB13B4100BFE1E6 /* CrossAccountTableViewCell.xib */,
-				F7E31D121BE20B6C00AE1413 /* CrossBuddyTableViewCell.h */,
-				F7E31D131BE20B6C00AE1413 /* CrossBuddyTableViewCell.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -603,16 +640,18 @@
 		F7D28D451BB3885100ED3FD6 /* View Controller Manager */ = {
 			isa = PBXGroup;
 			children = (
+				F7078FE31BF987F7004971AC /* CrossViewManager.h */,
+				F7078FE41BF987F7004971AC /* CrossViewManager.m */,
 				F76999111BAFF66500BFE1E6 /* CrossSettingViewManager.h */,
 				F76999121BAFF66500BFE1E6 /* CrossSettingViewManager.m */,
 				F76999261BB1310200BFE1E6 /* CrossNewAccountViewManager.h */,
 				F76999271BB1310200BFE1E6 /* CrossNewAccountViewManager.m */,
 				F7E31D091BE1FDE100AE1413 /* CrossBuddyViewManager.h */,
 				F7E31D0A1BE1FDE100AE1413 /* CrossBuddyViewManager.m */,
-				F76BECF81BE9964100EDB832 /* CrossMessageViewManager.h */,
-				F76BECF91BE9964100EDB832 /* CrossMessageViewManager.m */,
 				F77204AF1BEC405F005DC22D /* CrossConversationViewManager.h */,
 				F77204B01BEC405F005DC22D /* CrossConversationViewManager.m */,
+				F76BECF81BE9964100EDB832 /* CrossMessageViewManager.h */,
+				F76BECF91BE9964100EDB832 /* CrossMessageViewManager.m */,
 			);
 			name = "View Controller Manager";
 			sourceTree = "<group>";
@@ -777,6 +816,7 @@
 				F7D28E6E1BB539A900ED3FD6 /* CrossProtocolStatus.m in Sources */,
 				F77204B11BEC405F005DC22D /* CrossConversationViewManager.m in Sources */,
 				F7D28E621BB51EC500ED3FD6 /* CrossXMPPManager.m in Sources */,
+				F7078FDF1BF98121004971AC /* CrossArrayDataSource.m in Sources */,
 				F7D28D441BB28F5200ED3FD6 /* CrossAlertAction.m in Sources */,
 				F7D28E641BB51F7000ED3FD6 /* CrossError.m in Sources */,
 				F769992B1BB13A8A00BFE1E6 /* CrossSettingTableViewCell.m in Sources */,
@@ -801,10 +841,12 @@
 				F7947A5E1BB910BC00E1B446 /* CrossConstants.m in Sources */,
 				F7D28DCA1BB39F6300ED3FD6 /* CrossProtocolManager.m in Sources */,
 				F78DC96E1BB937A000D78B38 /* CrossYapDatabaseObject.m in Sources */,
+				F7078FED1BF9C9FE004971AC /* CrossTableViewDelegate.m in Sources */,
 				F78DC9721BBA32B600D78B38 /* CrossDataBaseView.m in Sources */,
 				F7E31D151BE20B6C00AE1413 /* CrossBuddyTableViewCell.m in Sources */,
 				F778ED501BE734E300ECF7CE /* CrossMessageManager.m in Sources */,
 				F76BECF71BE8B64800EDB832 /* CrossMessageTableViewCell.m in Sources */,
+				F7078FE51BF987F7004971AC /* CrossViewManager.m in Sources */,
 				F76999071BAFF12A00BFE1E6 /* CrossViewSetting.m in Sources */,
 				F7D28D401BB28CBF00ED3FD6 /* CrossAlertViewController.m in Sources */,
 				F79D463F1BF06F04006CAC03 /* CrossKeyBoardView.m in Sources */,

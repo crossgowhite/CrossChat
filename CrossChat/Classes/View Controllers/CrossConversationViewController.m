@@ -28,15 +28,20 @@
 #import "CrossMessageDataBaseManager.h"
 
 #import "CrossMessageViewController.h"
+#import "CrossArrayDataSource.h"
+#import "CrossTableViewDelegate.h"
 
+static NSString * ConversationCellIdentifier = @"ConversationCell";
 
 @interface CrossConversationViewController () <CrossSettingDelegate>
 
 @property (nonatomic, strong) UIBarButtonItem * settingBarButtonItem;
 @property (nonatomic, strong) UIBarButtonItem * composeBarButtonItem;
 
-@property (nonatomic, strong) CrossConversationViewManager * conversationViewManager;
+@property (nonatomic, strong) CrossViewManager * conversationViewManager;
 
+@property (nonatomic, strong) CrossArrayDataSource * conversationArrayDataSource;
+@property (nonatomic, strong) CrossTableViewDelegate * tableViewDelegate;
 @end
 
 @implementation CrossConversationViewController
@@ -69,76 +74,36 @@
     self.navigationItem.leftBarButtonItem = self.composeBarButtonItem;
     self.navigationItem.leftBarButtonItem.enabled = NO;
     
+    //3. init conversation view manager
     self.conversationViewManager = [[CrossConversationViewManager alloc]init];
+    
+    //4. init data source
+    TableViewCellConfigureBlock configureCell = ^(CrossConversationTableViewCell *cell, CrossSetting *setting) {
+        setting.delegate = self;
+        [cell setSetting:setting];
+    };
+    self.conversationArrayDataSource = [[CrossArrayDataSource alloc]initWithViewManager:self.conversationViewManager cellIdentifier:ConversationCellIdentifier configureCellBlock:configureCell cellClass:[CrossConversationTableViewCell class]];
+    self.tableView.dataSource = self.conversationArrayDataSource;
+    
+    
+    //5. init delegate
+    self.tableViewDelegate = [[CrossTableViewDelegate alloc]initWithViewManager:self.conversationViewManager];
+    self.tableView.delegate = self.tableViewDelegate;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Table view data source
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 50;
-}
-
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return [self.conversationViewManager.settingGroups count];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-     return [self.conversationViewManager numberOfSettingsInSection:section];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    static NSString *cellIdentifier = @"BuddyCell";
-    
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
-    if(cell == nil)
-    {
-        cell = [[CrossConversationTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-    }
-    
-    CrossSetting * setting = [self.conversationViewManager settingAtSection:indexPath.section row:indexPath.row];
-    setting.delegate = self;
-    [(CrossConversationTableViewCell*)cell setSetting:setting];
-    return  cell;
-    
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    CrossSetting *setting = [self.conversationViewManager settingAtSection:indexPath.section row:indexPath.row];
-    CrossSettingActionBlock actionBlock = setting.actionBlock;
-    if (actionBlock)
-    {
-        actionBlock();
-    }
-    
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
 }
 
 #pragma mark -- setting bar buttom click
 - (void)settingBarButtonItemPressed:(id)sender
 {
-    
     //1. create setting view controller
     CrossSettingViewController * settingViewController = [[CrossSettingViewController alloc]init];
     [settingViewController setHidesBottomBarWhenPushed:YES];
     //2. push setting view controller into navigation controller
     [self.navigationController pushViewController:settingViewController animated:YES];
-    
 }
 
 #pragma mark -- compose bar buttom click
@@ -154,6 +119,7 @@
     if([CrossProtocolManager sharedInstance].numberOfConnectedAccount)
     {
         [self enableComposeButton];
+        [self refreshTableView];
     }
     else
     {
@@ -161,7 +127,7 @@
         [self cleanTableView];
     }
     
-    [self refreshTableView];
+    
     [[CrossProtocolManager sharedInstance] addObserver:self forKeyPath:NSStringFromSelector(@selector(numberOfConnectedAccount)) options:NSKeyValueObservingOptionNew context:NULL];
 }
 
@@ -279,60 +245,5 @@
     CrossMessage * message = [CrossMessage CrossMessageWithText:messageText read:[NSNumber numberWithInteger:1] incoming:[NSNumber numberWithInteger:1] owner:buddy.userName];
     [messageDataBaseManager persistenceMessage:message completeBlock:nil];
 }
-
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

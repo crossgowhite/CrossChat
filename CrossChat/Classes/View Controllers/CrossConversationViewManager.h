@@ -7,20 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CrossSetting.h"
+#import "CrossViewManager.h"
 
-@interface CrossConversationViewManager : NSObject
-
-@property (nonatomic, strong) NSMutableArray * settingGroups;
-
-- (void) refreshSettingGroup;
-
-- (void) cleanSettingGroup;
-
-- (CrossSetting*) settingAtSection:(NSUInteger)section row:(NSInteger)row;
-
-- (NSString*) stringForGroupInSection:(NSUInteger)section;
-
-- (NSUInteger) numberOfSettingsInSection:(NSUInteger)section;
+@interface CrossConversationViewManager : CrossViewManager
 
 @end

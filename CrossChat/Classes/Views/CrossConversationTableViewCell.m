@@ -12,6 +12,7 @@
 
 @implementation CrossConversationTableViewCell
 
+
 - (void)awakeFromNib {
     // Initialization code
 }

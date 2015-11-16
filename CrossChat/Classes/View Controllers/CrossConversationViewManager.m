@@ -52,33 +52,4 @@
     
 }
 
-- (void) refreshSettingGroup
-{
-    [self initSettingGroups];
-}
-
-- (CrossSetting*) settingAtSection:(NSUInteger)section row:(NSInteger)row
-{
-    CrossSettingGroup * settingGroup = self.settingGroups[section];
-    CrossSetting * setting = settingGroup.settings[row];
-    return setting;
-}
-
-- (NSString*) stringForGroupInSection:(NSUInteger)section
-{
-    CrossSettingGroup * settingGroup = self.settingGroups[section];
-    return settingGroup.title;
-}
-
-- (NSUInteger) numberOfSettingsInSection:(NSUInteger)section
-{
-    CrossSettingGroup *settingsGroup = [self.settingGroups objectAtIndex:section];
-    return [settingsGroup.settings count];
-}
-
-- (void) cleanSettingGroup
-{
-    [self.settingGroups removeAllObjects];
-}
-
 @end

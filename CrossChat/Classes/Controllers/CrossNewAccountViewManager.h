@@ -7,19 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CrossSetting.h"
-#import "CrossSettingGroup.h"
-#import "String.h"
+#import "CrossViewManager.h"
 
-@interface CrossNewAccountViewManager : NSObject
+@interface CrossNewAccountViewManager : CrossViewManager
 
-@property (nonatomic, strong) NSArray * settingGroups;
-
-
-- (CrossSetting*) settingAtSection:(NSUInteger)section row:(NSInteger)row;
-
-- (NSString*) stringForGroupInSection:(NSUInteger)section;
-
-- (NSUInteger) numberOfSettingsInSection:(NSUInteger)section;
 
 @end

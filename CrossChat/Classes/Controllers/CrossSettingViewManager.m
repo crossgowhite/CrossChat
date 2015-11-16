@@ -8,6 +8,9 @@
 
 #import "CrossSettingViewManager.h"
 #import "CrossNewAccountSetting.h"
+#import "CrossSettingGroup.h"
+#import "String.h"
+#import "CrossCertificateSetting.h"
 
 @implementation CrossSettingViewManager
 
@@ -63,29 +66,6 @@
     self.settingGroups = allSettingGruops;
 }
 
-- (CrossSetting*) settingAtIndexPath:(NSIndexPath*)indexPath
-{
-    CrossSettingGroup * settingGroup = self.settingGroups[indexPath.section];
-    CrossSetting * setting = settingGroup.settings[indexPath.row];
-    return setting;
-}
-
-- (NSString*) stringForGroupInSection:(NSUInteger)section
-{
-    CrossSettingGroup * settingGroup = self.settingGroups[section];
-    return settingGroup.title;
-}
-
-- (NSUInteger) numberOfSettingsInSection:(NSUInteger)section
-{
-    CrossSettingGroup *settingsGroup = [self.settingGroups objectAtIndex:section];
-    return [settingsGroup.settings count];
-}
-
-- (NSIndexPath *)indexPathForSetting:(CrossSetting *)setting
-{
-    return 0;
-}
 
 - (void) addSetting: (CrossSetting *)newSetting AtIndexPath:(NSIndexPath*)indexPath
 {

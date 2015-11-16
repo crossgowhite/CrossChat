@@ -30,6 +30,14 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="kzi-Wz-CoZ"/>
                 </tableViewController>
+                <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="IoJ-oK-h00">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IoJ-oK-h00" id="QyE-gJ-78V">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </tableViewCellContentView>
+                </tableViewCell>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xeG-8F-V8r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="171" y="339"/>

@@ -16,6 +16,8 @@
 #import "CrossAlertAction.h"
 #import "CrossCertificateDomainViewController.h"
 
+#import "CrossCertificateSetting.h"
+
 #import "CrossAccountSetting.h"
 
 #import "CrossDataBaseView.h"
@@ -142,7 +144,8 @@
     
     else
     {
-        setting = [self.settingsManager settingAtIndexPath:indexPath];
+        setting = [self.settingsManager settingAtSection:indexPath.section row:indexPath.row];
+//        setting = [self.settingsManager settingAtIndexPath:indexPath];
     }
     
     setting.delegate = self;
@@ -157,7 +160,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CrossSetting *setting = [self.settingsManager settingAtIndexPath:indexPath];
+    CrossSetting *setting = [self.settingsManager settingAtSection:indexPath.section row:indexPath.row];
     CrossSettingActionBlock actionBlock = setting.actionBlock;
     if (actionBlock)
     {

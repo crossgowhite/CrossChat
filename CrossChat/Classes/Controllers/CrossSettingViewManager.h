@@ -7,22 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CrossCertificateSetting.h"
-#import "String.h"
-#import "CrossSettingGroup.h"
+#import "CrossViewManager.h"
 
-@interface CrossSettingViewManager : NSObject
-
-@property (nonatomic, strong) NSArray * settingGroups;
-
-
-- (CrossSetting*) settingAtIndexPath:(NSIndexPath*)indexPath;
-
-- (NSString*) stringForGroupInSection:(NSUInteger)section;
-
-- (NSUInteger) numberOfSettingsInSection:(NSUInteger)section;
-
-- (NSIndexPath *) indexPathForSetting:(CrossSetting *)setting;
+@interface CrossSettingViewManager : CrossViewManager
 
 - (void) addSetting: (CrossSetting *)newSetting AtIndexPath:(NSIndexPath*)indexPath;
+
 @end
