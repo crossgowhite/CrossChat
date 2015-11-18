@@ -33,13 +33,13 @@
     if(self)
     {
         self.buddy = buddy;
-        [self initMessageFrameGroups];
+        [self initArrayGroups];
     }
     
     return self;
 }
 
-- (void) initMessageFrameGroups
+- (void) initArrayGroups
 {
     //1. create basic group
     NSMutableArray * allGruops = [NSMutableArray array];
@@ -68,18 +68,13 @@
     }
     
     [allGruops addObject:messageFrameArray];
-    self.messageFrameGroups = allGruops;
+    self.arrayGroups = allGruops;
     
 }
 
-- (void) refreshMessageFrameGroup
+- (id) itemAtSection:(NSUInteger)section row:(NSInteger)row
 {
-    [self initMessageFrameGroups];
-}
-
-- (CrossMessageFrame*) messageFrameAtSection:(NSUInteger)section row:(NSInteger)row
-{
-    NSArray * messageFrameArray = self.messageFrameGroups[section];
+    NSArray * messageFrameArray = self.arrayGroups[section];
     CrossMessageFrame * messageFrame = [messageFrameArray objectAtIndex:row];
     return messageFrame;
 }
@@ -89,20 +84,16 @@
     return nil;
 }
 
-- (NSUInteger) numberOfMessageFramesInSection:(NSUInteger)section
+- (NSUInteger) numberOfItemsInSection:(NSUInteger)section
 {
-    NSArray * messageFrameArray = self.messageFrameGroups[section];
+    NSArray * messageFrameArray = self.arrayGroups[section];
     return [messageFrameArray count];
-}
-
-- (void) cleanSettingGroup
-{
-    [self.messageFrameGroups removeAllObjects];
 }
 
 - (NSIndexPath*) getLastMessageFrameIndexPath
 {
-    NSIndexPath * index = [NSIndexPath indexPathForRow:[[self.messageFrameGroups lastObject] count]-1 inSection:self.messageFrameGroups.count-1];
+    NSIndexPath * index = [NSIndexPath indexPathForRow:[[self.arrayGroups lastObject] count]-1 inSection:self.arrayGroups.count-1];
     return index;
 }
+
 @end

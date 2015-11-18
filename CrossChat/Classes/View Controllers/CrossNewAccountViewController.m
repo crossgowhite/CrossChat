@@ -182,13 +182,13 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return [self.accountManager.settingGroups count];
+    return [self.accountManager.arrayGroups count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.accountManager numberOfSettingsInSection:section];
+    return [self.accountManager numberOfItemsInSection:section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -227,7 +227,7 @@
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     
-    CrossSetting * setting = [self.accountManager settingAtSection:indexPath.section row:indexPath.row];
+    CrossSetting * setting = [self.accountManager itemAtSection:indexPath.section row:indexPath.row];
     [(CrossSettingTableViewCell*)cell setSetting:setting];
     return cell;
    
@@ -392,18 +392,6 @@
 //persistence account into sql db
 - (void) persistenceAccount
 {
-    //first time login account, we will query roster info & save it into db
-//    if (![[CrossDataBaseManager sharedInstance] accountWhetherExisted:self.account])
-//    {
-//        id <CrossProtocol> protocol = [[CrossProtocolManager sharedInstance]protocolForAccount:self.account];
-//        
-//        if (protocol && self.account)
-//        {
-//            NSLog(@"QUERY");
-//            [protocol queryRoster];
-//        }
-//    }
-    
     //1. save account info into account database
     [[CrossAccountDataBaseManager sharedInstance].readWriteDatabaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
         [self.account saveWithTransaction:transaction];

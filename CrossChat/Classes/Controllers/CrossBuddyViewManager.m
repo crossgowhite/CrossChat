@@ -25,13 +25,13 @@
     
     if(self)
     {
-        [self initSettingGroups];
+        [self initArrayGroups];
     }
     
     return self;
 }
 
-- (void) initSettingGroups
+- (void) initArrayGroups
 {
     //1. create basic group
     NSMutableArray * allGruops = [NSMutableArray array];
@@ -52,7 +52,7 @@
         [allGruops addObject:buddyGroup];
     }
     
-    self.settingGroups = allGruops;
+    self.arrayGroups = allGruops;
     
 }
 

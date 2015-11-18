@@ -19,13 +19,13 @@
     
     if(self)
     {
-        [self initSettingGroups];
+        [self initArrayGroups];
     }
     
     return self;
 }
 
-- (void) initSettingGroups
+- (void) initArrayGroups
 {
     //1. create basic group
     NSMutableArray * allGruops = [NSMutableArray array];
@@ -54,7 +54,7 @@
     CrossSettingGroup * serverGroup = [[CrossSettingGroup alloc]initWithTitle:SERVER_STRING settings:serverArray];
     [allGruops addObject:serverGroup];
     
-    self.settingGroups = allGruops;
+    self.arrayGroups = allGruops;
     
 }
 

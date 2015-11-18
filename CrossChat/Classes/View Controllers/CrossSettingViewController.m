@@ -96,7 +96,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return [self.settingsManager.settingGroups count];
+    return [self.settingsManager.arrayGroups count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -106,7 +106,7 @@
         return [self.mappings numberOfItemsInSection:0] + 1;
         //return [self.mappings numberOfItemsInSection:0] + [self.settingsManager numberOfSettingsInSection:section];
     
-    return [self.settingsManager numberOfSettingsInSection:section];
+    return [self.settingsManager numberOfItemsInSection:section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -144,7 +144,7 @@
     
     else
     {
-        setting = [self.settingsManager settingAtSection:indexPath.section row:indexPath.row];
+        setting = [self.settingsManager itemAtSection:indexPath.section row:indexPath.row];
 //        setting = [self.settingsManager settingAtIndexPath:indexPath];
     }
     
@@ -160,7 +160,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CrossSetting *setting = [self.settingsManager settingAtSection:indexPath.section row:indexPath.row];
+    CrossSetting *setting = [self.settingsManager itemAtSection:indexPath.section row:indexPath.row];
     CrossSettingActionBlock actionBlock = setting.actionBlock;
     if (actionBlock)
     {

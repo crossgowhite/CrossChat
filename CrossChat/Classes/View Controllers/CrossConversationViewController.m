@@ -169,7 +169,7 @@ static NSString * ConversationCellIdentifier = @"ConversationCell";
 {
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.conversationViewManager refreshSettingGroup];
+        [self.conversationViewManager refreshArrayGroup];
         [self.tableView reloadData];
     });
 }
@@ -178,7 +178,7 @@ static NSString * ConversationCellIdentifier = @"ConversationCell";
 {
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.conversationViewManager cleanSettingGroup];
+        [self.conversationViewManager cleanArrayGroup];
         [self.tableView reloadData];
     });
 }

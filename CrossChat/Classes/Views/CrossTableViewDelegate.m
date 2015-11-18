@@ -29,7 +29,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CrossSetting *setting = [self.viewManager settingAtSection:indexPath.section row:indexPath.row];
+    CrossSetting *setting = [self.viewManager itemAtSection:indexPath.section row:indexPath.row];
     CrossSettingActionBlock actionBlock = setting.actionBlock;
     if (actionBlock)
     {

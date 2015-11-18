@@ -115,7 +115,7 @@ static NSString * BuddyCellIdentifier = @"BuddyCell";
 {
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.buddyViewManager refreshSettingGroup];
+        [self.buddyViewManager refreshArrayGroup];
         [self.tableView reloadData];
     });
 }
@@ -123,7 +123,7 @@ static NSString * BuddyCellIdentifier = @"BuddyCell";
 - (void)cleanTableView
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.buddyViewManager cleanSettingGroup];
+        [self.buddyViewManager cleanArrayGroup];
         [self.tableView reloadData];
     });
 }

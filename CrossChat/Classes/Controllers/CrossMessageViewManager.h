@@ -7,25 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CrossViewManager.h"
 
-@class CrossMessageFrame;
 @class CrossBuddy;
 
-@interface CrossMessageViewManager : NSObject
-
-@property (nonatomic, strong) NSMutableArray *  messageFrameGroups;
+@interface CrossMessageViewManager : CrossViewManager
 
 - (id) initWithCrossBuddy:(CrossBuddy *)buddy;
 
-- (void) refreshMessageFrameGroup;
-
-- (void) cleanMessageFrameGroup;
-
-- (CrossMessageFrame*) messageFrameAtSection:(NSUInteger)section row:(NSInteger)row;
-
-- (NSString*) stringForGroupInSection:(NSUInteger)section;
-
-- (NSUInteger) numberOfMessageFramesInSection:(NSUInteger)section;
-
 - (NSIndexPath*) getLastMessageFrameIndexPath;
+
 @end

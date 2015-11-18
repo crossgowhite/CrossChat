@@ -40,12 +40,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [self.viewManager.settingGroups count];
+    return [self.viewManager.arrayGroups count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.viewManager numberOfSettingsInSection:section];
+    return [self.viewManager numberOfItemsInSection:section];
 }
 
 
@@ -58,7 +58,7 @@
         cell = [[self.cellClass alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:self.cellIdentifier];
     }
     
-    id item = [self.viewManager settingAtSection:indexPath.section row:indexPath.row];
+    id item = [self.viewManager itemAtSection:indexPath.section row:indexPath.row];
     self.configureCellBlock(cell, item);
     return cell;
 }

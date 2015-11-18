@@ -20,13 +20,13 @@
     
     if(self)
     {
-        [self initSettingGroups];
+        [self initArrayGroups];
     }
     
     return self;
 }
 
-- (void) initSettingGroups
+- (void) initArrayGroups
 {
     //0. init setting array list
     NSMutableArray * allSettingGruops = [NSMutableArray array];
@@ -63,13 +63,13 @@
     //2.4 add securitySettingGroups into all setting group
     [allSettingGruops addObject:securitySettingGroup];
     
-    self.settingGroups = allSettingGruops;
+    self.arrayGroups = allSettingGruops;
 }
 
 
 - (void) addSetting: (CrossSetting *)newSetting AtIndexPath:(NSIndexPath*)indexPath
 {
-    CrossSettingGroup * settingGroup = self.settingGroups[indexPath.section];
+    CrossSettingGroup * settingGroup = self.arrayGroups[indexPath.section];
     NSMutableArray * array = (NSMutableArray *)settingGroup.settings;
     
     if ([array count] < indexPath.row+1)

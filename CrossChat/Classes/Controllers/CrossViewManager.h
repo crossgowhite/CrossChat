@@ -12,16 +12,16 @@
 
 @interface CrossViewManager : NSObject
 
-@property (nonatomic, strong) NSMutableArray * settingGroups;
+@property (nonatomic, strong) NSMutableArray * arrayGroups;
 
-- (void) refreshSettingGroup;
+- (void) refreshArrayGroup;
 
-- (void) cleanSettingGroup;
+- (void) cleanArrayGroup;
 
-- (CrossSetting*) settingAtSection:(NSUInteger)section row:(NSInteger)row;
+- (id) itemAtSection:(NSUInteger)section row:(NSInteger)row;
 
 - (NSString*) stringForGroupInSection:(NSUInteger)section;
 
-- (NSUInteger) numberOfSettingsInSection:(NSUInteger)section;
+- (NSUInteger) numberOfItemsInSection:(NSUInteger)section;
 
 @end

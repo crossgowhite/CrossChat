@@ -26,7 +26,7 @@
     return self;
 }
 
-- (void) initSettingGroups
+- (void) initArrayGroups
 {
     //1. create basic group
     NSMutableArray * allGruops = [NSMutableArray array];
@@ -48,7 +48,7 @@
     }
     
     
-    self.settingGroups = allGruops;
+    self.arrayGroups = allGruops;
     
 }
 

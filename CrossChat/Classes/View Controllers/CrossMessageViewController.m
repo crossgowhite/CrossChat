@@ -30,7 +30,10 @@
 #import "CrossProtocol.h"
 #import "CrossProtocolManager.h"
 
-static NSString *cellIdentifier = @"MessageCell";
+#import "CrossArrayDataSource.h"
+#import "CrossViewManager.h"
+#import "CrossMessageViewManager.h"
+static NSString *MesageCellIdentifier = @"MessageCell";
 
 @interface CrossMessageViewController () <KeyBordViewDelegate>
 
@@ -38,9 +41,11 @@ static NSString *cellIdentifier = @"MessageCell";
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) CrossKeyBoardView * keyBoardView;
 
-@property (nonatomic, strong) CrossMessageViewManager * messageViewManager;
+@property (nonatomic, strong) CrossViewManager * messageViewManager;
 @property (nonatomic, strong) CrossMessage * lastMessage;
 
+
+@property (nonatomic, strong) CrossArrayDataSource * messageArrayDataSource;
 @end
 
 
@@ -54,7 +59,9 @@ static NSString *cellIdentifier = @"MessageCell";
     
     [self initTableView];
     self.title = self.buddy.displayName;
-    [self.tableView registerClass:[CrossMessageTableViewCell class] forCellReuseIdentifier:cellIdentifier];
+    
+//    [self.tableView registerClass:[CrossMessageTableViewCell class] forCellReuseIdentifier:cellIdentifier];
+    
     self.messageViewManager = [[CrossMessageViewManager alloc]initWithCrossBuddy:self.buddy];
     
  #define KEYBOARDHEITHT 68
@@ -63,6 +70,13 @@ static NSString *cellIdentifier = @"MessageCell";
     self.keyBoardView.delegate = self;
     
     [self.view addSubview:self.keyBoardView];
+    
+    TableViewCellConfigureBlock configureCell = ^(CrossMessageTableViewCell *cell, CrossMessageFrame *messageFrame)
+    {
+        [cell setMessageFrame:messageFrame];
+    };
+    self.messageArrayDataSource = [[CrossArrayDataSource alloc]initWithViewManager:self.messageViewManager cellIdentifier:MesageCellIdentifier configureCellBlock:configureCell cellClass:[CrossMessageTableViewCell class]];
+    self.tableView.dataSource = self.messageArrayDataSource;
     
     [self tableViewScrollLastIndexPath];
 }
@@ -73,36 +87,9 @@ static NSString *cellIdentifier = @"MessageCell";
     // Dispose of any resources that can be recreated.
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return [self.messageViewManager.messageFrameGroups count];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return [self.messageViewManager numberOfMessageFramesInSection: section];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    CrossMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
-    if(cell == nil)
-    {
-        cell = [[CrossMessageTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-    }
-
-    CrossMessageFrame * messageFrame = [self.messageViewManager messageFrameAtSection:indexPath.section row:indexPath.row];
-    cell.messageFrame = messageFrame;
-    return cell;
-}
-
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CrossMessageFrame * messageFrame = [self.messageViewManager messageFrameAtSection:indexPath.section row:indexPath.row];
+    CrossMessageFrame * messageFrame = [self.messageViewManager itemAtSection:indexPath.section row:indexPath.row];
     return [messageFrame messageHeight];
 }
 
@@ -116,7 +103,7 @@ static NSString *cellIdentifier = @"MessageCell";
 - (void)refreshTableView
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.messageViewManager refreshMessageFrameGroup];
+        [self.messageViewManager refreshArrayGroup];
         [self.tableView reloadData];
     });
 }
@@ -164,6 +151,7 @@ static NSString *cellIdentifier = @"MessageCell";
     void (^CompleteDispatch_block_t)(void) = ^void(void)
     {
         [self refreshTableView];
+        [self tableViewScrollLastIndexPath];
     };
     self.lastMessage = message;
     [messageDataBaseManager persistenceMessage:message completeBlock:CompleteDispatch_block_t];
@@ -201,9 +189,9 @@ static NSString *cellIdentifier = @"MessageCell";
 
 -(void)tableViewScrollLastIndexPath
 {
-    if([self.messageViewManager numberOfMessageFramesInSection:0] > 0)
+    if([self.messageViewManager numberOfItemsInSection:0] > 0)
     {
-        [self.tableView scrollToRowAtIndexPath:[self.messageViewManager getLastMessageFrameIndexPath] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [self.tableView scrollToRowAtIndexPath:[(CrossMessageViewManager*)self.messageViewManager getLastMessageFrameIndexPath] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
     
 }
@@ -211,8 +199,6 @@ static NSString *cellIdentifier = @"MessageCell";
 #pragma mark -- KeyBordViewDelegate
 -(void)KeyBordView:(CrossKeyBoardView *)keyBoardView textFieldReturn:(UITextField *)textField
 {
-    [self tableViewScrollLastIndexPath];
-    
     if (textField.text.length > 0)
     {
         CrossAccount * connectedAccount = [CrossAccountManager connectedAccount];
@@ -250,7 +236,6 @@ static NSString *cellIdentifier = @"MessageCell";
 }
 
 #pragma mark -- keyboard show & hide observer
-
 -(void)keyboardShow:(NSNotification *)note
 {
     CGRect keyBoardRect=[note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];

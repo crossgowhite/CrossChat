@@ -12,37 +12,37 @@
 
 @implementation CrossViewManager
 
-- (void) initSettingGroups
+- (void) initArrayGroups
 {
 }
 
-- (void) refreshSettingGroup
+- (void) refreshArrayGroup
 {
-    [self initSettingGroups];
+    [self initArrayGroups];
 }
 
-- (CrossSetting*) settingAtSection:(NSUInteger)section row:(NSInteger)row
+- (id) itemAtSection:(NSUInteger)section row:(NSInteger)row
 {
-    CrossSettingGroup * settingGroup = self.settingGroups[section];
+    CrossSettingGroup * settingGroup = self.arrayGroups[section];
     CrossSetting * setting = settingGroup.settings[row];
     return setting;
 }
 
 - (NSString*) stringForGroupInSection:(NSUInteger)section
 {
-    CrossSettingGroup * settingGroup = self.settingGroups[section];
+    CrossSettingGroup * settingGroup = self.arrayGroups[section];
     return settingGroup.title;
 }
 
-- (NSUInteger) numberOfSettingsInSection:(NSUInteger)section
+- (NSUInteger) numberOfItemsInSection:(NSUInteger)section
 {
-    CrossSettingGroup *settingsGroup = [self.settingGroups objectAtIndex:section];
+    CrossSettingGroup *settingsGroup = [self.arrayGroups objectAtIndex:section];
     return [settingsGroup.settings count];
 }
 
-- (void) cleanSettingGroup
+- (void) cleanArrayGroup
 {
-    [self.settingGroups removeAllObjects];
+    [self.arrayGroups removeAllObjects];
 }
 
 @end
