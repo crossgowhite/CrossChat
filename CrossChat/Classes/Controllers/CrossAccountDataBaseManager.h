@@ -26,4 +26,5 @@
 
 - (BOOL) accountWhetherExisted:(CrossAccount*)newAccount;
 
+- (NSArray *)allAutoLoginAccounts;
 @end

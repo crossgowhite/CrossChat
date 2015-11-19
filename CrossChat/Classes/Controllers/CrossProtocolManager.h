@@ -16,10 +16,12 @@
 
 @property (nonatomic) NSUInteger numberOfConnectedAccount;
 
++ (CrossProtocolManager*) sharedInstance; // Singleton method
+
 - (id <CrossProtocol>) protocolForAccount: (CrossAccount *)newAccount;
 - (void) removeProtocolForAccount: (CrossAccount *)newAccount;
 - (BOOL) existsProtocolForAccount: (CrossAccount *)newAccount;
-+ (CrossProtocolManager*) sharedInstance; // Singleton method
+
 
 - (CrossAccount*) connectedAccount;
 @end

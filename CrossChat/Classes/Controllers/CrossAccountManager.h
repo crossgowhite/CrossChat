@@ -13,8 +13,6 @@
 @interface CrossAccountManager : NSObject
 
 
-+ (NSArray *)allAutoLoginAccounts;
-
 + (CrossAccount*) connectedAccount;
 
 @end

@@ -20,6 +20,8 @@
 #import "CrossBuddyDataBaseManager.h"
 #import "CrossConstants.h"
 
+#import "CrossChatService.h"
+
 
 #import "MBProgressHUD.h"
 #import "YAPDatabaseViewMappings.h"
@@ -86,7 +88,8 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
 }
 
@@ -257,133 +260,31 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onRegisterFailed:) name:CrossProtocolRegisterFailed object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onRegisterSuccess:) name:CrossProtocolRegisterSuccess object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLoginSucess:) name:CrossProtocolLoginSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLoginFailed:) name:CrossProtocolLoginFailed object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:CrossProtocolRegisterFailed object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:CrossProtocolRegisterSuccess object:nil];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:CrossProtocolLoginSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:CrossProtocolLoginFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
-
-- (void)onRegisterSuccess: (NSNotification *)notification
-{
-    [self hideHUD];
-    [self loginAccount];
-    NSLog(@"CrossNewAccountViewController onRegisterSuccess");
-}
-
-
-- (void) onRegisterFailed: (NSNotification *)notification
-{
-    [self hideHUD];
-    NSLog(@"CrossNewAccountViewController onRegisterFailed");
-}
-
 
 - (void)onLoginSucess:(NSNotification *)notification
 {
-    [self persistenceAccount];
-    [self hideHUD];
-    [self showSuccessHUD];
-     NSLog(@"CrossNewAccountViewController onLoginSucess");
-}
-
-- (void)onLoginFailed:(NSNotification *)notification
-{
-    [self hideHUD];
-    NSLog(@"CrossNewAccountViewController onLoginFailed");
-}
-
-- (void)onLogouted:(NSNotification*)notification
-{
     [self dimissSelfView];
-    NSLog(@"CrossNewAccountViewController onLogouted");
-}
-#pragma mark -- show & hide hud
-
-//import note: hide process must do in the UI thread
-
-- (void) showHUDWithText: (NSString *)text
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.view endEditing:YES];
-        if (!self.HUD)
-        {
-            self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
-            [self.view addSubview:self.HUD];
-        }
-        self.HUD.mode = MBProgressHUDModeIndeterminate;
-        self.HUD.labelText = text;
-        self.HUD.dimBackground = YES;
-        [self.HUD show:YES];
-
-        });
-}
-
-- (void) hideHUD
-{
-    if(self.HUD)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"CrossNewAccountViewController hideHUD");
-            [self.HUD removeFromSuperview];
-            self.HUD = nil;
-        });
-    }
-}
-
-- (void) showSuccessHUD
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.view endEditing:YES];
-        if (!self.successHUD)
-        {
-            self.successHUD = [[MBProgressHUD alloc] initWithView:self.view];
-            self.successHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkmark"]];
-            [self.view addSubview:self.successHUD];
-        }
-        self.successHUD.mode = MBProgressHUDModeCustomView;
-        self.successHUD.labelText = SUCCESS_STRING;
-        [self.successHUD show:YES];
-        [self.successHUD hide:YES afterDelay:1];
-        [self performSelector:@selector(dimissSelfView) withObject:nil afterDelay:1];
-    });
 }
 
 #pragma mark -- login or register or logout
 
 - (void) loginAccount
 {
-    id <CrossProtocol> protocol = [[CrossProtocolManager sharedInstance]protocolForAccount:self.account];
-    
-    if (protocol && self.account)
-    {
-        NSLog(@"LOGING");
-        [self showHUDWithText:LOGINING_STRING];
-        [protocol login];
-    }
+    [[CrossChatService sharedInstance] loginWithAccount:self.account];
 }
 
 - (void) registerAccount
 {
-    id <CrossProtocol> protocol = [[CrossProtocolManager sharedInstance]protocolForAccount:self.account];
-    
-    if (protocol && self.account)
-    {
-        [self showHUDWithText:CREATEING_NEW_ACCOUNT_STRING];
-        [protocol registerAccount];
-    }
-    
+    [[CrossChatService sharedInstance] registerWithAccount:self.account];
 }
 
 
@@ -392,21 +293,18 @@
 //persistence account into sql db
 - (void) persistenceAccount
 {
-    //1. save account info into account database
-    [[CrossAccountDataBaseManager sharedInstance].readWriteDatabaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-        [self.account saveWithTransaction:transaction];
-    }];
+    [[CrossChatService sharedInstance] persistenceAccount:self.account];
 }
 
 
 #pragma mark -- dismiss self
 - (void) dimissSelfView
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    });
+    
 }
-
-
-
 
 /*
 #pragma mark - Navigation

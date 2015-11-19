@@ -17,4 +17,16 @@ extern NSString * CrossProtocolRegisterSuccess;
 extern NSString * CrossProtocolRegisterFailed;
 
 extern NSString * CrossProtocolLogouted;
+
+typedef NS_ENUM(NSInteger, CrossProtocolType) {
+    CrossProtocolTypeNone        = 0,
+    CrossProtocolTypeXMPP        = 1
+};
+
+typedef NS_ENUM(NSInteger, CrossProtocolConnectionStatus) {
+    CrossProtocolConnectionStatusDisconnected        = 0,
+    CrossProtocolConnectionStatusConnecting          = 1,
+    CrossProtocolConnectionStatusConnected           = 2
+};
+
 #endif

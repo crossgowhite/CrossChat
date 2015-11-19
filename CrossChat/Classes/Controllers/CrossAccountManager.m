@@ -13,16 +13,6 @@
 
 @implementation CrossAccountManager
 
-+ (NSArray *)allAutoLoginAccounts
-{
-    __block NSArray *accounts = nil;
-    
-    [[CrossAccountDataBaseManager sharedInstance].readWriteDatabaseConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
-        accounts = [CrossAccount allAccountsWithTransaction:transaction];
-    }];
-
-    return accounts;
-}
 
 #pragma mark -- get connected account
 + (CrossAccount*) connectedAccount

@@ -97,7 +97,6 @@ static NSString *MesageCellIdentifier = @"MessageCell";
 - (void)initTableView
 {
     self.tableView.allowsSelection = NO;
-    //self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"chat_bg_default.jpg"]];
 }
 
 - (void)refreshTableView

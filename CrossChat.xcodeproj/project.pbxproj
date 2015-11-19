@@ -61,6 +61,7 @@
 		F79D463F1BF06F04006CAC03 /* CrossKeyBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = F79D463E1BF06F04006CAC03 /* CrossKeyBoardView.m */; };
 		F7AF62251BBB820B0036DC67 /* CrossCertificateDomainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7AF62241BBB820B0036DC67 /* CrossCertificateDomainViewController.xib */; };
 		F7AF62271BBB82920036DC67 /* CrossNewAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7AF62261BBB82920036DC67 /* CrossNewAccountViewController.xib */; };
+		F7D088B61BFDA93100717CF5 /* CrossChatService.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D088B51BFDA93100717CF5 /* CrossChatService.m */; };
 		F7D28D391BB2757A00ED3FD6 /* CrossAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D28D381BB2757A00ED3FD6 /* CrossAccount.m */; };
 		F7D28D401BB28CBF00ED3FD6 /* CrossAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D28D3F1BB28CBF00ED3FD6 /* CrossAlertViewController.m */; };
 		F7D28D441BB28F5200ED3FD6 /* CrossAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D28D431BB28F5200ED3FD6 /* CrossAlertAction.m */; };
@@ -192,6 +193,8 @@
 		F79D463E1BF06F04006CAC03 /* CrossKeyBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossKeyBoardView.m; path = Classes/Views/CrossKeyBoardView.m; sourceTree = "<group>"; };
 		F7AF62241BBB820B0036DC67 /* CrossCertificateDomainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CrossCertificateDomainViewController.xib; path = "Classes/View Controllers/CrossCertificateDomainViewController.xib"; sourceTree = "<group>"; };
 		F7AF62261BBB82920036DC67 /* CrossNewAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CrossNewAccountViewController.xib; path = "Classes/View Controllers/CrossNewAccountViewController.xib"; sourceTree = "<group>"; };
+		F7D088B41BFDA93100717CF5 /* CrossChatService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossChatService.h; path = Classes/Controllers/CrossChatService.h; sourceTree = "<group>"; };
+		F7D088B51BFDA93100717CF5 /* CrossChatService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossChatService.m; path = Classes/Controllers/CrossChatService.m; sourceTree = "<group>"; };
 		F7D28D371BB2757A00ED3FD6 /* CrossAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossAccount.h; path = Classes/Model/Accounts/CrossAccount.h; sourceTree = "<group>"; };
 		F7D28D381BB2757A00ED3FD6 /* CrossAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossAccount.m; path = Classes/Model/Accounts/CrossAccount.m; sourceTree = "<group>"; };
 		F7D28D3E1BB28CBF00ED3FD6 /* CrossAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossAlertViewController.h; path = "Classes/View Controllers/CrossAlertViewController.h"; sourceTree = "<group>"; };
@@ -404,6 +407,7 @@
 		F76998D71BAFA0C500BFE1E6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F7D088B31BFDA8F900717CF5 /* Service Facade */,
 				F78DC96F1BBA327000D78B38 /* Yap DataBase View */,
 				F7D28D451BB3885100ED3FD6 /* View Controller Manager */,
 				F76998ED1BAFCEF100BFE1E6 /* CrossLanguageManager.h */,
@@ -606,6 +610,15 @@
 				F79D463E1BF06F04006CAC03 /* CrossKeyBoardView.m */,
 			);
 			name = KeyBoard;
+			sourceTree = "<group>";
+		};
+		F7D088B31BFDA8F900717CF5 /* Service Facade */ = {
+			isa = PBXGroup;
+			children = (
+				F7D088B41BFDA93100717CF5 /* CrossChatService.h */,
+				F7D088B51BFDA93100717CF5 /* CrossChatService.m */,
+			);
+			name = "Service Facade";
 			sourceTree = "<group>";
 		};
 		F7D28D361BB256C500ED3FD6 /* Accounts */ = {
@@ -842,6 +855,7 @@
 				F7D28DCA1BB39F6300ED3FD6 /* CrossProtocolManager.m in Sources */,
 				F78DC96E1BB937A000D78B38 /* CrossYapDatabaseObject.m in Sources */,
 				F7078FED1BF9C9FE004971AC /* CrossTableViewDelegate.m in Sources */,
+				F7D088B61BFDA93100717CF5 /* CrossChatService.m in Sources */,
 				F78DC9721BBA32B600D78B38 /* CrossDataBaseView.m in Sources */,
 				F7E31D151BE20B6C00AE1413 /* CrossBuddyTableViewCell.m in Sources */,
 				F778ED501BE734E300ECF7CE /* CrossMessageManager.m in Sources */,

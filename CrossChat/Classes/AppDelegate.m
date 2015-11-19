@@ -7,21 +7,10 @@
 //
 
 #import "AppDelegate.h"
-#import "CrossConversationViewController.h"
-#import "CrossAccountDataBaseManager.h"
-#import "CrossConstants.h"
-#import "CrossAccountManager.h"
-#import "CrossProtocol.h"
-#import "CrossProtocolManager.h"
-
-#import "MBProgressHUD.h"
+#import "CrossChatService.h"
 
 @interface AppDelegate ()
 
-//1. home tabbar view controller
-@property (strong, nonatomic) UITabBarController * tabBarCtrl;
-@property (nonatomic, strong) MBProgressHUD * HUD;
-@property (nonatomic, strong) MBProgressHUD * successHUD;
 @end
 
 @implementation AppDelegate
@@ -29,11 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    //DataBase part
-    [[CrossAccountDataBaseManager sharedInstance] setupDataBaseWithName :CrossYapDatabaseName];
-    
-    //Auto login
-    [self autoLogin];
+    [CrossChatService sharedInstance];
     return YES;
 }
 
@@ -57,33 +42,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
-- (void)autoLogin
-{
-    NSArray * array = [CrossAccountManager allAutoLoginAccounts];
-    for (CrossAccount * account in array)
-    {
-        if (account.auotoLogin)
-        {
-            CrossAccount * newAccount = [CrossAccount accountForAccountType: account.accountType];
-            if(newAccount)
-            {
-                newAccount.userName = account.userName;
-                newAccount.password = account.password;
-                newAccount.auotoLogin = account.auotoLogin;
-                newAccount.uniqueId = account.uniqueId;
-            }
-            id <CrossProtocol> protocol = [[CrossProtocolManager sharedInstance]protocolForAccount:newAccount];
-            
-            if (protocol)
-            {
-                NSLog(@"Auto LOGING Account %@",newAccount.userName);
-                [protocol login];
-            }
-            break;
-        }
-    }
 }
 
 - (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
