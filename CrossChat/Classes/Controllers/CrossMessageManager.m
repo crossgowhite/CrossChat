@@ -28,16 +28,6 @@
     return self;
 }
 
-+ (CrossMessageManager*) sharedInstance
-{
-    static id messageManager = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        messageManager = [[self alloc] init];
-    });
-    
-    return messageManager;
-}
 
 - (CrossMessageDataBaseManager*) databaseManagerForBuddy: (CrossBuddy *)buddy
 {
@@ -75,6 +65,15 @@
         {
             [self.databaseManagerDictionary removeObjectForKey:buddy.uniqueId];
         }
+    }
+}
+
+- (void)persistenceMessage:(CrossMessage*)message Buddy:(CrossBuddy*)buddy completeBlock:(dispatch_block_t)block
+{
+    CrossMessageDataBaseManager * messageDataBaseManager =  [self databaseManagerForBuddy:buddy];
+    if (messageDataBaseManager)
+    {
+        [messageDataBaseManager persistenceMessage:message completeBlock:block];
     }
 }
 @end

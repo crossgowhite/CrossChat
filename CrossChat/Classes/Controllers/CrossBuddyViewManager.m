@@ -9,9 +9,9 @@
 #import "CrossBuddyViewManager.h"
 #import "CrossSettingGroup.h"
 #import "String.h"
-#import "CrossBuddyManager.h"
 #import "CrossBuddy.h"
 #import "CrossBuddySetting.h"
+#import "CrossChatService.h"
 
 @interface CrossBuddyViewManager ()
 
@@ -39,21 +39,20 @@
     //1. init add account gruop
     NSMutableArray * buddyArray = [NSMutableArray array];
     
-    NSArray * buddyList = [[CrossBuddyManager sharedInstance]getAllBuddyList];
+    NSArray * buddyList = [[CrossChatService sharedInstance]getAllBuddyList];
     
-    for (CrossBuddy * buddy in buddyList) {
+    for (CrossBuddy * buddy in buddyList)
+    {
         CrossBuddySetting * setting = [[CrossBuddySetting alloc]initWithBuddy: buddy Title:buddy.displayName description:nil];
         [buddyArray addObject:setting];
     }
     
-    if ([buddyArray count] > 0) {
-        
+    if ([buddyArray count] > 0)
+    {
         CrossSettingGroup * buddyGroup = [[CrossSettingGroup alloc]initWithTitle:BASIC_STRING settings:buddyArray];
         [allGruops addObject:buddyGroup];
     }
-    
     self.arrayGroups = allGruops;
-    
 }
 
 @end

@@ -17,14 +17,11 @@
 @property (nonatomic, strong) YapDatabase * database;
 @property (nonatomic, strong) YapDatabaseConnection *readWriteDatabaseConnection;
 
-
-- (BOOL) setupDataBaseWithName :(NSString *)name;
-
-+ (instancetype)sharedInstance;
+- (instancetype) initWithDataBaseName :(NSString *)name;
 
 - (YapDatabaseConnection *) newConnection;
 
 - (BOOL) accountWhetherExisted:(CrossAccount*)newAccount;
 
-- (NSArray *)allAutoLoginAccounts;
+
 @end

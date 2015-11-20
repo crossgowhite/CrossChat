@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @class CrossBuddy;
+@class CrossMessage;
 @class CrossMessageDataBaseManager;
 
 @interface CrossMessageManager : NSObject
 
-+ (CrossMessageManager*) sharedInstance; // Singleton method
+- (CrossMessageDataBaseManager*)databaseManagerForBuddy: (CrossBuddy *)buddy;
 
-- (CrossMessageDataBaseManager*) databaseManagerForBuddy: (CrossBuddy *)buddy;
+- (void)persistenceMessage:(CrossMessage*)message Buddy:(CrossBuddy*)buddy completeBlock:(dispatch_block_t)block;
 @end

@@ -8,24 +8,16 @@
 
 #import "CrossConversationViewController.h"
 #import "String.h"
+#import "CrossConstants.h"
 #import "CrossSettingViewController.h"
-#import "CrossProtocolManager.h"
-#import "CrossAccount.h"
-#import "CrossAccountManager.h"
+
 #import "CrossConversationViewManager.h"
 
-#import "CrossXMPPMessageStatus.h"
 #import "CrossConversationTableViewCell.h"
 #import "CrossConversationSetting.h"
 
-#import "XMPPMessage.h"
-#import "CrossMessageViewController.h"
-#import "CrossXMPPMessageDecoder.h"
-
-#import "CrossBuddyDataBaseManager.h"
-#import "CrossMessageManager.h"
+#import "CrossChatService.h"
 #import "CrossMessage.h"
-#import "CrossMessageDataBaseManager.h"
 
 #import "CrossMessageViewController.h"
 #import "CrossArrayDataSource.h"
@@ -48,7 +40,7 @@ static NSString * ConversationCellIdentifier = @"ConversationCell";
 
 - (void)awakeFromNib
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMessage:) name:CrossXMPPMessageReceived object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMessage:) name:CrossMessageReceived object:nil];
 }
 
 
@@ -64,6 +56,7 @@ static NSString * ConversationCellIdentifier = @"ConversationCell";
     
     self.title = CHATS_STRING;
     
+    self.conversationViewManager = [[CrossConversationViewManager alloc]init];
     
     //1. init navigation bar item
     self.settingBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"SettingsIcon"] style:UIBarButtonItemStylePlain target:self action:@selector(settingBarButtonItemPressed:)];
@@ -73,9 +66,6 @@ static NSString * ConversationCellIdentifier = @"ConversationCell";
     self.composeBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(composeBarButtonItemPressed:)];
     self.navigationItem.leftBarButtonItem = self.composeBarButtonItem;
     self.navigationItem.leftBarButtonItem.enabled = NO;
-    
-    //3. init conversation view manager
-    self.conversationViewManager = [[CrossConversationViewManager alloc]init];
     
     //4. init data source
     TableViewCellConfigureBlock configureCell = ^(CrossConversationTableViewCell *cell, CrossSetting *setting) {
@@ -116,40 +106,27 @@ static NSString * ConversationCellIdentifier = @"ConversationCell";
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if([CrossProtocolManager sharedInstance].numberOfConnectedAccount)
-    {
+    if([[CrossChatService sharedInstance] getAccountConnectionStatus] == CrossProtocolConnectionStatusConnected)
         [self enableComposeButton];
-        [self refreshTableView];
-    }
     else
-    {
         [self disableComposeButton];
-        [self cleanTableView];
-    }
     
-    
-    [[CrossProtocolManager sharedInstance] addObserver:self forKeyPath:NSStringFromSelector(@selector(numberOfConnectedAccount)) options:NSKeyValueObservingOptionNew context:NULL];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLoginSucess:) name:CrossProtocolLoginSuccess object:nil];
+    [self refreshTableView];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [[CrossProtocolManager sharedInstance] removeObserver:self forKeyPath:NSStringFromSelector(@selector(numberOfConnectedAccount))];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:CrossProtocolLoginSuccess object:nil];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+- (void)onLoginSucess:(NSNotification *)notification
 {
-    NSUInteger numberConnectedAccounts = [[change objectForKey:NSKeyValueChangeNewKey] unsignedIntegerValue];
-    if (numberConnectedAccounts)
-    {
-        [self enableComposeButton];
-        [self refreshTableView];
-    }
-    else
-    {
-        [self disableComposeButton];
-        [self cleanTableView];
-    }
+    //3. init conversation view manager
+    [self enableComposeButton];
+    [self refreshTableView];
 }
+
 
 - (void)enableComposeButton
 {
@@ -167,18 +144,8 @@ static NSString * ConversationCellIdentifier = @"ConversationCell";
 
 - (void)refreshTableView
 {
-    
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.conversationViewManager refreshArrayGroup];
-        [self.tableView reloadData];
-    });
-}
-
-- (void)cleanTableView
-{
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.conversationViewManager cleanArrayGroup];
         [self.tableView reloadData];
     });
 }
@@ -186,42 +153,18 @@ static NSString * ConversationCellIdentifier = @"ConversationCell";
 
 - (void) dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:CrossXMPPMessageReceived object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:CrossMessageReceived object:nil];
 }
 
 
 #pragma mark -- On received xmpp message
 - (void)didReceiveMessage:(NSNotification*)notification
 {
-    XMPPMessage * message = notification.object;
-    
-    //if crossmessageview controller is in show
-    //do not handle message received
     if (![self.navigationController.viewControllers.lastObject isKindOfClass:[CrossMessageViewController class]])
     {
-        NSString * messageText = [CrossXMPPMessageDecoder getMessageTextWithMessage:message];
-        if (messageText)
-        {
-            NSString * fromUser = [CrossXMPPMessageDecoder getFromUserNameWithMessage:message];
-            CrossBuddy * buddy = [[CrossBuddyDataBaseManager sharedInstance]getCrossBuddyByName:fromUser];
-            if (buddy)
-            {
-                buddy.statusMessage = messageText;
-                [[CrossBuddyDataBaseManager sharedInstance].readWriteDatabaseConnection
-                 asyncReadWriteWithBlock: ^(YapDatabaseReadWriteTransaction *transaction)
-                 {
-                     [buddy saveWithTransaction:transaction];
-                 }
-                 completionBlock:^
-                 {
-                     [self refreshTableView];
-                     [self persistenceMessageText:messageText Buddy:buddy];
-                 }];
-            }
-        }
+        [self refreshTableView];
     }
 }
-
 
 
 #pragma mark -- action block call back function item
@@ -239,11 +182,5 @@ static NSString * ConversationCellIdentifier = @"ConversationCell";
     }
 }
 
-- (void) persistenceMessageText:(NSString*)messageText Buddy:(CrossBuddy*)buddy
-{
-    CrossMessageDataBaseManager * messageDataBaseManager =  [[CrossMessageManager sharedInstance] databaseManagerForBuddy:buddy];
-    CrossMessage * message = [CrossMessage CrossMessageWithText:messageText read:[NSNumber numberWithInteger:1] incoming:[NSNumber numberWithInteger:1] owner:buddy.userName];
-    [messageDataBaseManager persistenceMessage:message completeBlock:nil];
-}
 
 @end

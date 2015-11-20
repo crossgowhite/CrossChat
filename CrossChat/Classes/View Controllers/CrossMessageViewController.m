@@ -13,26 +13,18 @@
 #import "CrossMessageTableViewCell.h"
 
 #import "CrossMessageFrame.h"
-#import "CrossXMPPMessageStatus.h"
 
-#import "XMPPMessage.h"
-#import "CrossXMPPMessageDecoder.h"
-#import "CrossBuddyDataBaseManager.h"
-#import "CrossMessageDataBaseManager.h"
 #import "CrossMessage.h"
-#import "CrossMessageManager.h"
 
 #import "CrossConstants.h"
 #import "CrossKeyBoardView.h"
 
-#import "CrossAccountManager.h"
-#import "CrossAccount.h"
-#import "CrossProtocol.h"
-#import "CrossProtocolManager.h"
 
 #import "CrossArrayDataSource.h"
 #import "CrossViewManager.h"
 #import "CrossMessageViewManager.h"
+#import "CrossChatService.h"
+
 static NSString *MesageCellIdentifier = @"MessageCell";
 
 @interface CrossMessageViewController () <KeyBordViewDelegate>
@@ -42,9 +34,6 @@ static NSString *MesageCellIdentifier = @"MessageCell";
 @property (nonatomic,strong) CrossKeyBoardView * keyBoardView;
 
 @property (nonatomic, strong) CrossViewManager * messageViewManager;
-@property (nonatomic, strong) CrossMessage * lastMessage;
-
-
 @property (nonatomic, strong) CrossArrayDataSource * messageArrayDataSource;
 @end
 
@@ -111,7 +100,7 @@ static NSString *MesageCellIdentifier = @"MessageCell";
 #pragma mark -- handle xmpp message
 - (void)viewWillAppear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMessage:) name:CrossXMPPMessageReceived object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMessage:) name:CrossMessageReceived object:nil];
    
     //add keyboard view show notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -120,54 +109,23 @@ static NSString *MesageCellIdentifier = @"MessageCell";
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:CrossXMPPMessageReceived object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:CrossMessageReceived object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [self updateBuddy];
+    [self refreshTableView];
+    [self tableViewScrollLastIndexPath];
 }
 
 - (void)didReceiveMessage:(NSNotification*)notification
 {
-    XMPPMessage * message = notification.object;
-    NSString * messageText = [CrossXMPPMessageDecoder getMessageTextWithMessage:message];
-    NSString * fromuser = [CrossXMPPMessageDecoder getFromUserNameWithMessage:message];
-    if (messageText)
-    {
-        CrossMessage * message = [CrossMessage CrossMessageWithText:messageText read:[NSNumber numberWithInteger:1] incoming:[NSNumber numberWithInteger:1] owner:fromuser];
-        [self persistenceMessageText:message];
-    }
+    [self refreshTableView];
+    [self tableViewScrollLastIndexPath];
 }
 
-- (void)persistenceMessageText:(CrossMessage*)message
-{
-    CrossMessageDataBaseManager * messageDataBaseManager =  [[CrossMessageManager sharedInstance] databaseManagerForBuddy:self.buddy];
-    
-    
-    void (^CompleteDispatch_block_t)(void) = ^void(void)
-    {
-        [self refreshTableView];
-        [self tableViewScrollLastIndexPath];
-    };
-    self.lastMessage = message;
-    [messageDataBaseManager persistenceMessage:message completeBlock:CompleteDispatch_block_t];
-}
-
-- (void)updateBuddy
-{
-    if (self.lastMessage && ![self.buddy.statusMessage isEqualToString:self.lastMessage.text])
-    {
-        [[CrossBuddyDataBaseManager sharedInstance].readWriteDatabaseConnection
-         readWriteWithBlock: ^(YapDatabaseReadWriteTransaction *transaction)
-         {
-             self.buddy.statusMessage = self.lastMessage.text;
-             [self.buddy saveWithTransaction:transaction];
-         }];
-    }
-}
 
 #pragma mark -- message view donot support landscape
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -200,20 +158,15 @@ static NSString *MesageCellIdentifier = @"MessageCell";
 {
     if (textField.text.length > 0)
     {
-        CrossAccount * connectedAccount = [CrossAccountManager connectedAccount];
+        CrossMessage * message = [CrossMessage CrossMessageWithText:textField.text read:[NSNumber numberWithInteger:1] incoming:[NSNumber numberWithInteger:0] owner:self.buddy.userName];
         
-        if (connectedAccount)
+        void (^CompleteDispatch_block_t)(void) = ^void(void)
         {
-            CrossMessage * message = [CrossMessage CrossMessageWithText:textField.text read:[NSNumber numberWithInteger:1] incoming:[NSNumber numberWithInteger:0] owner:self.buddy.userName];
-            [self persistenceMessageText:message];
-            
-            id <CrossProtocol> protocol = [[CrossProtocolManager sharedInstance]protocolForAccount:connectedAccount];
-            
-            if (protocol)
-            {
-                [protocol sendMessage: message];
-            }
-        }
+            [self refreshTableView];
+            [self tableViewScrollLastIndexPath];
+        };
+        
+        [[CrossChatService sharedInstance] sendMessage:message completeBlock:CompleteDispatch_block_t];
         textField.text = @"";
     }
     

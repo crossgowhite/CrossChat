@@ -8,14 +8,13 @@
 
 #import "CrossMessageViewManager.h"
 #import "CrossMessageFrame.h"
-#import "CrossMessageDataBaseManager.h"
-#import "CrossMessageManager.h"
 #import "Crossbuddy.h"
 #import "CrossMessage.h"
 
-#import "CrossAccountManager.h"
 #import "CrossConstants.h"
 #import "CrossAccount.h"
+
+#import "CrossChatService.h"
 
 @interface CrossMessageViewManager ()
 
@@ -44,8 +43,7 @@
     //1. create basic group
     NSMutableArray * allGruops = [NSMutableArray array];
     
-    CrossMessageDataBaseManager * manaeger = [[CrossMessageManager sharedInstance] databaseManagerForBuddy :self.buddy];
-    self.messageArray = [manaeger MessageList];
+    self.messageArray = [[CrossChatService sharedInstance] MessageListWithBuddy:self.buddy];
 
     NSMutableArray * messageFrameArray = [NSMutableArray array];
     
@@ -61,7 +59,7 @@
         
         else if([message.incoming intValue] == 0)
         {
-            messageFrame.avatarImage = [[CrossAccountManager connectedAccount] accountImage];
+            messageFrame.avatarImage = [ [[CrossChatService sharedInstance] getServiceAccount] accountImage];
         }
         
         [messageFrameArray addObject:messageFrame];

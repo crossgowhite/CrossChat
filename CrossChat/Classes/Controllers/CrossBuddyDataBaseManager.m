@@ -23,17 +23,14 @@ NSString *const CrossYapDatabseMessageIdSecondaryIndexExtension = @"CrossYapData
 
 #pragma mark -- singleton instance
 
-+ (instancetype) sharedInstance
+- (instancetype)initWithAccountUniqueId:(NSString *)accountName dbName:(NSString *)dbName
 {
-    static id databaseManager = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        databaseManager = [[self alloc] init];
-    });
-    
-    return databaseManager;
+    if (self = [super init])
+    {
+        [self setupDataBaseWithAccountUniqueId:accountName dbName:dbName];
+    }
+    return self;
 }
-
 
 #pragma mark -- setup database
 
@@ -213,5 +210,55 @@ NSString *const CrossYapDatabseMessageIdSecondaryIndexExtension = @"CrossYapData
     }];
     
     return newbuddy;
+}
+
+- (NSArray *)getAllBuddyList
+{
+    __block NSArray *buddys = nil;
+        
+    [self.readWriteDatabaseConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
+            buddys = [CrossBuddy allBuddysWithTransaction:transaction];
+        }];
+        
+    return buddys;
+
+}
+
+//all in conversation friend list
+- (NSArray *)getInConversationBuddyList
+{
+    __block NSArray *buddys = nil;
+    NSMutableArray * array = [NSMutableArray array];
+    [self.readWriteDatabaseConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
+            buddys = [CrossBuddy allBuddysWithTransaction:transaction];
+    }];
+        
+    for (CrossBuddy * buddy in buddys)
+    {
+        if (buddy.statusMessage != nil)
+        {
+            [array addObject:buddy];
+        }
+    }
+    return array;
+
+}
+
+- (void)updateBuddyStatusMessage:(NSString*)message buddyName:(NSString*)buddyname completeBlock:(updateBuddy_complete_block_t)block
+{
+    CrossBuddy * buddy = [self getCrossBuddyByName:buddyname];
+    if (buddy)
+    {
+        buddy.statusMessage = message;
+        [self.readWriteDatabaseConnection asyncReadWriteWithBlock: ^(YapDatabaseReadWriteTransaction *transaction)
+        {
+            [buddy saveWithTransaction:transaction];
+        }
+        completionBlock:^
+        {
+            if (block)
+                block(buddy);
+        }];
+    }
 }
 @end

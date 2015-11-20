@@ -12,15 +12,18 @@
 extern NSString *const CrossYapDatabseMessageIdSecondaryIndex;
 extern NSString *const CrossYapDatabseMessageIdSecondaryIndexExtension;
 
+typedef void (^updateBuddy_complete_block_t)(CrossBuddy*);
+
 @interface CrossBuddyDataBaseManager : NSObject
 
 @property (nonatomic, strong) YapDatabase * database;
 @property (nonatomic, strong) YapDatabaseConnection *readWriteDatabaseConnection;
 
 
-- (BOOL) setupDataBaseWithAccountUniqueId :(NSString *)accountName dbName:(NSString *)dbName;
+//- (BOOL) setupDataBaseWithAccountUniqueId :(NSString *)accountName dbName:(NSString *)dbName;
 
-+ (instancetype)sharedInstance;
+- (instancetype)initWithAccountUniqueId:(NSString *)accountName dbName:(NSString *)dbName;
+//+ (instancetype)sharedInstance;
 
 - (YapDatabaseConnection *) newConnection;
 
@@ -28,4 +31,12 @@ extern NSString *const CrossYapDatabseMessageIdSecondaryIndexExtension;
 - (void)persistenceBuddyPhotoWithUserName:(NSString *)username photoData:(NSData*)data;
 
 - (CrossBuddy*) getCrossBuddyByName:(NSString*)username;
+
+//all friend list
+- (NSArray *)getAllBuddyList;
+
+//all in conversation friend list
+- (NSArray *)getInConversationBuddyList;
+
+- (void)updateBuddyStatusMessage:(NSString*)message buddyName:(NSString*)name completeBlock:(updateBuddy_complete_block_t)block;
 @end

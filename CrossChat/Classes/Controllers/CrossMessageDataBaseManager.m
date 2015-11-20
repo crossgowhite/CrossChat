@@ -9,9 +9,8 @@
 #import "CrossMessageDataBaseManager.h"
 #import "CrossBuddy.h"
 #import "CrossAccount.h"
-#import "CrossAccountManager.h"
 #import "CrossConstants.h"
-
+#import "CrossChatService.h"
 
 #import "CrossMessage.h"
 
@@ -79,7 +78,8 @@ static NSString * const RootKey = @"Root";
     //3. database directory = sandbox path + application
     NSString * directory = [applicationSupportDirectory stringByAppendingPathComponent:applicationName];
     
-    NSString * connectAccountUniqedID = [CrossAccountManager connectedAccount].uniqueId;
+    CrossAccount * account = [[CrossChatService sharedInstance] getServiceAccount];
+    NSString * connectAccountUniqedID = account.uniqueId;
     
     //4. final database directory = sandbox path + application + accountname
     NSString * finaldirectory = [directory stringByAppendingPathComponent: connectAccountUniqedID];

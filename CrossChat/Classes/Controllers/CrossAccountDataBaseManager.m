@@ -7,7 +7,7 @@
 //
 
 #import "CrossAccountDataBaseManager.h"
-
+#import "CrossChatService.h"
 
 @interface CrossAccountDataBaseManager ()
 
@@ -20,17 +20,15 @@
 
 #pragma mark -- singleton instance
 
-+ (instancetype) sharedInstance
-{
-    static id databaseManager = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        databaseManager = [[self alloc] init];
-    });
-    
-    return databaseManager;
-}
 
+- (instancetype) initWithDataBaseName :(NSString *)name
+{
+    if (self = [super init])
+    {
+        [self setupDataBaseWithName:name];
+    }
+    return self;
+}
 
 #pragma mark -- setup database
 
@@ -119,16 +117,7 @@
 }
 
 
-- (NSArray *)allAutoLoginAccounts
-{
-    __block NSArray *accounts = nil;
-    
-    [[CrossAccountDataBaseManager sharedInstance].readWriteDatabaseConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
-        accounts = [CrossAccount allAccountsWithTransaction:transaction];
-    }];
-    
-    return accounts;
-}
+
 
 
 @end

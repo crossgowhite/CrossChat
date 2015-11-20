@@ -8,17 +8,6 @@
 
 #import "CrossBuddyTableViewController.h"
 #import "String.h"
-#import "CrossProtocolManager.h"
-#import "CrossBuddy.h"
-
-#import "YAPDatabaseViewMappings.h"
-#import "YapDatabase.h"
-#import "YapDatabaseView.h"
-#import "YAPDatabaseConnection.h"
-
-#import "CrossDataBaseView.h"
-#import "CrossBuddyDataBaseManager.h"
-#import "CrossBuddyManager.h"
 
 #import "CrossBuddyViewManager.h"
 #import "CrossBuddySetting.h"
@@ -26,10 +15,6 @@
 #import "CrossBuddyTableViewCell.h"
 #import "CrossMessageViewController.h"
 
-
-#import "CrossMessageManager.h"
-#import "CrossMessageDataBaseManager.h"
-#import "CrossMessage.h"
 #import "CrossArrayDataSource.h"
 #import "CrossTableViewDelegate.h"
 
@@ -79,36 +64,11 @@ static NSString * BuddyCellIdentifier = @"BuddyCell";
 #pragma mark -- connection status kvo
 - (void)viewWillAppear:(BOOL)animated
 {
-    if([CrossProtocolManager sharedInstance].numberOfConnectedAccount)
-    {
-        [self refreshTableView];
-    }
-    else
-    {
-        [self cleanTableView];
-    }
-    
-    [[CrossProtocolManager sharedInstance] addObserver:self forKeyPath:NSStringFromSelector(@selector(numberOfConnectedAccount)) options:NSKeyValueObservingOptionNew context:NULL];
+    [self refreshTableView];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [[CrossProtocolManager sharedInstance] removeObserver:self forKeyPath:NSStringFromSelector(@selector(numberOfConnectedAccount))];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    NSUInteger numberConnectedAccounts = [[change objectForKey:NSKeyValueChangeNewKey] unsignedIntegerValue];
-    //alredy connected
-    if (numberConnectedAccounts)
-    {
-        [self refreshTableView];
-    }
-    
-    else
-    {
-        [self cleanTableView];
-    }
 }
 
 - (void)refreshTableView
@@ -119,16 +79,6 @@ static NSString * BuddyCellIdentifier = @"BuddyCell";
         [self.tableView reloadData];
     });
 }
-
-- (void)cleanTableView
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.buddyViewManager cleanArrayGroup];
-        [self.tableView reloadData];
-    });
-}
-
-
 
 #pragma mark -- action block call back function item
 - (void) Setting:(CrossSetting*)setting showDetailViewControllerClass:(Class)viewControllerClass

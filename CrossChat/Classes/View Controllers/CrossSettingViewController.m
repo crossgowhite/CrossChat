@@ -26,6 +26,8 @@
 #import "CrossProtocolManager.h"
 #import "CrossProtocolStatus.h"
 
+#import "CrossChatService.h"
+
 #import "YAPDatabaseViewMappings.h"
 #import "YapDatabase.h"
 #import "YapDatabaseView.h"
@@ -66,7 +68,7 @@
     [CrossDataBaseView registerAllAccountsDatabaseView];
     
     //yap data base part
-    self.databaseConnection = [[CrossAccountDataBaseManager sharedInstance] newConnection];
+    self.databaseConnection = [[CrossChatService sharedInstance].accountDataBaseManager newConnection];
     [self.databaseConnection beginLongLivedReadTransaction];
     
     

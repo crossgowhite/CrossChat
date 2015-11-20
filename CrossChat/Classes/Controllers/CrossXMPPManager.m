@@ -28,7 +28,7 @@
 #import "CrossAccountDataBaseManager.h"
 #import "CrossXMPPMessageStatus.h"
 #import "CrossMessage.h"
-
+#import "CrossChatService.h"
 @interface CrossXMPPManager()
 
 //account
@@ -262,9 +262,6 @@
 {
     [self goOnline];
     
-    //setup buddy db
-    [[CrossBuddyDataBaseManager sharedInstance] setupDataBaseWithAccountUniqueId:self.account.uniqueId dbName:CrossYapBuddyDatabaseName];
-    
     [self fetchvCardTempForJID:self.JID];
 
     self.connectionStatus = CrossProtocolConnectionStatusConnected;
@@ -380,7 +377,7 @@
                 CrossBuddy * buddy = [[CrossBuddy alloc]init];
                 buddy.userName = jid;
                 buddy.displayName = name;
-                [[CrossBuddyDataBaseManager sharedInstance]persistenceBuddy:buddy];
+                [[CrossChatService sharedInstance].buddyDataBaseManager persistenceBuddy:buddy];
                 [self fetchvCardTempForJID:[XMPPJID jidWithString:jid]];
             }
         }
@@ -411,23 +408,23 @@
     if ([jid.user isEqualToString: self.JID.user])
     {
         self.account.avatarImageData = card.photo;
-        [[CrossAccountDataBaseManager sharedInstance].readWriteDatabaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-            [self.account saveWithTransaction:transaction];
-        }];
+        [[CrossChatService sharedInstance].accountDataBaseManager.readWriteDatabaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                        [self.account saveWithTransaction:transaction];
+                    }];
     }
     
     else
     {
         if (card.photo)
         {
-            [[CrossBuddyDataBaseManager sharedInstance] persistenceBuddyPhotoWithUserName:username photoData:card.photo];
+            [[CrossChatService sharedInstance].buddyDataBaseManager persistenceBuddyPhotoWithUserName:username photoData:card.photo];
         }
         
         else
         {
             UIImage *img = [UIImage imageNamed:@"xmpp"];
             NSData * data = UIImageJPEGRepresentation(img, 1.0);
-            [[CrossBuddyDataBaseManager sharedInstance] persistenceBuddyPhotoWithUserName:username photoData:data];
+            [[CrossChatService sharedInstance].buddyDataBaseManager persistenceBuddyPhotoWithUserName:username photoData:data];
         }
 
     }

@@ -9,8 +9,8 @@
 #import "CrossConversationViewManager.h"
 #import "CrossConversationSetting.h"
 #import "CrossSettingGroup.h"
-#import "CrossBuddyManager.h"
 #import "String.h"
+#import "CrossChatService.h"
 
 @implementation CrossConversationViewManager
 
@@ -20,7 +20,7 @@
     
     if(self)
     {
-        //[self initSettingGroups];
+//        [self initArrayGroups];
     }
     
     return self;
@@ -34,7 +34,7 @@
     //1. init add account gruop
     NSMutableArray * buddyArray = [NSMutableArray array];
     
-    NSArray * buddyList = [[CrossBuddyManager sharedInstance] getInConversationBuddyList];
+    NSArray * buddyList = [[CrossChatService sharedInstance] getInConversationBuddyList];
     
     for (CrossBuddy * buddy in buddyList) {
         CrossConversationSetting * setting = [[CrossConversationSetting alloc]initWithBuddy: buddy Title:buddy.displayName description:nil];

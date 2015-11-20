@@ -30,3 +30,5 @@ const NSString * const CrossMessageDatabaseExtension                         = @
 
 const NSString *const  CrossMessageViewWillLoad                              = @"CrossMessageViewWillLoad";
 const NSString *const  CrossMessageViewDidUnload                             = @"CrossMessageViewDidUnload";
+
+const NSString *const  CrossMessageReceived                                  = @"CrossMessageReceivedNotification";

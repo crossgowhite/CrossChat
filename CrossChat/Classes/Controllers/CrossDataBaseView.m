@@ -12,6 +12,7 @@
 #import "CrossBuddyDataBaseManager.h"
 
 #import "CrossBuddy.h"
+#import "CrossChatService.h"
 
 NSString * CrossAllAccountDatabaseViewExtensionName =       @"CrossAllAccountDatabaseViewExtensionName";
 NSString * CrossAllAccountGroup =                           @"All Accounts";
@@ -24,7 +25,7 @@ NSString * CrossAllBuddyGroup =                             @"All Buddys";
 
 + (BOOL)registerAllAccountsDatabaseView
 {
-    YapDatabaseView *accountView = [[CrossAccountDataBaseManager sharedInstance].database registeredExtension:CrossAllAccountDatabaseViewExtensionName];
+    YapDatabaseView *accountView = [[CrossChatService sharedInstance].accountDataBaseManager.database registeredExtension:CrossAllAccountDatabaseViewExtensionName];
     
     if(accountView)
         return YES;
@@ -56,13 +57,13 @@ NSString * CrossAllBuddyGroup =                             @"All Buddys";
                                                                    versionTag:@"1"
                                                                       options:nil];
     
-    return [[CrossAccountDataBaseManager sharedInstance].database registerExtension:databaseView withName:CrossAllAccountDatabaseViewExtensionName];
+    return [[CrossChatService sharedInstance].accountDataBaseManager.database registerExtension:databaseView withName:CrossAllAccountDatabaseViewExtensionName];
 }
 
 
 + (BOOL)registerAllBuddysDatabaseView
 {
-    YapDatabaseView *buddyView = [[CrossBuddyDataBaseManager sharedInstance].database registeredExtension:CrossAllBuddyDatabaseViewExtensionName];
+    YapDatabaseView *buddyView = [[CrossChatService sharedInstance].buddyDataBaseManager.database registeredExtension:CrossAllBuddyDatabaseViewExtensionName];
     
     if(buddyView)
         return YES;
@@ -93,7 +94,7 @@ NSString * CrossAllBuddyGroup =                             @"All Buddys";
                                                                    versionTag:@"1"
                                                                       options:nil];
     
-    return [[CrossBuddyDataBaseManager sharedInstance].database registerExtension:databaseView withName:CrossAllBuddyDatabaseViewExtensionName];
+    return [[CrossChatService sharedInstance].buddyDataBaseManager.database registerExtension:databaseView withName:CrossAllBuddyDatabaseViewExtensionName];
 }
 
 @end

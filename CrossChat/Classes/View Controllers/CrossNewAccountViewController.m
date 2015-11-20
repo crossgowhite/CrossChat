@@ -95,9 +95,17 @@
 
 - (BOOL) initAccount
 {
+    CrossAccount * account = nil;
+    if (self.account)
+    {
+        account = self.account;
+    }
+    else
+    {
+        account = [CrossAccount accountForAccountType:CrossAccountTypeXMPP];
+    }
     //hard code xmpp type account
-    CrossAccount * account = [CrossAccount accountForAccountType:CrossAccountTypeXMPP];
-    
+
     if(account)
     {
         account.userName = self.userNameTableViewCell.getTextFiledString;
@@ -289,7 +297,6 @@
 
 
 #pragma mark -- Yap database operation
-
 //persistence account into sql db
 - (void) persistenceAccount
 {

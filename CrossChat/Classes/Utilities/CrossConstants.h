@@ -31,4 +31,5 @@ extern const NSString *const  CrossXMPPErrorNoSuitableAuthMethod;
 extern const NSString *const  CrossMessageViewWillLoad;
 extern const NSString *const  CrossMessageViewDidUnload;
 
+extern const NSString *const  CrossMessageReceived;
 #endif

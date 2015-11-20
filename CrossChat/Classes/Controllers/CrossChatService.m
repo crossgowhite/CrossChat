@@ -9,9 +9,16 @@
 #import "CrossChatService.h"
 #import "CrossAccount.h"
 #import "CrossProtocolManager.h"
-#import "CrossAccountDataBaseManager.h"
 #import "CrossConstants.h"
+#import "CrossMessage.h"
 
+#import "CrossBuddyDataBaseManager.h"
+#import "CrossAccountDataBaseManager.h"
+#import "CrossMessageManager.h"
+#import "CrossMessageDataBaseManager.h"
+
+#import "CrossXMPPMessageStatus.h"
+#import "CrossXMPPMessageDecoder.h"
 
 #import "MBProgressHUD.h"
 
@@ -19,7 +26,7 @@ static CrossChatService * sharedService = nil;
 
 @interface CrossChatService ()
 
-@property (retain, nonatomic) CrossAccount * account;
+
 
 @end
 
@@ -33,10 +40,13 @@ static CrossChatService * sharedService = nil;
     if (self)
     {
         self.account = nil;
+        self.buddyDataBaseManager = nil;
+        self.messageManager = nil;
         
         [self initNotification];
-        //setup database
-        [[CrossAccountDataBaseManager sharedInstance] setupDataBaseWithName :CrossYapDatabaseName];
+        
+        //setup account database
+        self.accountDataBaseManager = [[CrossAccountDataBaseManager alloc]initWithDataBaseName:CrossYapDatabaseName];
         
         //auto login
         [self autoLogin];
@@ -55,6 +65,92 @@ static CrossChatService * sharedService = nil;
 }
 
 
+#pragma mark -- init notification
+-(void)initNotification
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onRegisterFailed:)
+                                                 name:CrossProtocolRegisterFailed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onRegisterSuccess:)
+                                                 name:CrossProtocolRegisterSuccess object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLoginSucess:)
+                                                 name:CrossProtocolLoginSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLoginFailed:)
+                                                 name:CrossProtocolLoginFailed object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLogouted:)
+                                                 name:CrossProtocolLogouted object:nil];
+}
+
+-(void)uninitNotification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+#pragma mark -- login / register listener
+- (void)onRegisterSuccess: (NSNotification *)notification
+{
+    [self hideHUD];
+    [self loginWithAccount:self.account];
+}
+
+
+- (void) onRegisterFailed: (NSNotification *)notification
+{
+    [self hideHUD];
+}
+
+
+- (void)onLoginSucess:(NSNotification *)notification
+{
+    //setup buddy db
+    self.buddyDataBaseManager = [[CrossBuddyDataBaseManager alloc]initWithAccountUniqueId:self.account.uniqueId dbName:CrossYapBuddyDatabaseName];
+    self.messageManager = [[CrossMessageManager alloc]init];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ReceiveMessage:) name:CrossXMPPMessageReceived object:nil];
+    
+    [self hideHUD];
+}
+
+- (void)onLoginFailed:(NSNotification *)notification
+{
+    [self hideHUD];
+}
+
+- (void)onLogouted:(NSNotification *)notification
+{
+    [self setBuddyDataBaseManager:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:CrossXMPPMessageReceived object:nil];
+    [self setMessageManager:nil];
+}
+
+#pragma mark -- show & hide hud
+- (void)showHUD
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIView *window = [[UIApplication sharedApplication] keyWindow];
+        MBProgressHUD *hud = [MBProgressHUD HUDForView:window];
+        if (!hud)
+        {
+            hud = [MBProgressHUD showHUDAddedTo:window animated:YES];
+        }
+        else
+        {
+            [hud show:YES];
+        }
+    });
+}
+
+- (void)hideHUD
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIView *window = [[UIApplication sharedApplication] keyWindow];
+        [MBProgressHUD hideHUDForView:window animated:NO];
+    });
+}
+
+#pragma mark -- Account relate
 // Get service relate account
 - (CrossAccount *)getServiceAccount
 {
@@ -130,26 +226,13 @@ static CrossChatService * sharedService = nil;
     return CrossProtocolConnectionStatusDisconnected;
 }
 
-//about message
-- (void)sendMessage:(CrossMessage *)newMessage
-{
-    if (self.account && [self getAccountConnectionStatus] == CrossProtocolConnectionStatusConnected)
-    {
-        id <CrossProtocol> protocol = [[CrossProtocolManager sharedInstance] protocolForAccount:self.account];
-        if (protocol)
-        {
-            [protocol sendMessage:newMessage];
-        }
-    }
-}
-
 //persistence Account
 - (void)persistenceAccount:(CrossAccount*)account
 {
     if (account)
     {
         self.account = account;
-        [[CrossAccountDataBaseManager sharedInstance].readWriteDatabaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+        [self.accountDataBaseManager.readWriteDatabaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
             [self.account saveWithTransaction:transaction];
         }];
     }
@@ -158,7 +241,8 @@ static CrossChatService * sharedService = nil;
 //auto login
 - (void)autoLogin
 {
-    NSArray * array = [[CrossAccountDataBaseManager sharedInstance] allAutoLoginAccounts];
+    
+    NSArray * array = [self allAutoLoginAccounts];
     for (CrossAccount * account in array)
     {
         if (account.auotoLogin)
@@ -177,74 +261,95 @@ static CrossChatService * sharedService = nil;
     }
 }
 
-#pragma mark -- init notification
--(void)initNotification
+- (NSArray *)allAutoLoginAccounts
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onRegisterFailed:)
-                                                 name:CrossProtocolRegisterFailed object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onRegisterSuccess:)
-                                                 name:CrossProtocolRegisterSuccess object:nil];
+    __block NSArray *accounts = nil;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLoginSucess:)
-                                                 name:CrossProtocolLoginSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLoginFailed:)
-                                                 name:CrossProtocolLoginFailed object:nil];
+    [self.accountDataBaseManager.readWriteDatabaseConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
+        accounts = [CrossAccount allAccountsWithTransaction:transaction];
+    }];
+    
+    return accounts;
 }
 
--(void)uninitNotification
+#pragma mark -- Buddy relate
+- (NSArray *)getAllBuddyList
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    if ([self getAccountConnectionStatus] == CrossProtocolConnectionStatusConnected && self.buddyDataBaseManager)
+        return [self.buddyDataBaseManager getAllBuddyList];
+    
+    return nil;
 }
 
-
-#pragma mark -- login / register listener
-- (void)onRegisterSuccess: (NSNotification *)notification
+//all in conversation friend list
+- (NSArray *)getInConversationBuddyList
 {
-    [self hideHUD];
-    [self loginWithAccount:self.account];
+    if ([self getAccountConnectionStatus] == CrossProtocolConnectionStatusConnected && self.buddyDataBaseManager)
+        return [self.buddyDataBaseManager getInConversationBuddyList];
+
+    return nil;
 }
 
-
-- (void) onRegisterFailed: (NSNotification *)notification
+#pragma mark -- Message relate
+//send message
+- (void)sendMessage:(CrossMessage *)newMessage completeBlock:(dispatch_block_t)block
 {
-    [self hideHUD];
-}
 
-
-- (void)onLoginSucess:(NSNotification *)notification
-{
-    [self hideHUD];
-}
-
-- (void)onLoginFailed:(NSNotification *)notification
-{
-    [self hideHUD];
-}
-
-#pragma mark -- show & hide hud
-- (void)showHUD
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        UIView *window = [[UIApplication sharedApplication] keyWindow];
-        MBProgressHUD *hud = [MBProgressHUD HUDForView:window];
-        if (!hud)
+    if (self.account && [self getAccountConnectionStatus] == CrossProtocolConnectionStatusConnected)
+    {
+        //1.send message
+        id <CrossProtocol> protocol = [[CrossProtocolManager sharedInstance] protocolForAccount:self.account];
+        if (protocol)
         {
-            hud = [MBProgressHUD showHUDAddedTo:window animated:YES];
+            [protocol sendMessage:newMessage];
         }
-        else
-        {
-            [hud show:YES];
-        }
-    });
+        [self handleMessage:newMessage completeBlock:block];
+    }
 }
 
-- (void)hideHUD
+//received message
+- (void)ReceiveMessage:(NSNotification*)notification
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        UIView *window = [[UIApplication sharedApplication] keyWindow];
-        [MBProgressHUD hideHUDForView:window animated:NO];
-    });
+    XMPPMessage * message = notification.object;
+    NSString * messageText = [CrossXMPPMessageDecoder getMessageTextWithMessage:message];
+    NSString * fromuser = [CrossXMPPMessageDecoder getFromUserNameWithMessage:message];
+    if (messageText)
+    {
+        CrossMessage * message = [CrossMessage CrossMessageWithText:messageText read:[NSNumber numberWithInteger:1] incoming:[NSNumber numberWithInteger:1] owner:fromuser];
+        
+        [self handleMessage:message completeBlock:^(void){
+            [[NSNotificationCenter defaultCenter] postNotificationName:CrossMessageReceived object:nil];}];
+    }
 }
+
+- (void)handleMessage:(CrossMessage*)message completeBlock:(dispatch_block_t)block
+{
+    void (^updateBuddy_complete_block_t)(CrossBuddy*) = ^(CrossBuddy* buddy)
+    {
+        //2. save message
+        [self.messageManager persistenceMessage:message Buddy:buddy completeBlock:^(void){
+            if (block)
+                block();
+        }];
+    };
+    
+    //1. save buddy
+    [self.buddyDataBaseManager updateBuddyStatusMessage:message.text buddyName:message.owner completeBlock:updateBuddy_complete_block_t];
+}
+
+- (NSArray *)MessageListWithBuddy:(CrossBuddy*)buddy
+{
+    if (self.messageManager && self.account && [self getAccountConnectionStatus] == CrossProtocolConnectionStatusConnected)
+    {
+        CrossMessageDataBaseManager * manaeger = [self.messageManager databaseManagerForBuddy :buddy];
+        if (manaeger)
+        {
+            return [manaeger MessageList];
+        }
+    }
+    return nil;
+}
+
 
 -(void)dealloc
 {
