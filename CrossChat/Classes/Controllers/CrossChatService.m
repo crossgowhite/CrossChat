@@ -38,11 +38,7 @@ static CrossChatService * sharedService = nil;
     self = [super init];
     
     if (self)
-    {
-        self.account = nil;
-        self.buddyDataBaseManager = nil;
-        self.messageManager = nil;
-        
+    {        
         [self initNotification];
         
         //setup account database

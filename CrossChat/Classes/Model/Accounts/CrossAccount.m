@@ -42,7 +42,6 @@
     if(self)
     {
         self.accountType = CrossAccountTypeNone;
-        self.avatarImageData = nil;
     }
     return self;
 }

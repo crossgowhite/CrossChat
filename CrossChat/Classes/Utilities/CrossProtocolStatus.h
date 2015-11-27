@@ -10,13 +10,13 @@
 #define CrossChat_CrossProtocolStatus_h
 #import <Foundation/Foundation.h>
 
-extern NSString * CrossProtocolLoginSuccess;
-extern NSString * CrossProtocolLoginFailed;
+static NSString * const CrossProtocolLoginSuccess                                    = @"LoginSuccessNotification";
+static NSString * const CrossProtocolLoginFailed                                     = @"LoginFailedNotification";
 
-extern NSString * CrossProtocolRegisterSuccess;
-extern NSString * CrossProtocolRegisterFailed;
+static NSString * const CrossProtocolRegisterSuccess                                 = @"RegisterSuccessNotification";
+static NSString * const CrossProtocolRegisterFailed                                  = @"RegisterFailNotification";
 
-extern NSString * CrossProtocolLogouted;
+static NSString * const CrossProtocolLogouted                                        = @"LogoutedNotification";
 
 typedef NS_ENUM(NSInteger, CrossProtocolType) {
     CrossProtocolTypeNone        = 0,

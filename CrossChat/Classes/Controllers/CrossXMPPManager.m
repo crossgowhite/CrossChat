@@ -66,7 +66,6 @@
         NSString * queueLabel = [NSString stringWithFormat:@"%@.work.%@",[self class],self];
         self.workQueue = dispatch_queue_create([queueLabel UTF8String], 0);
         self.connectionStatus = CrossProtocolConnectionStatusDisconnected;
-        self.account = nil;
         self.isRegisteringNewAccount = NO;
     }
     
