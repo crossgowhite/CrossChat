@@ -35,4 +35,9 @@ static NSString * const  CrossMessageViewDidUnload                            = 
 
 static NSString * const  CrossMessageReceived                                 = @"CrossMessageReceivedNotification";
 
+static NSString * const  CrossMesssageType                                    = @"CrossMessageType";
+static NSString * const  CrossMessageTextType                                 = @"CrossMessageTextType";
+static NSString * const  CrossMessageImageType                                = @"CrossMessageImageType";
+
+
 #endif

@@ -17,6 +17,7 @@
 		F73FE1051BDE2BC200F2651F /* CrossBuddyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F73FE1041BDE2BC200F2651F /* CrossBuddyTableViewController.m */; };
 		F73FE1081BDF0CE100F2651F /* CrossBuddy.m in Sources */ = {isa = PBXBuildFile; fileRef = F73FE1071BDF0CE100F2651F /* CrossBuddy.m */; };
 		F73FE10B1BDF642100F2651F /* CrossBuddyDataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F73FE10A1BDF642100F2651F /* CrossBuddyDataBaseManager.m */; };
+		F75AE2AE1C07FC1E00DA26EE /* CrossMessageMoreActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F75AE2AD1C07FC1E00DA26EE /* CrossMessageMoreActionView.m */; };
 		F76998AF1BAF9F8400BFE1E6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F76998AE1BAF9F8400BFE1E6 /* main.m */; };
 		F76998B81BAF9F8400BFE1E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F76998B61BAF9F8400BFE1E6 /* Main.storyboard */; };
 		F76998BA1BAF9F8400BFE1E6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F76998B91BAF9F8400BFE1E6 /* Images.xcassets */; };
@@ -106,6 +107,8 @@
 		F73FE1071BDF0CE100F2651F /* CrossBuddy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossBuddy.m; path = Classes/Model/Buddy/CrossBuddy.m; sourceTree = "<group>"; };
 		F73FE1091BDF642100F2651F /* CrossBuddyDataBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossBuddyDataBaseManager.h; path = Classes/Controllers/CrossBuddyDataBaseManager.h; sourceTree = "<group>"; };
 		F73FE10A1BDF642100F2651F /* CrossBuddyDataBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossBuddyDataBaseManager.m; path = Classes/Controllers/CrossBuddyDataBaseManager.m; sourceTree = "<group>"; };
+		F75AE2AC1C07FC1E00DA26EE /* CrossMessageMoreActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossMessageMoreActionView.h; path = Classes/Views/CrossMessageMoreActionView.h; sourceTree = "<group>"; };
+		F75AE2AD1C07FC1E00DA26EE /* CrossMessageMoreActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossMessageMoreActionView.m; path = Classes/Views/CrossMessageMoreActionView.m; sourceTree = "<group>"; };
 		F76998A91BAF9F8400BFE1E6 /* CrossChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrossChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F76998AD1BAF9F8400BFE1E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F76998AE1BAF9F8400BFE1E6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -327,6 +330,15 @@
 			name = "DataBase Manager";
 			sourceTree = "<group>";
 		};
+		F75AE2AB1C07FBF600DA26EE /* MessageMoreAction */ = {
+			isa = PBXGroup;
+			children = (
+				F75AE2AC1C07FC1E00DA26EE /* CrossMessageMoreActionView.h */,
+				F75AE2AD1C07FC1E00DA26EE /* CrossMessageMoreActionView.m */,
+			);
+			name = MessageMoreAction;
+			sourceTree = "<group>";
+		};
 		F76998A01BAF9F8400BFE1E6 = {
 			isa = PBXGroup;
 			children = (
@@ -432,6 +444,7 @@
 		F76998D81BAFA10500BFE1E6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F75AE2AB1C07FBF600DA26EE /* MessageMoreAction */,
 				F7078FE71BF9C85C004971AC /* TableDelegate */,
 				F7078FDC1BF980CE004971AC /* ArrayTableViewDataSource */,
 				F7078FE61BF9BEDF004971AC /* Buddy */,
@@ -835,6 +848,7 @@
 				F76998EF1BAFCEF100BFE1E6 /* CrossLanguageManager.m in Sources */,
 				F76999131BAFF66500BFE1E6 /* CrossSettingViewManager.m in Sources */,
 				F76998DD1BAFA42100BFE1E6 /* CrossConversationViewController.m in Sources */,
+				F75AE2AE1C07FC1E00DA26EE /* CrossMessageMoreActionView.m in Sources */,
 				F769990E1BAFF52100BFE1E6 /* CrossCertificateDomainViewController.m in Sources */,
 				F76998FF1BAFE6FC00BFE1E6 /* CrossSettingViewController.m in Sources */,
 				F7D28E671BB51F8700ED3FD6 /* CrossErrorManager.m in Sources */,

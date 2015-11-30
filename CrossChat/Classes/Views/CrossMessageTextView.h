@@ -18,6 +18,9 @@
 //content label
 @property (nonatomic,strong) UILabel *textLabel;
 
+//image view
+@property (nonatomic, strong) UIImageView *imageView;
+
 //chart info
 @property (nonatomic,strong) CrossMessage *message;
 

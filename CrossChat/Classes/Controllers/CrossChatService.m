@@ -306,13 +306,9 @@ static CrossChatService * sharedService = nil;
 //received message
 - (void)ReceiveMessage:(NSNotification*)notification
 {
-    XMPPMessage * message = notification.object;
-    NSString * messageText = [CrossXMPPMessageDecoder getMessageTextWithMessage:message];
-    NSString * fromuser = [CrossXMPPMessageDecoder getFromUserNameWithMessage:message];
-    if (messageText)
+    CrossMessage * message = [CrossXMPPMessageDecoder getCrossMessageWithXMPPMessage:notification.object];
+    if (message)
     {
-        CrossMessage * message = [CrossMessage CrossMessageWithText:messageText read:[NSNumber numberWithInteger:1] incoming:[NSNumber numberWithInteger:1] owner:fromuser];
-        
         [self handleMessage:message completeBlock:^(void){
             [[NSNotificationCenter defaultCenter] postNotificationName:CrossMessageReceived object:nil];}];
     }

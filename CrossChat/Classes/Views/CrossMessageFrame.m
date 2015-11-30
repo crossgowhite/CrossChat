@@ -16,6 +16,8 @@
 #define IconWidth 40
 #define IconHeight 40
 
+#define IMAGEWIDTH 100
+#define IMAGEHEIGHT 120
 @implementation CrossMessageFrame
 
 - (void)setMessage:(CrossMessage *)message
@@ -38,7 +40,18 @@
     CGFloat contentX = CGRectGetMaxX(self.iconRect) + kIconMarginX;
     CGFloat contentY = iconY;
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:13]};
-    CGSize contentSize = [message.text boundingRectWithSize:CGSizeMake(200, MAXFLOAT) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attributes context:nil].size;
+    
+    CGSize contentSize;
+    
+    if (message.type == CrossMessageText)
+    {
+        contentSize = [message.text boundingRectWithSize:CGSizeMake(200, MAXFLOAT) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attributes context:nil].size;
+    }
+    else if(message.type == CrossMessageImage)
+    {
+        contentSize = CGSizeMake(IMAGEWIDTH,IMAGEHEIGHT);
+    }
+
     
     if ([message.incoming intValue] == 0)
         contentX = iconX - kIconMarginX - contentSize.width - iconWidth;

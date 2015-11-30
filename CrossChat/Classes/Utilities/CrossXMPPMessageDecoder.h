@@ -9,9 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "XMPPMessage.h"
 
+
+@class CrossMessage;
+
 @interface CrossXMPPMessageDecoder : NSObject
 
-+ (NSString *) getFromUserNameWithMessage:(XMPPMessage*)message;
++ (CrossMessage*) getCrossMessageWithXMPPMessage:(XMPPMessage*)message;
 
-+ (NSString *) getMessageTextWithMessage:(XMPPMessage*)message;
++ (NSXMLElement*) createMessageElementWithMessage:(CrossMessage *)message;
+
 @end

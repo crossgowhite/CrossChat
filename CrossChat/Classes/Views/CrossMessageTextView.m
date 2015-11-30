@@ -36,6 +36,9 @@
         self.textLabel.textAlignment=NSTextAlignmentLeft;
         self.textLabel.font=[UIFont fontWithName:@"HelveticaNeue" size:13];
         [self addSubview:self.textLabel];
+        
+        self.imageView=[[UIImageView alloc]init];
+        [self addSubview:self.imageView];
     }
     return self;
 }
@@ -57,7 +60,7 @@
     }
     
     self.textLabel.frame=CGRectMake(contentLabelX, -3, self.frame.size.width-kContentStartMargin-5, self.frame.size.height);
-    
+    self.imageView.frame=CGRectMake(contentLabelX, 3, self.frame.size.width-kContentStartMargin-10, self.frame.size.height-15);
 }
 
 

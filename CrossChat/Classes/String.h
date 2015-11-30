@@ -76,4 +76,6 @@
 #define HOLDTOSPEAK_STRING [CrossLanguageManager translatedString: @"Hold to Speak"]
 
 #define UNHOLDTOSTOP_STRING [CrossLanguageManager translatedString: @"UnHold to Stop"]
+
+#define IMAGE_STRING [CrossLanguageManager translatedString: @"Image"]
 #endif

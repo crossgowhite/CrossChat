@@ -35,12 +35,13 @@
 
 -(void)initSubView
 {
-    self.backImageView=[[UIImageView alloc]initWithFrame:self.bounds];
-    
-    UIImage * image=[UIImage imageNamed:@"toolbar_bottom_bar.png"];
-    image = [image stretchableImageWithLeftCapWidth:image.size.width*0.6 topCapHeight:image.size.height*0.5];
-    self.backImageView.image=image;
-    [self addSubview:self.backImageView];
+    self.backgroundColor = [UIColor darkGrayColor];
+//    self.backImageView=[[UIImageView alloc]initWithFrame:self.bounds];
+//    
+//    UIImage * image=[UIImage imageNamed:@"toolbar_bottom_bar.png"];
+//    image = [image stretchableImageWithLeftCapWidth:image.size.width*0.6 topCapHeight:image.size.height*0.5];
+//    self.backImageView.image=image;
+//    [self addSubview:self.backImageView];
     
     self.voiceBtn=[self buttonWith:@"chat_bottom_voice_nor.png" hightLight:@"chat_bottom_voice_press.png" action:@selector(voiceBtnPress:)];
     [self.voiceBtn setFrame:CGRectMake(0,0, 33, 33)];
@@ -146,6 +147,7 @@
     {
         [self.delegate endEdit];
     }
+    
     [voice setImage:[UIImage imageNamed:normal] forState:UIControlStateNormal];
     [voice setImage:[UIImage imageNamed:hightLight] forState:UIControlStateHighlighted];
 }
@@ -153,13 +155,14 @@
 -(void)imageBtnPress:(UIButton *)image
 {
     
-    
 }
 
 -(void)addBtnPress:(UIButton *)image
 {
-    
-    
+    if ([self.delegate respondsToSelector:@selector(onAddBtnPress)])
+    {
+        [self.delegate onAddBtnPress];
+    }
 }
 
 #pragma mark -- UITextFieldDelegate

@@ -29,7 +29,10 @@
 #import "CrossXMPPMessageStatus.h"
 #import "CrossMessage.h"
 #import "CrossChatService.h"
-@interface CrossXMPPManager()
+
+#import "CrossXMPPMessageDecoder.h"
+
+@interface CrossXMPPManager() <XMPPStreamDelegate>
 
 //account
 @property (nonatomic, strong) CrossXMPPAccount *                        account;
@@ -101,14 +104,9 @@
 //about message
 - (void) sendMessage: (CrossMessage *)newMessage
 {
-    NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
-    [body setStringValue:newMessage.text];
-    NSXMLElement * sendedmessage = [NSXMLElement elementWithName:@"message"];
-    [sendedmessage addAttributeWithName:@"type" stringValue:@"chat"];
-    [sendedmessage addAttributeWithName:@"to" stringValue:newMessage.owner];
-    [sendedmessage addChild:body];
-    [self.xmppStream sendElement:sendedmessage];
+    [self.xmppStream sendElement: [CrossXMPPMessageDecoder createMessageElementWithMessage: newMessage]];
 }
+
 
 //about login
 - (void) login
@@ -428,5 +426,13 @@
 
     }
     
+}
+
+
+
+#pragma mark -- keepalive
+-(void)xmppStream:(XMPPStream *)sender socketDidConnect:(GCDAsyncSocket *)socket
+{
+    sender.enableBackgroundingOnSocket = YES;
 }
 @end

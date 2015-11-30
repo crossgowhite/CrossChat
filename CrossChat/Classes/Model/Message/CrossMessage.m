@@ -8,7 +8,7 @@
 
 #import "CrossMessage.h"
 #import "CrossTimerHelper.h"
-
+#import "String.h"
 @implementation CrossMessage
 
 //- (id)initWithCoder:(NSCoder *)decoder
@@ -62,6 +62,22 @@
         self.read = read;
         self.incoming = incoming;
         self.owner = owner;
+        self.type = CrossMessageText;
+    }
+    return self;
+}
+
+- (instancetype)initWithData:(NSData *)data read:(NSNumber*)read incoming:(NSNumber*)incoming owner:(NSString *)owner
+{
+    if (self = [super init])
+    {
+        self.date = [CrossTimerHelper getCurrentDate];
+        self.data = data;
+        self.read = read;
+        self.text = IMAGE_STRING;
+        self.incoming = incoming;
+        self.owner = owner;
+        self.type = CrossMessageImage;
     }
     return self;
 }
@@ -79,12 +95,22 @@
     [plistDic setObject:self.read forKey:@"read"];
     [plistDic setObject:self.incoming forKey:@"incoming"];
     [plistDic setObject:self.owner forKey:@"owner"];
+    [plistDic setValue:[NSNumber numberWithInteger:self.type] forKey:@"type"];
+    if (self.data)
+    {
+        [plistDic setObject:self.data forKey:@"data"];
+    }
     return plistDic;
 }
 
 + (instancetype)CrossMessageWithText:(NSString *)text read:(NSNumber*)read incoming:(NSNumber*)incoming owner:(NSString*)owner
 {
     return [[CrossMessage alloc] initWithText:text read:read incoming:incoming owner:owner];
+}
+
++ (instancetype)CrossMessageWithData:(NSData *)data read:(NSNumber*)read incoming:(NSNumber*)incoming owner:(NSString*)owner
+{
+    return [[CrossMessage alloc] initWithData:data read:read incoming:incoming owner:owner];
 }
 
 @end

@@ -65,7 +65,18 @@
     
     self.messageTextView.message = message;
     self.messageTextView.frame = messageFrame.textViewRect;
-    self.messageTextView.textLabel.text = message.text;
+    
+    if (message.type == CrossMessageText)
+    {
+        self.messageTextView.textLabel.text = message.text;
+    }
+    
+    else if (message.type == CrossMessageImage)
+    {
+        self.messageTextView.imageView.layer.cornerRadius = 8;
+        self.messageTextView.imageView.layer.masksToBounds = YES;
+        self.messageTextView.imageView.image =[UIImage imageWithData:message.data];
+    }
     
     [self setBackGroundImageViewImage:self.messageTextView fromImage:@"chatfrom_bg_normal.png" toImage:@"chatto_bg_normal.png"];
 }

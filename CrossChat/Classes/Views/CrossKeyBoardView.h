@@ -20,9 +20,12 @@
 -(void)finishRecord;
 
 -(void)endEdit;
+
+-(void)onAddBtnPress;
+
 @end
 
 @interface CrossKeyBoardView : UIView
 
-@property (nonatomic,assign) id<KeyBordViewDelegate> delegate;
+@property (nonatomic,weak) id<KeyBordViewDelegate> delegate;
 @end
