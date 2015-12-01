@@ -34,7 +34,7 @@
 - (CrossProtocolConnectionStatus)getProtocolConnectionStatus;
 
 //about message
-- (void) sendMessage: (CrossMessage *)newMessage;
+- (NSString*) sendMessage: (CrossMessage *)newMessage;
 
 //about registerAccount
 - (void) registerAccount;

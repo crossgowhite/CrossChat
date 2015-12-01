@@ -735,6 +735,7 @@
 				TargetAttributes = {
 					F76998A81BAF9F8400BFE1E6 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 22W9WY3KT2;
 					};
 					F76998C11BAF9F8400BFE1E6 = {
 						CreatedOnToolsVersion = 6.1;
@@ -1016,6 +1017,8 @@
 			baseConfigurationReference = B2832C3653D537F61A55CAE4 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CrossChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1027,6 +1030,8 @@
 			baseConfigurationReference = 95C9829AE0FB8227D6DE7B62 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CrossChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

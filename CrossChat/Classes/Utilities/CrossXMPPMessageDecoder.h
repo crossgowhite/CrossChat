@@ -16,6 +16,8 @@
 
 + (CrossMessage*) getCrossMessageWithXMPPMessage:(XMPPMessage*)message;
 
-+ (NSXMLElement*) createMessageElementWithMessage:(CrossMessage *)message;
++ (NSXMLElement*) createMessageElementWithMessage:(CrossMessage *)message siID:(NSString*)siID;
+
++ (XMPPMessage*) getReceiptsMessageWithXMPPMessage:(XMPPMessage*)message;
 
 @end

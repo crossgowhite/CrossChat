@@ -288,19 +288,20 @@ static CrossChatService * sharedService = nil;
 
 #pragma mark -- Message relate
 //send message
-- (void)sendMessage:(CrossMessage *)newMessage completeBlock:(dispatch_block_t)block
+- (NSString*)sendMessage:(CrossMessage *)newMessage completeBlock:(dispatch_block_t)block
 {
-
+    NSString * siID =nil;
     if (self.account && [self getAccountConnectionStatus] == CrossProtocolConnectionStatusConnected)
     {
         //1.send message
         id <CrossProtocol> protocol = [[CrossProtocolManager sharedInstance] protocolForAccount:self.account];
         if (protocol)
         {
-            [protocol sendMessage:newMessage];
+            siID = [protocol sendMessage:newMessage];
         }
         [self handleMessage:newMessage completeBlock:block];
     }
+    return siID;
 }
 
 //received message

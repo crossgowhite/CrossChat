@@ -101,12 +101,38 @@
     return self.connectionStatus;
 }
 
-//about message
-- (void) sendMessage: (CrossMessage *)newMessage
+#pragma mark -- message relate
+//received message
+- (void) xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message
 {
-    [self.xmppStream sendElement: [CrossXMPPMessageDecoder createMessageElementWithMessage: newMessage]];
+    NSLog(@"%@",[message description]);
+    //1. handle receipt at xmpp manager
+    [self handleReceiptsMessage:message];
+    
+    //2. post message out
+    NSNotificationCenter * nc =[NSNotificationCenter defaultCenter];
+    [nc postNotificationName:CrossXMPPMessageReceived object:message];
+    
 }
 
+//send message
+- (NSString*) sendMessage: (CrossMessage *)newMessage
+{
+    NSString * siid =[XMPPStream generateUUID];
+    NSLog(@"send jid%@",siid);
+    [self.xmppStream sendElement: [CrossXMPPMessageDecoder createMessageElementWithMessage: newMessage siID:siid ]];
+    return siid;
+}
+
+
+- (void) handleReceiptsMessage: (XMPPMessage*)message
+{
+    XMPPMessage * reponse = [CrossXMPPMessageDecoder getReceiptsMessageWithXMPPMessage:message];
+    if (reponse)
+    {
+        [[self xmppStream] sendElement:reponse];
+    }
+}
 
 //about login
 - (void) login
@@ -333,17 +359,7 @@
     [[self xmppStream] sendElement:presence];
 }
 
-#pragma mark -- message relate
-- (void) xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message
-{
-    NSNotificationCenter * nc =[NSNotificationCenter defaultCenter];
-    
-    if (message.isChatMessageWithBody)
-    {
-        [nc postNotificationName:CrossXMPPMessageReceived object:message];
-    }
 
-}
 
 #pragma mark -- query roster list
 - (void) queryRoster

@@ -15,22 +15,39 @@
 
 + (CrossMessage*) getCrossMessageWithXMPPMessage:(XMPPMessage*)message
 {
-    CrossMessageType type = [CrossXMPPMessageDecoder getMessageType:message];
-    NSString * fromuser = [CrossXMPPMessageDecoder getFromUserNameWithMessage:message];
-    
-    if (type == CrossMessageText)
+    if ([message isChatMessageWithBody])
     {
-        NSString * messageText = [CrossXMPPMessageDecoder getMessageTextWithMessage:message];
-        CrossMessage * crossMessage =  [CrossMessage CrossMessageWithText:messageText read:[NSNumber numberWithInteger:1] incoming:[NSNumber numberWithInteger:1] owner:fromuser];
-        return crossMessage;
+        CrossMessageType type = [CrossXMPPMessageDecoder getMessageType:message];
+        NSString * fromuser = [CrossXMPPMessageDecoder getFromUserNameWithMessage:message];
+        
+        if (type == CrossMessageText)
+        {
+            NSString * messageText = [CrossXMPPMessageDecoder getMessageTextWithMessage:message];
+            CrossMessage * crossMessage =  [CrossMessage CrossMessageWithText:messageText read:[NSNumber numberWithInteger:1] incoming:[NSNumber numberWithInteger:1] owner:fromuser];
+            return crossMessage;
+        }
+        
+        else if(type == CrossMessageImage)
+        {
+            NSString * imageString = [[message elementForName:@"attachment"] stringValue];
+            NSData * data = [[NSData alloc]initWithBase64EncodedString:imageString options:0];
+            CrossMessage * crossMessage = [CrossMessage CrossMessageWithData:data read:[NSNumber numberWithInteger:1] incoming:[NSNumber numberWithInteger:1] owner:fromuser];
+            return crossMessage;
+        }
     }
-    
-    else if(type == CrossMessageImage)
+    else
     {
-        NSString * imageString = [[message elementForName:@"attachment"] stringValue];
-        NSData * data = [[NSData alloc]initWithBase64EncodedString:imageString options:0];
-        CrossMessage * crossMessage = [CrossMessage CrossMessageWithData:data read:[NSNumber numberWithInteger:1] incoming:[NSNumber numberWithInteger:1] owner:fromuser];
-        return crossMessage;
+        //received send success message
+        NSXMLElement * received = [message elementForName:@"received"];
+        if (received)
+        {
+            if ([received.xmlns isEqualToString:@"urn:xmpp:receipts"])
+            {
+                DDXMLNode * node = [received attributeForName:@"id"];
+                NSString * messageId = node.stringValue;
+                NSLog(@"%@",messageId);
+            }
+        }
     }
 
     return nil;
@@ -56,7 +73,7 @@
 
 + (CrossMessageType) getMessageType:(XMPPMessage*)message
 {
-    DDXMLNode * from = [message attributeForName:@"attachment"];
+    DDXMLNode * from = [message elementForName:@"attachment"];
     
     if (from)
     {
@@ -66,15 +83,39 @@
     return CrossMessageText;
 }
 
++ (XMPPMessage*) getReceiptsMessageWithXMPPMessage:(XMPPMessage*)message
+{
+    NSArray * request = [message elementsForName:@"request"];
+    XMPPMessage * reponseMessage = nil;
+    //create receipts reponse
+    if (request)
+    {
+        if ([message attributeStringValueForName:@"id"])
+        {
+            reponseMessage = [XMPPMessage messageWithType:[message attributeStringValueForName:@"type"]
+                                                       to:message.from];
+            NSXMLElement * received = [NSXMLElement elementWithName:@"received" xmlns:@"urn:xmpp:receipts"];
+            [received addAttributeWithName:@"id" stringValue:[message attributeStringValueForName:@"id"]];
+            [reponseMessage addChild:received];
+        }
+    }
+    return reponseMessage;
+}
 
-+(NSXMLElement*) createMessageElementWithMessage:(CrossMessage *)message
++(NSXMLElement*) createMessageElementWithMessage:(CrossMessage *)message siID:(NSString*)siID
 {
     NSXMLElement * sendedmessage = [NSXMLElement elementWithName:@"message"];
     [sendedmessage addAttributeWithName:@"type" stringValue:@"chat"];
     [sendedmessage addAttributeWithName:@"to" stringValue:message.owner];
+    [sendedmessage addAttributeWithName:@"id" stringValue:siID];
     
     NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
-    NSXMLElement *messagetype = nil;
+    
+    //image attachmenet
+    NSXMLElement *attachment = nil;
+    
+    //receipts
+    NSXMLElement *receipts = nil;
     
     if (message.type == CrossMessageText)
     {
@@ -84,14 +125,23 @@
     else if(message.type == CrossMessageImage)
     {
         NSString * base64str = [message.data base64EncodedStringWithOptions:0];
-        messagetype = [NSXMLElement elementWithName:@"attachment"];
-        [messagetype setStringValue:base64str];
+        attachment = [NSXMLElement elementWithName:@"attachment"];
+        [attachment setStringValue:base64str];
+        
+        receipts = [NSXMLElement elementWithName:@"request" xmlns:@"urn:xmpp:receipts"];
+        
     }
     
     [sendedmessage addChild:body];
-    if (messagetype)
+    
+    if (attachment)
     {
-        [sendedmessage addChild:messagetype];
+        [sendedmessage addChild:attachment];
+    }
+    
+    if (receipts)
+    {
+        [sendedmessage addChild:receipts];
     }
     
     return sendedmessage;

@@ -56,7 +56,7 @@
 
 #pragma mark -- Message relate
 //about message
-- (void)sendMessage:(CrossMessage *)newMessage completeBlock:(dispatch_block_t)block;
+- (NSString*)sendMessage:(CrossMessage *)newMessage completeBlock:(dispatch_block_t)block;
 
 //get message list via buddy
 - (NSArray *) MessageListWithBuddy:(CrossBuddy*)buddy;

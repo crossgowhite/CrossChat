@@ -73,6 +73,7 @@
     
     else if (message.type == CrossMessageImage)
     {
+        self.messageTextView.textLabel.text = nil;
         self.messageTextView.imageView.layer.cornerRadius = 8;
         self.messageTextView.imageView.layer.masksToBounds = YES;
         self.messageTextView.imageView.image =[UIImage imageWithData:message.data];
