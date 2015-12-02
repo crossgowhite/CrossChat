@@ -24,6 +24,8 @@
         {
             NSString * messageText = [CrossXMPPMessageDecoder getMessageTextWithMessage:message];
             CrossMessage * crossMessage =  [CrossMessage CrossMessageWithText:messageText read:[NSNumber numberWithInteger:1] incoming:[NSNumber numberWithInteger:1] owner:fromuser];
+            crossMessage.messageID = [message attributeForName:@"id"].stringValue;
+            
             return crossMessage;
         }
         
@@ -32,6 +34,7 @@
             NSString * imageString = [[message elementForName:@"attachment"] stringValue];
             NSData * data = [[NSData alloc]initWithBase64EncodedString:imageString options:0];
             CrossMessage * crossMessage = [CrossMessage CrossMessageWithData:data read:[NSNumber numberWithInteger:1] incoming:[NSNumber numberWithInteger:1] owner:fromuser];
+            crossMessage.messageID = [message attributeForName:@"id"].stringValue;
             return crossMessage;
         }
     }
@@ -43,9 +46,15 @@
         {
             if ([received.xmlns isEqualToString:@"urn:xmpp:receipts"])
             {
+                NSString * fromuser = [CrossXMPPMessageDecoder getFromUserNameWithMessage:message];
                 DDXMLNode * node = [received attributeForName:@"id"];
                 NSString * messageId = node.stringValue;
+                CrossMessage * crossMessage = [[CrossMessage alloc]init];
+                crossMessage.isReponseMessage = [NSNumber numberWithInteger:1];
+                crossMessage.messageID = messageId;
+                crossMessage.owner = fromuser;
                 NSLog(@"%@",messageId);
+                return crossMessage;
             }
         }
     }

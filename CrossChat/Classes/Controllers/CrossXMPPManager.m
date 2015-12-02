@@ -119,7 +119,7 @@
 - (NSString*) sendMessage: (CrossMessage *)newMessage
 {
     NSString * siid =[XMPPStream generateUUID];
-    NSLog(@"send jid%@",siid);
+    newMessage.messageID = siid;
     [self.xmppStream sendElement: [CrossXMPPMessageDecoder createMessageElementWithMessage: newMessage siID:siid ]];
     return siid;
 }

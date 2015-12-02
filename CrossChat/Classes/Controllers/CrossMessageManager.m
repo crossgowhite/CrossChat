@@ -76,4 +76,13 @@
         [messageDataBaseManager persistenceMessage:message completeBlock:block];
     }
 }
+
+- (void)updateMessage:(CrossMessage*)message Buddy:(CrossBuddy*)buddy completeBlock:(dispatch_block_t)block;
+{
+    CrossMessageDataBaseManager * messageDataBaseManager =  [self databaseManagerForBuddy:buddy];
+    if (messageDataBaseManager)
+    {
+        [messageDataBaseManager updateMessage:message completeBlock:block];
+    }
+}
 @end

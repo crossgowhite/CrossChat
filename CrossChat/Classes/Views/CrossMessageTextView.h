@@ -21,6 +21,9 @@
 //image view
 @property (nonatomic, strong) UIImageView *imageView;
 
+//hud view
+@property (nonatomic, strong) UIActivityIndicatorView * indicator;
+
 //chart info
 @property (nonatomic,strong) CrossMessage *message;
 

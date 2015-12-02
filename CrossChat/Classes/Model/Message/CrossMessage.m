@@ -62,7 +62,9 @@
         self.read = read;
         self.incoming = incoming;
         self.owner = owner;
+        self.successSend = [NSNumber numberWithInteger:1];
         self.type = CrossMessageText;
+        self.isReponseMessage = [NSNumber numberWithInteger:0];
     }
     return self;
 }
@@ -77,7 +79,19 @@
         self.text = IMAGE_STRING;
         self.incoming = incoming;
         self.owner = owner;
+        
+        if ([incoming intValue] == 1)
+        {
+            self.successSend = [NSNumber numberWithInteger:1];
+        }
+        else
+        {
+            self.successSend = [NSNumber numberWithInteger:0];
+        }
+        
         self.type = CrossMessageImage;
+        self.isReponseMessage = [NSNumber numberWithInteger:0];
+        
     }
     return self;
 }
@@ -95,6 +109,9 @@
     [plistDic setObject:self.read forKey:@"read"];
     [plistDic setObject:self.incoming forKey:@"incoming"];
     [plistDic setObject:self.owner forKey:@"owner"];
+    [plistDic setObject:self.successSend forKey:@"successSend"];
+    [plistDic setObject:self.messageID forKey:@"messageID"];
+    [plistDic setObject:self.isReponseMessage forKey:@"isReponseMessage"];
     [plistDic setValue:[NSNumber numberWithInteger:self.type] forKey:@"type"];
     if (self.data)
     {

@@ -39,6 +39,9 @@
         
         self.imageView=[[UIImageView alloc]init];
         [self addSubview:self.imageView];
+        
+        self.indicator = [[UIActivityIndicatorView alloc]init];
+        [self addSubview:self.indicator];
     }
     return self;
 }
@@ -52,7 +55,7 @@
     
     if ([self.message.incoming intValue] == 1)
     {
-        contentLabelX=kContentStartMargin*0.8;
+        contentLabelX=kContentStartMargin*0.5;
     }
     else if([self.message.incoming intValue] == 0)
     {
@@ -61,6 +64,7 @@
     
     self.textLabel.frame=CGRectMake(contentLabelX, -3, self.frame.size.width-kContentStartMargin-5, self.frame.size.height);
     self.imageView.frame=CGRectMake(contentLabelX, 3, self.frame.size.width-kContentStartMargin-10, self.frame.size.height-15);
+    [self.indicator setCenter:CGPointMake(self.frame.size.width/2, self.frame.size.height/2)];
 }
 
 

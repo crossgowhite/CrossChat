@@ -77,6 +77,15 @@
         self.messageTextView.imageView.layer.cornerRadius = 8;
         self.messageTextView.imageView.layer.masksToBounds = YES;
         self.messageTextView.imageView.image =[UIImage imageWithData:message.data];
+        
+        if ([message.successSend intValue] == 0)
+        {
+            [self.messageTextView.indicator startAnimating];
+        }
+        else
+        {
+            [self.messageTextView.indicator stopAnimating];
+        }
     }
     
     [self setBackGroundImageViewImage:self.messageTextView fromImage:@"chatfrom_bg_normal.png" toImage:@"chatto_bg_normal.png"];

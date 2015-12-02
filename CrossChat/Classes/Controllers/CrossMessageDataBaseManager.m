@@ -113,5 +113,32 @@ static NSString * const RootKey = @"Root";
 
 }
 
+- (void) updateMessage:(CrossMessage*)message completeBlock:(dispatch_block_t)block
+{
+    for (int i = 0; i < [self.dictArray count]; i++)
+    {
+        NSDictionary * dict = [self.dictArray objectAtIndex:i];
+        
+        CrossMessage * tmpMessage = [CrossMessage CrossMessageWithDict:dict];
+        
+        if ([tmpMessage.messageID isEqualToString:message.messageID])
+        {
+            tmpMessage.successSend = [NSNumber numberWithInteger:1];
+            [self.dictArray replaceObjectAtIndex:i withObject:[tmpMessage encodeIntoDictionary]];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
+                
+                BOOL success = [self.dictArray writeToFile:self.dataFilePath atomically:YES];
+                if (success)
+                {
+                    if (block)
+                    {
+                        block();
+                    }
+                }
+            });
+        }
+    }
+}
+
 
 @end

@@ -317,17 +317,32 @@ static CrossChatService * sharedService = nil;
 
 - (void)handleMessage:(CrossMessage*)message completeBlock:(dispatch_block_t)block
 {
-    void (^updateBuddy_complete_block_t)(CrossBuddy*) = ^(CrossBuddy* buddy)
+    if ([message.isReponseMessage intValue] == 1)
     {
-        //2. save message
-        [self.messageManager persistenceMessage:message Buddy:buddy completeBlock:^(void){
+        CrossBuddy * buddy = [self.buddyDataBaseManager getCrossBuddyByName:message.owner];
+        [self.messageManager updateMessage:message Buddy:buddy completeBlock:^(void){
             if (block)
+            {
                 block();
+            }
         }];
-    };
+    }
     
-    //1. save buddy
-    [self.buddyDataBaseManager updateBuddyStatusMessage:message.text buddyName:message.owner completeBlock:updateBuddy_complete_block_t];
+    else
+    {
+        void (^updateBuddy_complete_block_t)(CrossBuddy*) = ^(CrossBuddy* buddy)
+        {
+            //2. save message
+            [self.messageManager persistenceMessage:message Buddy:buddy completeBlock:^(void){
+                if (block)
+                    block();
+            }];
+        };
+        
+        //1. save buddy
+        [self.buddyDataBaseManager updateBuddyStatusMessage:message.text buddyName:message.owner completeBlock:updateBuddy_complete_block_t];
+    }
+    
 }
 
 - (NSArray *)MessageListWithBuddy:(CrossBuddy*)buddy

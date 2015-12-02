@@ -279,8 +279,6 @@ typedef void (^completeBlock)();
 {
     UIImage * chosenImage = info[UIImagePickerControllerEditedImage];
     
-    
-    chosenImage = [UIImage imageNamed:@"sendpic.png"];
     CrossMessage * message = [CrossMessage CrossMessageWithData: UIImageJPEGRepresentation(chosenImage,0.3) read:[NSNumber numberWithInteger:1] incoming:[NSNumber numberWithInteger:0] owner:self.buddy.userName];
     
     void (^CompleteDispatch_block_t)(void) = ^void(void)
@@ -288,7 +286,7 @@ typedef void (^completeBlock)();
         [self refreshTableView];
     };
     
-    NSString * messageId = [[CrossChatService sharedInstance] sendMessage:message completeBlock:CompleteDispatch_block_t];
+    [[CrossChatService sharedInstance] sendMessage:message completeBlock:CompleteDispatch_block_t];
 
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }

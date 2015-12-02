@@ -25,6 +25,9 @@ typedef NS_ENUM(NSInteger, CrossMessageType) {
 @property (nonatomic) NSNumber  *incoming;
 @property (nonatomic, strong) NSString *owner;
 @property (nonatomic) CrossMessageType type;
+@property (nonatomic) NSNumber  *successSend;
+@property (nonatomic, strong) NSString *messageID;
+@property (nonatomic) NSNumber *isReponseMessage;
 
 - (instancetype)initWithDict:(NSDictionary*)dict;
 

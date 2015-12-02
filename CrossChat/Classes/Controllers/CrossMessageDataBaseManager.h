@@ -19,4 +19,5 @@
 
 - (void) persistenceMessage:(CrossMessage*)message completeBlock:(dispatch_block_t)block;
 
+- (void) updateMessage:(CrossMessage*)message completeBlock:(dispatch_block_t)block;
 @end

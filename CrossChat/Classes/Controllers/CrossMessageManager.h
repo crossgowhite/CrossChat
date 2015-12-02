@@ -17,4 +17,6 @@
 - (CrossMessageDataBaseManager*)databaseManagerForBuddy: (CrossBuddy *)buddy;
 
 - (void)persistenceMessage:(CrossMessage*)message Buddy:(CrossBuddy*)buddy completeBlock:(dispatch_block_t)block;
+
+- (void)updateMessage:(CrossMessage*)message Buddy:(CrossBuddy*)buddy completeBlock:(dispatch_block_t)block;
 @end
