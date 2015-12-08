@@ -55,7 +55,7 @@
     
     if ([self.message.incoming intValue] == 1)
     {
-        contentLabelX=kContentStartMargin*0.5;
+        contentLabelX=kContentStartMargin*0.9;
     }
     else if([self.message.incoming intValue] == 0)
     {
