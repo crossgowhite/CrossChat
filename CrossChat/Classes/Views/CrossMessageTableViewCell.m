@@ -11,6 +11,11 @@
 #import "CrossMessageFrame.h"
 #import "CrossMessage.h"
 
+#import <AssetsLibrary/ALAsset.h>
+#import <AssetsLibrary/ALAssetsLibrary.h>
+#import <AssetsLibrary/ALAssetsGroup.h>
+#import <AssetsLibrary/ALAssetRepresentation.h>
+
 @interface CrossMessageTableViewCell ()
 
 @property (nonatomic,strong) UIImageView *icon;
@@ -73,10 +78,33 @@
     
     else if (message.type == CrossMessageImage)
     {
+        
         self.messageTextView.textLabel.text = nil;
         self.messageTextView.imageView.layer.cornerRadius = 8;
         self.messageTextView.imageView.layer.masksToBounds = YES;
-        self.messageTextView.imageView.image =[UIImage imageWithData:message.data];
+        
+        __block NSData * data = nil;
+        
+        //local image, use url rather than nsdata, inorder to save the disk content
+        if ([message.incoming intValue] == 0)
+        {
+            ALAssetsLibrary *assetLibrary=[[ALAssetsLibrary alloc] init];
+            [assetLibrary assetForURL:[NSURL URLWithString:message.dataURL]
+                          resultBlock:^(ALAsset *asset){
+                              ALAssetRepresentation *rep = [asset defaultRepresentation];
+                              Byte *buffer = (Byte*)malloc(rep.size);
+                              NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:rep.size error:nil];
+                              data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
+                              self.messageTextView.imageView.image =[UIImage imageWithData:data];
+                          }
+                         failureBlock:^(NSError *error) {}
+             ];
+        }
+        
+        else if([message.incoming intValue] == 1)
+        {
+            self.messageTextView.imageView.image =[UIImage imageWithData:message.data];
+        }
         
         if ([message.successSend intValue] == 0)
         {

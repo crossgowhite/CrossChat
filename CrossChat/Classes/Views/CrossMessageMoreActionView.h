@@ -10,8 +10,8 @@
 
 @protocol MoreActionDelegate <NSObject>
 
--(void)onPicBtnPress;
-
+-(void)onSelectPicBtnPress;
+-(void)onTakePicBtnPress;
 @end
 
 @interface CrossMessageMoreActionView : UIView

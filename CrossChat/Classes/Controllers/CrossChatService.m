@@ -317,6 +317,7 @@ static CrossChatService * sharedService = nil;
 
 - (void)handleMessage:(CrossMessage*)message completeBlock:(dispatch_block_t)block
 {
+    //case for send message success reponse, using isReponseMessage flag
     if ([message.isReponseMessage intValue] == 1)
     {
         CrossBuddy * buddy = [self.buddyDataBaseManager getCrossBuddyByName:message.owner];
@@ -328,6 +329,7 @@ static CrossChatService * sharedService = nil;
         }];
     }
     
+    //normal received message
     else
     {
         void (^updateBuddy_complete_block_t)(CrossBuddy*) = ^(CrossBuddy* buddy)

@@ -96,6 +96,33 @@
     return self;
 }
 
+- (instancetype)initWithDataURL:(NSString *)dataURL read:(NSNumber*)read incoming:(NSNumber*)incoming owner:(NSString *)owner
+{
+    if (self = [super init])
+    {
+        self.date = [CrossTimerHelper getCurrentDate];
+        self.dataURL = dataURL;
+        self.read = read;
+        self.text = IMAGE_STRING;
+        self.incoming = incoming;
+        self.owner = owner;
+        
+        if ([incoming intValue] == 1)
+        {
+            self.successSend = [NSNumber numberWithInteger:1];
+        }
+        else
+        {
+            self.successSend = [NSNumber numberWithInteger:0];
+        }
+        
+        self.type = CrossMessageImage;
+        self.isReponseMessage = [NSNumber numberWithInteger:0];
+        
+    }
+    return self;
+}
+
 + (instancetype)CrossMessageWithDict:(NSDictionary*)dict
 {
     return [[self alloc]initWithDict:dict];
@@ -117,6 +144,11 @@
     {
         [plistDic setObject:self.data forKey:@"data"];
     }
+    
+    if (self.dataURL)
+    {
+        [plistDic setObject:self.dataURL forKey:@"dataURL"];
+    }
     return plistDic;
 }
 
@@ -130,4 +162,8 @@
     return [[CrossMessage alloc] initWithData:data read:read incoming:incoming owner:owner];
 }
 
++ (instancetype)CrossMessageWithDataURL:(NSString *)dataURL read:(NSNumber *)read incoming:(NSNumber *)incoming owner:(NSString *)owner
+{
+    return [[CrossMessage alloc] initWithDataURL:dataURL read:read incoming:incoming owner:owner];
+}
 @end

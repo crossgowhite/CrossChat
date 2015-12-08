@@ -54,6 +54,7 @@
 		F78DC9721BBA32B600D78B38 /* CrossDataBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = F78DC9711BBA32B600D78B38 /* CrossDataBaseView.m */; };
 		F78DC9751BBA60DD00D78B38 /* CrossAccountSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = F78DC9741BBA60DD00D78B38 /* CrossAccountSetting.m */; };
 		F7947A601BB913E400E1B446 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F7947A5F1BB913E400E1B446 /* libsqlite3.dylib */; };
+		F7991D5B1C16869F006DBF16 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7991D5A1C16869F006DBF16 /* AssetsLibrary.framework */; };
 		F79D46381BEC87AB006CAC03 /* CrossXMPPMessageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = F79D46371BEC87AB006CAC03 /* CrossXMPPMessageDecoder.m */; };
 		F79D463B1BEC9DA5006CAC03 /* CrossTimerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F79D463A1BEC9DA5006CAC03 /* CrossTimerHelper.m */; };
 		F79D463F1BF06F04006CAC03 /* CrossKeyBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = F79D463E1BF06F04006CAC03 /* CrossKeyBoardView.m */; };
@@ -179,6 +180,7 @@
 		F78DC9731BBA60DD00D78B38 /* CrossAccountSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossAccountSetting.h; path = Classes/Model/Settings/CrossAccountSetting.h; sourceTree = "<group>"; };
 		F78DC9741BBA60DD00D78B38 /* CrossAccountSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossAccountSetting.m; path = Classes/Model/Settings/CrossAccountSetting.m; sourceTree = "<group>"; };
 		F7947A5F1BB913E400E1B446 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		F7991D5A1C16869F006DBF16 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		F79D46361BEC87AB006CAC03 /* CrossXMPPMessageDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossXMPPMessageDecoder.h; path = Classes/Utilities/CrossXMPPMessageDecoder.h; sourceTree = "<group>"; };
 		F79D46371BEC87AB006CAC03 /* CrossXMPPMessageDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossXMPPMessageDecoder.m; path = Classes/Utilities/CrossXMPPMessageDecoder.m; sourceTree = "<group>"; };
 		F79D46391BEC9DA5006CAC03 /* CrossTimerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossTimerHelper.h; path = Classes/Utilities/CrossTimerHelper.h; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7991D5B1C16869F006DBF16 /* AssetsLibrary.framework in Frameworks */,
 				F7947A601BB913E400E1B446 /* libsqlite3.dylib in Frameworks */,
 				B1C857E504FD11D142654C11 /* libPods.a in Frameworks */,
 			);
@@ -254,6 +257,7 @@
 		3A710076720B45EA126120C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F7991D5A1C16869F006DBF16 /* AssetsLibrary.framework */,
 				F7947A5F1BB913E400E1B446 /* libsqlite3.dylib */,
 				29DE9DA3ECADB50DE3034A07 /* libPods.a */,
 			);

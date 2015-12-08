@@ -21,6 +21,7 @@ typedef NS_ENUM(NSInteger, CrossMessageType) {
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, strong) NSData * data;
+@property (nonatomic, strong) NSString * dataURL;
 @property (nonatomic) NSNumber  *read;
 @property (nonatomic) NSNumber  *incoming;
 @property (nonatomic, strong) NSString *owner;
@@ -36,6 +37,8 @@ typedef NS_ENUM(NSInteger, CrossMessageType) {
 + (instancetype)CrossMessageWithText:(NSString *)text read:(NSNumber*)read incoming:(NSNumber*)incoming owner:(NSString*)owner;
 
 + (instancetype)CrossMessageWithData:(NSData *)data read:(NSNumber*)read incoming:(NSNumber*)incoming owner:(NSString*)owner;
+
++ (instancetype)CrossMessageWithDataURL:(NSString *)url read:(NSNumber *)read incoming:(NSNumber *)incoming owner:(NSString *)owner;
 
 - (NSDictionary *)encodeIntoDictionary;
 @end

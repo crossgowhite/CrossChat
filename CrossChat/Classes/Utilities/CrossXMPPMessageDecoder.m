@@ -15,6 +15,7 @@
 
 + (CrossMessage*) getCrossMessageWithXMPPMessage:(XMPPMessage*)message
 {
+    //normal message
     if ([message isChatMessageWithBody])
     {
         CrossMessageType type = [CrossXMPPMessageDecoder getMessageType:message];
@@ -53,7 +54,6 @@
                 crossMessage.isReponseMessage = [NSNumber numberWithInteger:1];
                 crossMessage.messageID = messageId;
                 crossMessage.owner = fromuser;
-                NSLog(@"%@",messageId);
                 return crossMessage;
             }
         }

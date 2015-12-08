@@ -33,9 +33,16 @@
     if (buddySetting.buddy.avatarData)
     {
         self.imageView.image = [UIImage imageWithData:buddySetting.buddy.avatarData];
-        self.imageView.layer.cornerRadius = 8;
-        self.imageView.layer.masksToBounds = YES;
+
     }
+    else
+    {
+        self.imageView.image = [UIImage imageNamed:@"xmpp"];
+    }
+    
+    self.imageView.layer.cornerRadius = 8;
+    self.imageView.layer.masksToBounds = YES;
+    
     self.accessoryType = buddySetting.accessoryType;
 }
 

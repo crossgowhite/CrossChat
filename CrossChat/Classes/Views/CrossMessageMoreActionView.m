@@ -11,7 +11,8 @@
 @interface CrossMessageMoreActionView ()
 
 @property (nonatomic,strong) UIImageView *  backImageView;
-@property (nonatomic,strong) UIButton *     picBtn;
+@property (nonatomic,strong) UIButton *     selectPicBtn;
+@property (nonatomic,strong) UIButton *     takePicBtn;
 @end
 
 @implementation CrossMessageMoreActionView
@@ -31,10 +32,15 @@
 {
     self.backgroundColor = [UIColor darkGrayColor];
 
-    self.picBtn = [self buttonWith:@"sendpic.png" action:@selector(picBtnPress:)];
-    [self.picBtn setFrame:CGRectMake(0,0, 50, 50)];
-    [self.picBtn setCenter:CGPointMake(40, self.frame.size.height*0.5)];
-    [self addSubview:self.picBtn];
+    self.selectPicBtn = [self buttonWith:@"sendpic.png" action:@selector(selectPicBtnPress:)];
+    [self.selectPicBtn setFrame:CGRectMake(0,0, 50, 50)];
+    [self.selectPicBtn setCenter:CGPointMake(40, self.frame.size.height*0.5)];
+    [self addSubview:self.selectPicBtn];
+    
+    self.takePicBtn = [self buttonWith:@"takepic.png" action:@selector(takePicBtnPress:)];
+    [self.takePicBtn setFrame:CGRectMake(0,0, 50, 50)];
+    [self.takePicBtn setCenter:CGPointMake(120, self.frame.size.height*0.5)];
+    [self addSubview:self.takePicBtn];
 }
 
 -(UIButton *)buttonWith:(NSString *)noraml action:(SEL)action
@@ -47,11 +53,19 @@
 }
 
 //-(void)addBtnPress:(UIButton *)image
--(void)picBtnPress:(UIButton *)image
+-(void)selectPicBtnPress:(UIButton *)image
 {
-    if([self.delegate respondsToSelector:@selector(onPicBtnPress)])
+    if([self.delegate respondsToSelector:@selector(onSelectPicBtnPress)])
     {
-        [self.delegate onPicBtnPress];
+        [self.delegate onSelectPicBtnPress];
+    }
+}
+
+-(void)takePicBtnPress:(UIButton*)image
+{
+    if([self.delegate respondsToSelector:@selector(onTakePicBtnPress)])
+    {
+        [self.delegate onTakePicBtnPress];
     }
 }
 

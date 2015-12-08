@@ -252,14 +252,22 @@ typedef void (^completeBlock)();
     [self animateWithDuration:0.1f animationsBlock:aniBlock completionBlock:completeBlock];
 }
 
-
--(void)onPicBtnPress
+-(void)createImagePickControllerWithSourceType:(UIImagePickerControllerSourceType)type
 {
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.delegate = self;
-    imagePickerController.allowsEditing = YES;
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePickerController.sourceType = type;
     [self presentViewController:imagePickerController animated:YES completion:nil];
+}
+
+-(void)onSelectPicBtnPress
+{
+    [self createImagePickControllerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
+-(void)onTakePicBtnPress
+{
+    [self createImagePickControllerWithSourceType:UIImagePickerControllerSourceTypeCamera];
 }
 
 -(void)removeMoreActionView
@@ -277,9 +285,14 @@ typedef void (^completeBlock)();
 
 - (void)imagePickerController: (UIImagePickerController *)picker didFinishPickingMediaWithInfo: (NSDictionary *)info
 {
-    UIImage * chosenImage = info[UIImagePickerControllerEditedImage];
+//    UIImage * chosenImage = info[UIImagePickerControllerOriginalImage];
     
-    CrossMessage * message = [CrossMessage CrossMessageWithData: UIImageJPEGRepresentation(chosenImage,0.3) read:[NSNumber numberWithInteger:1] incoming:[NSNumber numberWithInteger:0] owner:self.buddy.userName];
+    NSURL* url = [info objectForKey:UIImagePickerControllerReferenceURL];
+    
+    NSLog(@"%@",url);
+    CrossMessage * message = [CrossMessage CrossMessageWithDataURL:[url absoluteString] read:[NSNumber numberWithInteger:1] incoming:[NSNumber numberWithInteger:0] owner:self.buddy.userName];
+    
+//    CrossMessage * message = [CrossMessage CrossMessageWithData: UIImageJPEGRepresentation(chosenImage,0.3) read:[NSNumber numberWithInteger:1] incoming:[NSNumber numberWithInteger:0] owner:self.buddy.userName];
     
     void (^CompleteDispatch_block_t)(void) = ^void(void)
     {
