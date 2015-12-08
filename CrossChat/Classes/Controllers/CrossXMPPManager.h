@@ -35,4 +35,6 @@
 //query roster info
 - (void) queryRoster;
 
+- (void) fetchAvatarWithName:(NSString*)name;
+
 @end

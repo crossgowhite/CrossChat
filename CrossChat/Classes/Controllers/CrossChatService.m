@@ -11,6 +11,7 @@
 #import "CrossProtocolManager.h"
 #import "CrossConstants.h"
 #import "CrossMessage.h"
+#import "CrossBuddy.h"
 
 #import "CrossBuddyDataBaseManager.h"
 #import "CrossAccountDataBaseManager.h"
@@ -21,6 +22,8 @@
 #import "CrossXMPPMessageDecoder.h"
 
 #import "MBProgressHUD.h"
+
+
 
 static CrossChatService * sharedService = nil;
 
@@ -105,6 +108,8 @@ static CrossChatService * sharedService = nil;
     self.messageManager = [[CrossMessageManager alloc]init];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ReceiveMessage:) name:CrossXMPPMessageReceived object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ReceiveIQ:) name:CrossXMPPIQReceived object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ReceiveAvatarData:) name:CrossXMPPAvatarDataReceived object:nil];
     
     [self hideHUD];
 }
@@ -118,6 +123,8 @@ static CrossChatService * sharedService = nil;
 {
     [self setBuddyDataBaseManager:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:CrossXMPPMessageReceived object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:CrossXMPPIQReceived object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:CrossXMPPAvatarDataReceived object:nil];
     [self setMessageManager:nil];
 }
 
@@ -345,6 +352,57 @@ static CrossChatService * sharedService = nil;
         [self.buddyDataBaseManager updateBuddyStatusMessage:message.text buddyName:message.owner completeBlock:updateBuddy_complete_block_t];
     }
     
+}
+
+//Receive friends list
+- (void)ReceiveIQ:(NSNotification*)notification
+{
+    
+    NSArray * buddyList = [CrossXMPPMessageDecoder getCrossBuddyListWithIQMessage:notification.object];
+
+    for (CrossBuddy * buddy in buddyList)
+    {
+        [self.buddyDataBaseManager persistenceBuddy:buddy];
+        
+        if (self.account && [self getAccountConnectionStatus] == CrossProtocolConnectionStatusConnected)
+        {
+            //1.fetch avatar data
+            id <CrossProtocol> protocol = [[CrossProtocolManager sharedInstance] protocolForAccount:self.account];
+            if (protocol)
+            {
+                [protocol fetchAvatarWithName:buddy.userName];
+            }
+        }
+    }
+}
+
+//Receive friends avatar data
+-(void)ReceiveAvatarData:(NSNotification*)notification
+{
+    CrossAccount * account = [CrossXMPPMessageDecoder getAvatarDataWithXMPPvCardTemp:notification.object];
+    
+    if ([account.userName isEqualToString:self.account.displayName])
+    {
+        self.account.avatarImageData = account.avatarImageData;
+        [self.accountDataBaseManager.readWriteDatabaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                                        [self.account saveWithTransaction:transaction];
+                                    }];
+    }
+    
+    else
+    {
+        if (account.avatarImageData)
+        {
+            [self.buddyDataBaseManager persistenceBuddyPhotoWithUserName:account.userName photoData:account.avatarImageData];
+        }
+        
+        else
+        {
+            UIImage *img = [UIImage imageNamed:@"xmpp"];
+            NSData * data = UIImageJPEGRepresentation(img, 1.0);
+            [self.buddyDataBaseManager persistenceBuddyPhotoWithUserName:account.userName photoData:data];
+        }
+    }
 }
 
 - (NSArray *)MessageListWithBuddy:(CrossBuddy*)buddy

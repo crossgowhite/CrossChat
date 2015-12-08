@@ -288,7 +288,9 @@
     [self fetchvCardTempForJID:self.JID];
 
     self.connectionStatus = CrossProtocolConnectionStatusConnected;
+    
     //    [self queryRoster];
+    
     [self successInHanle];
 }
 
@@ -374,27 +376,11 @@
     [self.xmppStream sendElement:iq];
 }
 
+
 - (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq
 {
-    if ([@"result" isEqualToString:iq.type])
-    {
-        NSXMLElement *query = iq.childElement;
-        if ([@"query" isEqualToString:query.name])
-        {
-            NSArray *items = [query children];
-            for (NSXMLElement *item in items)
-            {
-                NSString * jid = [item attributeStringValueForName:@"jid"];
-                NSString * name = [item attributeStringValueForName:@"name"];
-                
-                CrossBuddy * buddy = [[CrossBuddy alloc]init];
-                buddy.userName = jid;
-                buddy.displayName = name;
-                [[CrossChatService sharedInstance].buddyDataBaseManager persistenceBuddy:buddy];
-                [self fetchvCardTempForJID:[XMPPJID jidWithString:jid]];
-            }
-        }
-    }
+    NSNotificationCenter * nc =[NSNotificationCenter defaultCenter];
+    [nc postNotificationName:CrossXMPPIQReceived object:iq];
     return YES;
 }
 
@@ -404,6 +390,12 @@
 }
 
 #pragma mark -- query XMPPvCardTempModule
+
+- (void) fetchAvatarWithName:(NSString*)name
+{
+    [self fetchvCardTempForJID:[XMPPJID jidWithString:name]];
+}
+
 - (void)fetchvCardTempForJID:(XMPPJID *)jid
 {
     [self.xmppvCardTempModule fetchvCardTempForJID:jid ignoreStorage:YES];
@@ -412,39 +404,11 @@
 //call back for receive card info
 -(void)xmppvCardTempModule:(XMPPvCardTempModule *)vCardTempModule didReceivevCardTemp:(XMPPvCardTemp *)vCardTemp forJID:(XMPPJID *)jid
 {
-    NSString * username = jid.user;
-    username = [username stringByAppendingString:@"@"];
-    username = [username stringByAppendingString:jid.domain];
     XMPPvCardTemp * card = [self.xmppvCardTempModule vCardTempForJID:jid shouldFetch:YES];
-    
-    //user card info, store it into db
-    if ([jid.user isEqualToString: self.JID.user])
-    {
-        self.account.avatarImageData = card.photo;
-        [[CrossChatService sharedInstance].accountDataBaseManager.readWriteDatabaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                        [self.account saveWithTransaction:transaction];
-                    }];
-    }
-    
-    else
-    {
-        if (card.photo)
-        {
-            [[CrossChatService sharedInstance].buddyDataBaseManager persistenceBuddyPhotoWithUserName:username photoData:card.photo];
-        }
-        
-        else
-        {
-            UIImage *img = [UIImage imageNamed:@"xmpp"];
-            NSData * data = UIImageJPEGRepresentation(img, 1.0);
-            [[CrossChatService sharedInstance].buddyDataBaseManager persistenceBuddyPhotoWithUserName:username photoData:data];
-        }
-
-    }
-    
+    card.jid = jid;
+    NSNotificationCenter * nc =[NSNotificationCenter defaultCenter];
+    [nc postNotificationName:CrossXMPPAvatarDataReceived object:card];
 }
-
-
 
 #pragma mark -- keepalive
 -(void)xmppStream:(XMPPStream *)sender socketDidConnect:(GCDAsyncSocket *)socket

@@ -8,7 +8,10 @@
 
 #import "CrossXMPPMessageDecoder.h"
 #import "CrossMessage.h"
+#import "CrossBuddy.h"
 #import "CrossConstants.h"
+#import "CrossAccount.h"
+
 #import "XMPPFramework.h"
 
 @implementation CrossXMPPMessageDecoder
@@ -156,4 +159,44 @@
     return sendedmessage;
 }
 
++ (NSArray*) getCrossBuddyListWithIQMessage:(XMPPIQ*)message
+{
+    NSMutableArray * buddyList = [NSMutableArray array];
+    
+    if ([@"result" isEqualToString:message.type])
+    {
+        NSXMLElement *query = message.childElement;
+        if ([@"query" isEqualToString:query.name])
+        {
+            NSArray *items = [query children];
+            for (NSXMLElement *item in items)
+            {
+                NSString * jid = [item attributeStringValueForName:@"jid"];
+                NSString * name = [item attributeStringValueForName:@"name"];
+                
+                CrossBuddy * buddy = [[CrossBuddy alloc]init];
+                buddy.userName = jid;
+                buddy.displayName = name;
+                [buddyList addObject:buddy];
+            }
+        }
+    }
+    return buddyList;
+}
+
++ (CrossAccount*) getAvatarDataWithXMPPvCardTemp:(XMPPvCardTemp*)message
+{
+    
+    XMPPJID *jid = message.jid;
+    
+    NSString * username = jid.user;
+    username = [username stringByAppendingString:@"@"];
+    username = [username stringByAppendingString:jid.domain];
+    
+    CrossAccount * account = [CrossAccount accountForAccountType:CrossAccountTypeXMPP];
+    account.userName = username;
+    account.avatarImageData = message.photo;
+    
+    return account;
+}
 @end

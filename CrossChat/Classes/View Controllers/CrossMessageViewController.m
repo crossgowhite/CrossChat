@@ -63,7 +63,6 @@ typedef void (^completeBlock)();
     
 #define KEYBOARDHEITHT 68
     //init key board view
-    NSLog(@"%f",self.view.frame.size.height);
     self.keyBoardView= [[CrossKeyBoardView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, KEYBOARDHEITHT)];
     self.keyBoardView.delegate = self;
     [self.view addSubview:self.keyBoardView];
@@ -126,13 +125,11 @@ typedef void (^completeBlock)();
 -(void)viewWillDisappear:(BOOL)animated
 {
     [self refreshTableView];
-//    [self tableViewScrollLastIndexPath];
 }
 
 - (void)didReceiveMessage:(NSNotification*)notification
 {
     [self refreshTableView];
-//    [self tableViewScrollLastIndexPath];
 }
 
 
@@ -172,7 +169,6 @@ typedef void (^completeBlock)();
         void (^CompleteDispatch_block_t)(void) = ^void(void)
         {
             [self refreshTableView];
-//            [self tableViewScrollLastIndexPath];
         };
         
         [[CrossChatService sharedInstance] sendMessage:message completeBlock:CompleteDispatch_block_t];
@@ -233,9 +229,22 @@ typedef void (^completeBlock)();
     self.moreActionView.delegate = self;
 }
 
+-(void)removeMoreActionView
+{
+    if (self.moreActionView)
+    {
+        CGRect frame = self.keyBoardView.frame;
+        CGFloat height = frame.origin.y + MOREACTIONHEITHT;
+        frame.origin.y = height;
+        self.keyBoardView.frame = frame;
+        [self.moreActionView removeFromSuperview];
+        self.moreActionView = nil;
+    }
+}
+
 -(void)onAddBtnPress
 {
-    [self.view endEditing:YES];
+    [self endEdit];
     
     animationsBlock aniBlock = ^()
     {
@@ -270,26 +279,12 @@ typedef void (^completeBlock)();
     [self createImagePickControllerWithSourceType:UIImagePickerControllerSourceTypeCamera];
 }
 
--(void)removeMoreActionView
-{
-    if (self.moreActionView)
-    {
-        CGRect frame = self.keyBoardView.frame;
-        CGFloat height = frame.origin.y + MOREACTIONHEITHT;
-        frame.origin.y = height;
-        self.keyBoardView.frame = frame;
-        [self.moreActionView removeFromSuperview];
-        self.moreActionView = nil;
-    }
-}
-
 - (void)imagePickerController: (UIImagePickerController *)picker didFinishPickingMediaWithInfo: (NSDictionary *)info
 {
 //    UIImage * chosenImage = info[UIImagePickerControllerOriginalImage];
     
     NSURL* url = [info objectForKey:UIImagePickerControllerReferenceURL];
     
-    NSLog(@"%@",url);
     CrossMessage * message = [CrossMessage CrossMessageWithDataURL:[url absoluteString] read:[NSNumber numberWithInteger:1] incoming:[NSNumber numberWithInteger:0] owner:self.buddy.userName];
     
 //    CrossMessage * message = [CrossMessage CrossMessageWithData: UIImageJPEGRepresentation(chosenImage,0.3) read:[NSNumber numberWithInteger:1] incoming:[NSNumber numberWithInteger:0] owner:self.buddy.userName];
@@ -308,6 +303,8 @@ typedef void (^completeBlock)();
 {
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
+
+
 
 #pragma mark -- keyboard show & hide observer
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView

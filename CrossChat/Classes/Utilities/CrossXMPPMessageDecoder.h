@@ -7,10 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "XMPPMessage.h"
 
+#import "XMPPMessage.h"
+#import "XMPPIQ.h"
+#import "XMPPvCardTemp.h"
 
 @class CrossMessage;
+@class CrossBuddy;
+@class CrossAccount;
 
 @interface CrossXMPPMessageDecoder : NSObject
 
@@ -19,5 +23,9 @@
 + (NSXMLElement*) createMessageElementWithMessage:(CrossMessage *)message siID:(NSString*)siID;
 
 + (XMPPMessage*) getReceiptsMessageWithXMPPMessage:(XMPPMessage*)message;
+
++ (NSArray*) getCrossBuddyListWithIQMessage:(XMPPIQ*)message;
+
++ (CrossAccount*) getAvatarDataWithXMPPvCardTemp:(XMPPvCardTemp*)message;
 
 @end

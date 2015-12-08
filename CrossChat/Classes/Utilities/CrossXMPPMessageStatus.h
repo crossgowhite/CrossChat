@@ -8,4 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * CrossXMPPMessageReceived;
+static NSString * const CrossXMPPMessageReceived =       @"XMPPMessageReceivedNotification";
+static NSString * const CrossXMPPIQReceived =            @"XMPPIQReceivedNotification";
+static NSString * const CrossXMPPAvatarDataReceived =    @"XMPPAvatarDataNotification";

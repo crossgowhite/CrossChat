@@ -17,11 +17,6 @@
 
 
 
-
-
-
-
-
 //Protocol Base
 //Base interface for each protocol, it will hide the detail protocol manager to customer
 @protocol CrossProtocol <NSObject>
@@ -38,6 +33,9 @@
 
 //about registerAccount
 - (void) registerAccount;
+
+//query avatar info
+- (void) fetchAvatarWithName:(NSString*)name;
 
 
 //about login
