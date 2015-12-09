@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "YapDatabase.h"
 #import "CrossBuddy.h"
+
+#import "XMPPRoster.h"
+
 extern NSString *const CrossYapDatabseMessageIdSecondaryIndex;
 extern NSString *const CrossYapDatabseMessageIdSecondaryIndexExtension;
 

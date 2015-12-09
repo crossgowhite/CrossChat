@@ -76,6 +76,7 @@ static CrossProtocolManager * sharedManger = nil;
         {
             [protocol removeObserver:self forKeyPath:NSStringFromSelector(@selector(connectionStatus))];
             [self.protocolManagerDictionary removeObjectForKey:newAccount.uniqueId];
+            protocol = nil;
         }
     }
 }

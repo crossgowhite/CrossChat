@@ -29,8 +29,8 @@ static CrossChatService * sharedService = nil;
 
 @interface CrossChatService ()
 
-
-
+@property (nonatomic, strong) NSCondition * lock;
+@property (nonatomic) BOOL waitDisconnectDone;
 @end
 
 
@@ -44,6 +44,7 @@ static CrossChatService * sharedService = nil;
     {        
         [self initNotification];
         
+        self.lock = [[NSCondition alloc]init];
         //setup account database
         self.accountDataBaseManager = [[CrossAccountDataBaseManager alloc]initWithDataBaseName:CrossYapDatabaseName];
         
@@ -122,10 +123,19 @@ static CrossChatService * sharedService = nil;
 - (void)onLogouted:(NSNotification *)notification
 {
     [self setBuddyDataBaseManager:nil];
+    [self setMessageManager:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:CrossXMPPMessageReceived object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:CrossXMPPIQReceived object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:CrossXMPPAvatarDataReceived object:nil];
-    [self setMessageManager:nil];
+    
+    [self.lock lock];
+    if (self.waitDisconnectDone)
+    {
+        self.waitDisconnectDone = NO;
+        [self.lock signal];
+    }
+    [self.lock unlock];
+
 }
 
 #pragma mark -- show & hide hud
@@ -163,6 +173,21 @@ static CrossChatService * sharedService = nil;
 // Login Action
 - (BOOL)loginWithAccount:(CrossAccount*)account
 {
+    //if already one account in connection,
+    //disconnect first
+    [self.lock lock];
+    if (self.account && [self getAccountConnectionStatus] != CrossProtocolConnectionStatusDisconnected)
+    {
+
+        self.waitDisconnectDone = YES;
+        [self disconnect];
+        while (self.waitDisconnectDone)
+        {
+            [self.lock wait];
+        }
+    }
+    [self.lock unlock];
+    
     if (account)
     {
         id <CrossProtocol> protocol = [[CrossProtocolManager sharedInstance] protocolForAccount:account];
@@ -187,6 +212,7 @@ static CrossChatService * sharedService = nil;
             [protocol disconnect];
     }
 }
+
 
 //register account
 - (BOOL)registerWithAccount:(CrossAccount*)account

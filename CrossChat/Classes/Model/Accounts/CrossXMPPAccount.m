@@ -11,7 +11,7 @@
 #import "CrossXMPPManager.h"
 #import "String.h"
 
-static NSUInteger const CrossDefaultPortNumber = 5222;
+
 
 @implementation CrossXMPPAccount
 

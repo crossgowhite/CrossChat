@@ -60,4 +60,6 @@
 
 //get message list via buddy
 - (NSArray *) MessageListWithBuddy:(CrossBuddy*)buddy;
+
+
 @end

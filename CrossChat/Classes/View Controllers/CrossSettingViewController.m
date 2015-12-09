@@ -19,6 +19,7 @@
 #import "CrossCertificateSetting.h"
 
 #import "CrossAccountSetting.h"
+#import "CrossXMPPAccount.h"
 
 #import "CrossDataBaseView.h"
 #import "CrossAccountDataBaseManager.h"
@@ -147,7 +148,6 @@
     else
     {
         setting = [self.settingsManager itemAtSection:indexPath.section row:indexPath.row];
-//        setting = [self.settingsManager settingAtIndexPath:indexPath];
     }
     
     setting.delegate = self;
@@ -269,15 +269,7 @@
 
 - (void) logoutAccount : (CrossAccount *)newAccount
 {
-    id <CrossProtocol> protocol = [[CrossProtocolManager sharedInstance]protocolForAccount:newAccount];
-    
-    if (protocol && newAccount)
-    {
-        if ([protocol getProtocolConnectionStatus] == CrossProtocolConnectionStatusConnected)
-        {
-            [protocol disconnect];
-        }
-    }
+    [[CrossChatService sharedInstance] disconnect];
 }
 
 
@@ -371,15 +363,20 @@
         }
     }
     
+    [self.tableView reloadData];
     [self.tableView endUpdates];
 }
 
 - (CrossAccount *) accountAtIndexPath: (NSIndexPath *)indexPath
 {
-    __block CrossAccount *account = nil;
+    __block CrossXMPPAccount *account = nil;
     [self.databaseConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
         
         account = [[transaction extension:CrossAllAccountDatabaseViewExtensionName] objectAtIndexPath:indexPath withMappings:self.mappings];
+        account.domain = XMPP_SERVER_ADDRESS_STRING;
+        account.accountType = CrossAccountTypeXMPP;
+        account.port = [CrossXMPPAccount defaultPort];
+        account.resource = [CrossXMPPAccount newResource];
     }];
     
     return account;
@@ -418,7 +415,8 @@
 - (void)refreshAccountTableView:(NSNotification*)notification
 {
      dispatch_async(dispatch_get_main_queue(), ^{
-         [self.tableView reloadSections:[[NSIndexSet alloc] initWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+         [self.tableView reloadData];
+         //[self.tableView reloadSections:[[NSIndexSet alloc] initWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
      });
 }
 

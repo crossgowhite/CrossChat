@@ -8,6 +8,8 @@
 
 #import "CrossAccount.h"
 
+static NSUInteger const CrossDefaultPortNumber = 5222;
+
 @interface CrossXMPPAccount : CrossAccount
 
 @property (nonatomic, strong) NSString * domain;

@@ -17,6 +17,8 @@
 #import "XMPPFramework.h"
 #import "XMPPRoster.h"
 #import "XMPPRosterCoreDataStorage.h"
+#import "XMPPRosterMemoryStorage.h"
+
 #import "XMPPPresence.h"
 #import "XMPPvCardTemp.h"
 #import "XMPPvCardTempModule.h"
@@ -41,9 +43,10 @@
 @property (nonatomic) CrossProtocolConnectionStatus                     connectionStatus;
 
 //xmpp services
-@property (nonatomic, strong, readonly) XMPPStream *                    xmppStream;
-@property (nonatomic, strong, readonly) XMPPRoster *                    xmppRoster;
-@property (nonatomic, strong, readonly) XMPPRosterCoreDataStorage *     xmppRosterStorage;
+@property (nonatomic, strong) XMPPStream *                    xmppStream;
+@property (nonatomic, strong) XMPPRoster *                    xmppRoster;
+//@property (nonatomic, strong) XMPPRosterCoreDataStorage *     xmppRosterStorage;
+@property (nonatomic, strong) XMPPRosterMemoryStorage *       xmppRosterStorage;
 @property (nonatomic, strong) XMPPvCardTempModule *                     xmppvCardTempModule;
 @property (nonatomic, strong) XMPPvCardCoreDataStorage *                xmppvCardStorage;
 
@@ -54,6 +57,8 @@
 @property (nonatomic) BOOL                                              isRegisteringNewAccount;
 //work queue
 @property (nonatomic) dispatch_queue_t                                  workQueue;
+
+
 @end
 
 
@@ -154,24 +159,48 @@
 }
 
 
-
-
 #pragma mark -- xmpp service
 - (void) setupStream
 {
-    _xmppStream = [[XMPPStream alloc] init];
-    _xmppRosterStorage = [[XMPPRosterCoreDataStorage alloc] init];
-    _xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:self.xmppRosterStorage];
+    if (self.xmppStream)
+    {
+        return;
+    }
     
-    _xmppvCardStorage = [XMPPvCardCoreDataStorage sharedInstance];
-    _xmppvCardTempModule = [[XMPPvCardTempModule alloc] initWithvCardStorage:self.xmppvCardStorage dispatchQueue:self.workQueue];
+    self.xmppStream = [[XMPPStream alloc] init];
+//    self.xmppRosterStorage = [[XMPPRosterCoreDataStorage alloc] init];
+    self.xmppRosterStorage = [[XMPPRosterMemoryStorage alloc]init];
+    self.xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:self.xmppRosterStorage];
+    
+    self.xmppvCardStorage = [XMPPvCardCoreDataStorage sharedInstance];
+    self.xmppvCardTempModule = [[XMPPvCardTempModule alloc] initWithvCardStorage:self.xmppvCardStorage dispatchQueue:self.workQueue];
     
     [self.xmppRoster activate: self.xmppStream];
     [self.xmppvCardTempModule activate: self.xmppStream];
+    
     // Add ourself as a delegate to anything we may be interested in
     [self.xmppStream addDelegate:self delegateQueue:self.workQueue];
     [self.xmppRoster addDelegate:self delegateQueue:self.workQueue];
     [self.xmppvCardTempModule addDelegate:self delegateQueue:self.workQueue];
+}
+
+- (void)tearDownStream
+{
+    [self.xmppStream removeDelegate:self];
+    [self.xmppRoster removeDelegate:self];
+    [self.xmppvCardTempModule removeDelegate:self];
+    
+    [self.xmppRoster deactivate];
+    [self.xmppvCardTempModule deactivate];
+    
+    [self.xmppRosterStorage clearAllUsersAndResourcesForXMPPStream:self.xmppStream];
+    [self.xmppvCardStorage clearvCardTempForJID:self.JID xmppStream:self.xmppStream];
+    
+    self.xmppStream = nil;
+    self.xmppRosterStorage = nil;
+    self.xmppRoster = nil;
+    self.xmppvCardStorage = nil;
+    self.xmppvCardTempModule = nil;
 }
 
 //1. First step: connect to server
@@ -414,5 +443,11 @@
 -(void)xmppStream:(XMPPStream *)sender socketDidConnect:(GCDAsyncSocket *)socket
 {
     sender.enableBackgroundingOnSocket = YES;
+}
+
+
+-(void)dealloc
+{
+    [self tearDownStream];
 }
 @end

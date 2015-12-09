@@ -12,12 +12,12 @@
 #import "CrossAccountTableViewCell.h"
 #import "CrossSettingTableViewCell.h"
 #import "CrossAccount.h"
+#import "CrossXMPPAccount.h"
+
 #import "CrossAlertAction.h"
 #import "CrossAlertViewController.h"
 #import "CrossProtocolManager.h"
 #import "CrossProtocolStatus.h"
-#import "CrossAccountDataBaseManager.h"
-#import "CrossBuddyDataBaseManager.h"
 #import "CrossConstants.h"
 
 #import "CrossChatService.h"
@@ -105,7 +105,9 @@
         account = [CrossAccount accountForAccountType:CrossAccountTypeXMPP];
     }
     //hard code xmpp type account
-
+//    CrossXMPPAccount * tmpaccount = (CrossXMPPAccount *)account;
+//    tmpaccount.domain = XMPP_SERVER_ADDRESS_STRING;
+//    tmpaccount.
     if(account)
     {
         account.userName = self.userNameTableViewCell.getTextFiledString;
@@ -118,6 +120,7 @@
         }
         
         self.account = account;
+        
         return YES;
     }
     

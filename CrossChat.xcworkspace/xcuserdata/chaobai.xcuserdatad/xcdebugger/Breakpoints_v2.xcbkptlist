@@ -4,28 +4,18 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            scope = "0"
-            stopOnStyle = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CrossChat/Classes/Utilities/CrossXMPPMessageDecoder.m"
-            timestampString = "471252207.318514"
+            filePath = "CrossChat/Classes/View Controllers/CrossNewAccountViewController.m"
+            timestampString = "471323380.313014"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
-            landmarkName = "+getAvatarDataWithXMPPvCardTemp:"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "-initWithAccount:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -35,13 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CrossChat/Classes/Controllers/CrossChatService.m"
-            timestampString = "471252464.663195"
+            filePath = "CrossChat/Classes/View Controllers/CrossSettingViewController.m"
+            timestampString = "471324153.633215"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "386"
-            endingLineNumber = "386"
-            landmarkName = "-ReceiveAvatarData:"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -51,13 +41,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CrossChat/Classes/Controllers/CrossChatService.m"
-            timestampString = "471252593.830408"
+            filePath = "CrossChat/Classes/Controllers/CrossXMPPManager.m"
+            timestampString = "471324175.658498"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "384"
-            endingLineNumber = "384"
-            landmarkName = "-ReceiveAvatarData:"
+            startingLineNumber = "336"
+            endingLineNumber = "336"
+            landmarkName = "-accountDomainWithError:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
