@@ -108,23 +108,28 @@ typedef void (^completeBlock)();
 #pragma mark -- handle xmpp message
 - (void)viewWillAppear:(BOOL)animated
 {
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMessage:) name:CrossMessageReceived object:nil];
     
     //add keyboard view show notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
+    [super viewWillAppear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
+
     [[NSNotificationCenter defaultCenter] removeObserver:self name:CrossMessageReceived object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [super viewDidDisappear:animated];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [self refreshTableView];
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMessage:(NSNotification*)notification

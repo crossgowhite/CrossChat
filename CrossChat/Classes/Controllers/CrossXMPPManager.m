@@ -283,8 +283,7 @@
 - (void) authenticateWithStream: (XMPPStream *)stream
 {
     NSError * error = nil;
-    BOOL status = YES;
-    status = [stream authenticateWithPassword:self.account.password error:&error];
+    [stream authenticateWithPassword:self.account.password error:&error];
     if(error)
     {
         CrossXMPPError * errorhandle = [[CrossErrorManager sharedInstance]errorForDomainType:CrossErrorDomainTypeXMPP error:error];

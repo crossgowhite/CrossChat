@@ -116,7 +116,13 @@
     return item == nil ? NO :YES;
 }
 
-
+-(void)removeAccount:(CrossAccount*)account
+{
+    [self.readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction){
+            [transaction setObject:nil forKey:account.uniqueId inCollection:[CrossAccount collection]];
+    }];
+    
+}
 
 
 

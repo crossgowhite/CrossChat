@@ -135,6 +135,7 @@
         [self.passWordTableViewCell setTextfieldWithValue: self.account.password];
         [self.autoLoginTbleViewCell setAutoLogin: self.account.auotoLogin];
     }
+    [super viewDidAppear:animated];
 }
 
 

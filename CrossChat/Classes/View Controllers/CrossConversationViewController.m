@@ -113,11 +113,13 @@ static NSString * ConversationCellIdentifier = @"ConversationCell";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLoginSucess:) name:CrossProtocolLoginSuccess object:nil];
     [self refreshTableView];
+    [super viewWillAppear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:CrossProtocolLoginSuccess object:nil];
+    [super viewDidDisappear:animated];
 }
 
 - (void)onLoginSucess:(NSNotification *)notification

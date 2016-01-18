@@ -146,7 +146,7 @@ static CrossChatService * sharedService = nil;
         MBProgressHUD *hud = [MBProgressHUD HUDForView:window];
         if (!hud)
         {
-            hud = [MBProgressHUD showHUDAddedTo:window animated:YES];
+            [MBProgressHUD showHUDAddedTo:window animated:YES];
         }
         else
         {
@@ -300,6 +300,15 @@ static CrossChatService * sharedService = nil;
     
     return accounts;
 }
+
+//only work on disconnect state
+-(void)removeAccount:(CrossAccount*)account
+{
+    [[CrossProtocolManager sharedInstance] removeProtocolForAccount:account];
+    [self.accountDataBaseManager removeAccount:account];
+    [CrossMessageDataBaseManager removeDataBase:account];
+}
+
 
 #pragma mark -- Buddy relate
 - (NSArray *)getAllBuddyList

@@ -736,7 +736,7 @@
 				TargetAttributes = {
 					F76998A81BAF9F8400BFE1E6 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 22W9WY3KT2;
+						DevelopmentTeam = 36PP274YBV;
 					};
 					F76998C11BAF9F8400BFE1E6 = {
 						CreatedOnToolsVersion = 6.1;
@@ -1021,6 +1021,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CrossChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cross;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1034,6 +1035,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CrossChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cross;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

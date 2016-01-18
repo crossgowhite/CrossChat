@@ -23,5 +23,6 @@
 
 - (BOOL) accountWhetherExisted:(CrossAccount*)newAccount;
 
-
+//remove account
+-(void)removeAccount:(CrossAccount*)account;
 @end

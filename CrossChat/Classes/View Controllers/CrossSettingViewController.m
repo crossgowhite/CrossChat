@@ -173,6 +173,21 @@
     
 }
 
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+-(void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        [self removeAccount:indexPath];
+    }
+}
+
+
+
 #pragma mark -- CrossSettingDelegate
 - (void) refreshView
 {
@@ -399,6 +414,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshAccountTableView:) name:CrossProtocolLogouted object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLoginSucess:) name:CrossProtocolLoginSuccess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLoginFailed:) name:CrossProtocolLoginFailed object:nil];
@@ -428,6 +444,17 @@
 - (void)onLoginFailed:(NSNotification *)notification
 {
     [self refreshAccountTableView:nil];
+}
+
+-(void)removeAccount:(NSIndexPath*)indexPath
+{
+    NSIndexPath * index = [NSIndexPath indexPathForRow:indexPath.row-1 inSection:indexPath.section];
+    CrossAccount * account = [self accountAtIndexPath:index];
+    
+    if (account)
+    {
+        [[CrossChatService sharedInstance]removeAccount:account];
+    }
 }
 /*
 #pragma mark - Navigation

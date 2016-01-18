@@ -140,5 +140,23 @@ static NSString * const RootKey = @"Root";
     }
 }
 
++ (void)removeDataBase:(CrossAccount*)account
+{
+    //1. get database directory
+    //1. get sandbox path
+    NSString * applicationSupportDirectory = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) lastObject];
+    
+    //2. get application name
+    NSString * applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
+    
+    //3. database directory = sandbox path + application
+    NSString * directory = [applicationSupportDirectory stringByAppendingPathComponent:applicationName];
+    
+    NSString * dataFilePath = [directory stringByAppendingPathComponent:account.uniqueId];
+
+    NSError * error;
+    
+    [[NSFileManager defaultManager] removeItemAtPath:dataFilePath error:&error];
+}
 
 @end

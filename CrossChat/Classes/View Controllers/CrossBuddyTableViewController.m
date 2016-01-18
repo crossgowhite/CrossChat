@@ -65,11 +65,9 @@ static NSString * BuddyCellIdentifier = @"BuddyCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [self refreshTableView];
+    [super viewWillAppear:animated];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{
-}
 
 - (void)refreshTableView
 {

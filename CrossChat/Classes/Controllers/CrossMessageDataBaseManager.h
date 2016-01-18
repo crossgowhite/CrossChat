@@ -10,6 +10,7 @@
 
 @class CrossBuddy;
 @class CrossMessage;
+@class CrossAccount;
 
 @interface CrossMessageDataBaseManager : NSObject
 
@@ -20,4 +21,6 @@
 - (void) persistenceMessage:(CrossMessage*)message completeBlock:(dispatch_block_t)block;
 
 - (void) updateMessage:(CrossMessage*)message completeBlock:(dispatch_block_t)block;
+
++ (void)removeDataBase:(CrossAccount*)account;
 @end

@@ -46,6 +46,8 @@
 //about connection status
 - (CrossProtocolConnectionStatus)getAccountConnectionStatus;
 
+//remove account
+-(void)removeAccount:(CrossAccount*)account;
 
 #pragma mark -- Buddy relate
 //all friend list
@@ -60,6 +62,5 @@
 
 //get message list via buddy
 - (NSArray *) MessageListWithBuddy:(CrossBuddy*)buddy;
-
 
 @end
